@@ -1,8 +1,6 @@
-# Literasea
+# [Literasea](https://literasea.live)
 
 # Dive into knowledge, sail with Literasea! 📖⛵
-
-[Literasea](https://literasea-tn3ud.ondigitalocean.app/)
 
 ## Anggota Kelompok C05
 
@@ -99,5 +97,6 @@ Pada aplikasi kami, terdapat dua jenis pengguna:
 
 Penjelasan lebih spesifik mengenai masing-masing jenis pengguna dan wewenangnya pada aplikasi terdapat pada penjelasan masing-masing modul.
 
-### LINK BERITA ACARA C05
-[BERITA ACARA C05](https://ristek.link/BeritaAcaraC05)
+### Berita Acara Kelompok C05
+
+[](https://ristek.link/BeritaAcaraC05)
