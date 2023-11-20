@@ -99,4 +99,4 @@ Penjelasan lebih spesifik mengenai masing-masing jenis pengguna dan wewenangnya 
 
 ### Berita Acara Kelompok C05
 
-[](https://ristek.link/BeritaAcaraC05)
+https://ristek.link/BeritaAcaraC05
