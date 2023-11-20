@@ -98,3 +98,6 @@ Pada aplikasi kami, terdapat dua jenis pengguna:
 - Penulis
 
 Penjelasan lebih spesifik mengenai masing-masing jenis pengguna dan wewenangnya pada aplikasi terdapat pada penjelasan masing-masing modul.
+
+### LINK BERITA ACARA C05
+[BERITA ACARA C05](https://ristek.link/BeritaAcaraC05)
