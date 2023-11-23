@@ -1,5 +1,9 @@
 # [Literasea](https://literasea.live)
 
+![Staging badge](https://github.com/C05-PBP-2023/literasea-mobile/actions/workflows/staging.yml/badge.svg)
+![Pre-release badge](https://github.com/C05-PBP-2023/literasea-mobile/actions/workflows/pre-release.yml/badge.svg)
+![Release badge](https://github.com/C05-PBP-2023/literasea-mobile/actions/workflows/release.yml/badge.svg)
+
 # Dive into knowledge, sail with Literasea! 📖⛵
 
 ## Anggota Kelompok C05
