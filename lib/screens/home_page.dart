@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:literasea_mobile/Katalog/Screens/reader.dart';
 import 'package:literasea_mobile/json/const.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -59,7 +60,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ),
                     onTap: () {
                       if (homePageButtons[index]["name"] == "Catalogue") {
-                        // ke page katalog
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const ProductPage()));
                       } else if (homePageButtons[index]["name"] == "Reviews") {
                         // ke page review
                       } else if (homePageButtons[index]["name"] == "Q & A") {
