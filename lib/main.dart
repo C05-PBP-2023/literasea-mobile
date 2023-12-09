@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:literasea_mobile/screens/checkout_form.dart';
+import 'package:literasea_mobile/widgets/cart_card.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -17,7 +19,7 @@ class Cart extends StatefulWidget {
 class _CartState extends State<Cart> {
   static const color = Color(0xffE5f5ff);
 
-  List<String> item = ["a", "b", "c", "d", "e", "f"];
+  List<String> item = ["buku1", "bbuku2", "cbuku3", "dbuku1 buku4", "ebuku1", "fbuku1buku13"];
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +30,12 @@ class _CartState extends State<Cart> {
               style: GoogleFonts.inter(
                   textStyle: const TextStyle(
                 fontWeight: FontWeight.w800,
-                fontSize: 30,
+                fontSize: 25,
                 color: Color(0xff00134E),
               ))),
-          centerTitle: true,
+          centerTitle: false,
           backgroundColor: Colors.white,
-          elevation: 0,
+          elevation: 1,
         ),
         body: Column(
           children: [
@@ -41,22 +43,50 @@ class _CartState extends State<Cart> {
               child: ListView.builder(
                 itemCount: item.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    height: 200,
-                    color: Colors.blueGrey,
-                    margin: EdgeInsets.all(5),
-                  );
+                  return CartCard(itemName: item[index]);
                 },
               ),
             ),
             Container(
-              height: 200,
+              height: 130,
               color: Colors.lightBlue,
-              child: Row(
-                children: [
-                  
-                ],
-              ),
+              child: Padding(
+                padding: EdgeInsets.all(8.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Books ordered"),
+                        Text("${item.length}"),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Price per book"),
+                        Text("100"),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text("Total"),
+                        Text("${item.length*100}"),
+                      ],
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => const CheckoutForm()));
+                      }, 
+                      child: Text("Checkout Books"),
+                    )
+                  ],
+                ),
+              )
             )
           ],
         ),
