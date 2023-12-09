@@ -29,7 +29,10 @@ class ReviewPage extends StatelessWidget {
               onPressed: () {
                 showRedirectingSnackbar(context); // Show snackbar
                 // Uncomment the next line if you want to navigate to another page
-                Navigator.push(context, MaterialPageRoute(builder: (context) => const ReviewProductPage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const ReviewProductPage()));
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(80, 40),
@@ -45,7 +48,7 @@ class ReviewPage extends StatelessWidget {
             ),
             const SizedBox(height: 15),
             Container(
-              padding: const EdgeInsets.only(left : 20),
+              padding: const EdgeInsets.only(left: 20),
               alignment: Alignment.centerLeft,
               child: const Text(
                 "Our Review",
@@ -58,30 +61,26 @@ class ReviewPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height : 15),
+            const SizedBox(height: 15),
             Container(
               height: 150,
               child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: 15, //ini nyoba dulu
-                separatorBuilder: (context,index) => SizedBox(width: 30),
-                padding: EdgeInsets.only(
-                  left: 20,
-                  right: 20
-                ),
-                itemBuilder: (context, index){
-                  return Container(
-                    width: 300,
-                    decoration: BoxDecoration(
-                      color: Colors.blue.withOpacity(0.35),
-                      borderRadius: BorderRadius.circular(20)
-                    ),
-                  );
-                }),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 15, //ini nyoba dulu
+                  separatorBuilder: (context, index) => SizedBox(width: 30),
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  itemBuilder: (context, index) {
+                    return Container(
+                      width: 300,
+                      decoration: BoxDecoration(
+                          color: Colors.blue.withOpacity(0.35),
+                          borderRadius: BorderRadius.circular(20)),
+                    );
+                  }),
             ),
             const SizedBox(height: 30),
             Container(
-              padding: const EdgeInsets.only(left : 20),
+              padding: const EdgeInsets.only(left: 20),
               alignment: Alignment.centerLeft,
               child: const Text(
                 "Top 3 Books",
@@ -98,36 +97,33 @@ class ReviewPage extends StatelessWidget {
             Container(
               height: 125,
               child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: 3, //ini nyoba dulu
-                separatorBuilder: (context,index) => SizedBox(width: 30),
-                padding: const EdgeInsets.only(
-                  left: 20,
-                  right: 10
-                ),
-                itemBuilder: (context, index){
-
-                  List<Color> backgroundJuara = [Color(0xFFBB5C),Color(0xB6BBC4), Color(0x994D1C)];
-                  return Container(
-                    width: 125,
-                    height: 125,
-                    decoration: BoxDecoration(
-                      color: backgroundJuara[index].withOpacity(0.8),
-                      borderRadius: BorderRadius.circular(20)
-                    ),
-                    child: Center(
-                      child: Text(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 3, //ini nyoba dulu
+                  separatorBuilder: (context, index) => SizedBox(width: 30),
+                  padding: const EdgeInsets.only(left: 20, right: 10),
+                  itemBuilder: (context, index) {
+                    List<Color> backgroundJuara = [
+                      Color(0xFFBB5C),
+                      Color(0xB6BBC4),
+                      Color(0x994D1C)
+                    ];
+                    return Container(
+                      width: 125,
+                      height: 125,
+                      decoration: BoxDecoration(
+                          color: backgroundJuara[index].withOpacity(0.8),
+                          borderRadius: BorderRadius.circular(20)),
+                      child: Center(
+                          child: Text(
                         'BOOK ${index + 1}',
                         style: const TextStyle(
-                          fontFamily: 'Inter',
-                          color: Colors.white,
-                          fontSize: 8,
-                          fontWeight: FontWeight.bold
-                        ),
-                      )
-                    ),
-                  );
-                }),
+                            fontFamily: 'Inter',
+                            color: Colors.white,
+                            fontSize: 8,
+                            fontWeight: FontWeight.bold),
+                      )),
+                    );
+                  }),
             ),
           ],
         ),
@@ -137,20 +133,30 @@ class ReviewPage extends StatelessWidget {
 
   AppBar appBar() {
     return AppBar(
-      flexibleSpace: const Column(
-        children: [
-          SizedBox(height: 20),
-          Text(
-            'Review Your Book!',
-            style: TextStyle(
-              color: Color(0xFF005B9C),
-              fontFamily: 'Inter',
-              fontSize: 25,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
+      title: Text(
+        'Review Your Book!',
+        style: TextStyle(
+          color: Color(0xFF005B9C),
+          fontFamily: 'Inter',
+          fontSize: 25,
+          fontWeight: FontWeight.bold,
+        ),
       ),
+      iconTheme: IconThemeData(color: Colors.black),
+      // flexibleSpace: const Column(
+      //   children: [
+      //     SizedBox(height: 20),
+      //     Text(
+      //       'Review Your Book!',
+      //       style: TextStyle(
+      //         color: Color(0xFF005B9C),
+      //         fontFamily: 'Inter',
+      //         fontSize: 25,
+      //         fontWeight: FontWeight.bold,
+      //       ),
+      //     ),
+      //   ],
+      // ),
       backgroundColor: Colors.white,
       centerTitle: true,
       elevation: 0.0,
@@ -159,7 +165,8 @@ class ReviewPage extends StatelessWidget {
 
   void showRedirectingSnackbar(BuildContext context) {
     const snackBar = SnackBar(
-      content: Text('Directing to our catalog...'), backgroundColor: Color(0xFF0C356A),
+      content: Text('Directing to our catalog...'),
+      backgroundColor: Color(0xFF0C356A),
       duration: Duration(seconds: 3),
     );
 
