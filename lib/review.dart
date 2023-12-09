@@ -70,7 +70,7 @@ class ReviewPage extends StatelessWidget {
                 ),
                 itemBuilder: (context, index){
                   return Container(
-                    width: 250,
+                    width: 300,
                     decoration: BoxDecoration(
                       color: Colors.blue.withOpacity(0.35),
                       borderRadius: BorderRadius.circular(20)
@@ -95,12 +95,12 @@ class ReviewPage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Container(
-              height: 200,
+              height: 125,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: 3, //ini nyoba dulu
                 separatorBuilder: (context,index) => SizedBox(width: 30),
-                padding: EdgeInsets.only(
+                padding: const EdgeInsets.only(
                   left: 20,
                   right: 10
                 ),
@@ -108,8 +108,8 @@ class ReviewPage extends StatelessWidget {
 
                   List<Color> backgroundJuara = [Color(0xB6BBC4), Color(0xFFBB5C), Color(0x994D1C)];
                   return Container(
-                    width: 200,
-                    height: 300,
+                    width: 125,
+                    height: 125,
                     decoration: BoxDecoration(
                       color: backgroundJuara[index].withOpacity(0.8),
                       borderRadius: BorderRadius.circular(20)
@@ -117,7 +117,7 @@ class ReviewPage extends StatelessWidget {
                     child: Center(
                       child: Text(
                         'BOOK ${index + 1}',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: 'Inter',
                           color: Colors.white,
                           fontSize: 8,
