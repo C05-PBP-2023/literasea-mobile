@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:literasea_mobile/review/screens/choose_book.dart';
 
 class ReviewPage extends StatelessWidget {
   const ReviewPage({Key? key}) : super(key: key);
@@ -28,7 +29,7 @@ class ReviewPage extends StatelessWidget {
               onPressed: () {
                 showRedirectingSnackbar(context); // Show snackbar
                 // Uncomment the next line if you want to navigate to another page
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => const ShopFormPage()));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => const ReviewProductPage()));
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(80, 40),
@@ -106,7 +107,7 @@ class ReviewPage extends StatelessWidget {
                 ),
                 itemBuilder: (context, index){
 
-                  List<Color> backgroundJuara = [Color(0xB6BBC4), Color(0xFFBB5C), Color(0x994D1C)];
+                  List<Color> backgroundJuara = [Color(0xFFBB5C),Color(0xB6BBC4), Color(0x994D1C)];
                   return Container(
                     width: 125,
                     height: 125,
@@ -158,7 +159,7 @@ class ReviewPage extends StatelessWidget {
 
   void showRedirectingSnackbar(BuildContext context) {
     const snackBar = SnackBar(
-      content: Text('Redirecting to our catalog...'), backgroundColor: Color(0xFF0C356A),
+      content: Text('Directing to our catalog...'), backgroundColor: Color(0xFF0C356A),
       duration: Duration(seconds: 3),
     );
 
