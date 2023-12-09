@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:literasea_mobile/authentication/screens/logout_page.dart';
 import 'package:literasea_mobile/json/const.dart';
 import 'package:literasea_mobile/screens/home_page.dart';
 
@@ -117,7 +118,7 @@ class _RootPageState extends State<RootPage> {
         MyHomePage(title: "Literasea"),
         Center(child: Text("Page 2")),
         Center(child: Text("Page 3")),
-        Center(child: Text("Page 4"))
+        LogoutPage()
       ],
     );
   }
