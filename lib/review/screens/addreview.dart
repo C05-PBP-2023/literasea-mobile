@@ -1,198 +1,173 @@
-// import 'package:flutter/material.dart';
-// // TODO: Impor drawer yang sudah dibuat sebelumnya
-// // import 'package:codashop/screens/menu.dart';
-// import 'package:literasea_mobile/review/screens/review.dart';
-// import 'dart:convert'; // Import for jsonEncode
-// import 'package:provider/provider.dart';
-// import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:literasea_mobile/screens/home_page.dart';
+// TODO: Impor drawer yang sudah dibuat sebelumnya
+import 'dart:convert'; // Import for jsonEncode
+import 'package:provider/provider.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:literasea_mobile/Katalog/models/product.dart';
 
-// class ShopFormPage extends StatefulWidget {
-//     const ShopFormPage({super.key});
 
-//     @override
-//     State<ShopFormPage> createState() => _ShopFormPageState();
-// }
+class ReviewFormPage extends StatefulWidget {
+  final Product product;
 
-// class _ShopFormPageState extends State<ShopFormPage> {
-//     final _formKey = GlobalKey<FormState>();
-//     String _name = "";
-//     int _price = 0;
-//     String _description = "";
-//     int _amount = 0;
-//     String _dateAdded = "";
+  const ReviewFormPage({required this.product, Key? key}) : super(key: key);
 
-//     @override
-//     Widget build(BuildContext context) {
-//       final request = context.watch<CookieRequest>();
+  @override
+  State<ReviewFormPage> createState() => _ShopFormPageState();
+}
 
-//         return Scaffold(
-//             appBar: AppBar(
-//                 title: const Center(
-//                 child: Text(
-//                     'Form Tambah Produk',
-//                 ),
-//                 ),
-//                 backgroundColor: Colors.indigo,
-//                 foregroundColor: Colors.white,
-//             ),
-//             body: Form(
-//                 key: _formKey,
-//                 child: SingleChildScrollView(
-//                     child: Column(
-//                         crossAxisAlignment: CrossAxisAlignment.start,
-//                         children: [
-//                             Padding(
-//                             padding: const EdgeInsets.all(8.0),
-//                             child: TextFormField(
-//                                 decoration: InputDecoration(
-//                                 hintText: "Nama Produk",
-//                                 labelText: "Nama Produk",
-//                                 border: OutlineInputBorder(
-//                                     borderRadius: BorderRadius.circular(5.0),
-//                                 ),
-//                                 ),
-//                                 onChanged: (String? value) {
-//                                 setState(() {
-//                                     _name = value!;
-//                                 });
-//                                 },
-//                                 validator: (String? value) {
-//                                 if (value == null || value.isEmpty) {
-//                                     return "Nama tidak boleh kosong!";
-//                                 }
-//                                 return null;
-//                                 },
-//                             ),
-//                             ),
-//                             Padding(
-//                             padding: const EdgeInsets.all(8.0),
-//                             child: TextFormField(
-//                                 decoration: InputDecoration(
-//                                 hintText: "Harga",
-//                                 labelText: "Harga",
-//                                 border: OutlineInputBorder(
-//                                     borderRadius: BorderRadius.circular(5.0),
-//                                 ),
-//                                 ),
-//                                 // TODO: Tambahkan variabel yang sesuai
-//                                 onChanged: (String? value) {
-//                                 setState(() {
-//                                     _price = int.parse(value!);
-//                                 });
-//                                 },
-//                                 validator: (String? value) {
-//                                 if (value == null || value.isEmpty) {
-//                                     return "Harga tidak boleh kosong!";
-//                                 }
-//                                 if (int.tryParse(value) == null) {
-//                                     return "Harga harus berupa angka!";
-//                                 }
-//                                 return null;
-//                                 },
-//                             ),
-//                             ),
-//                             Padding(
-//                             padding: const EdgeInsets.all(8.0),
-//                             child: TextFormField(
-//                                 decoration: InputDecoration(
-//                                 hintText: "Banyak Item",
-//                                 labelText: "Banyak Item",
-//                                 border: OutlineInputBorder(
-//                                     borderRadius: BorderRadius.circular(5.0),
-//                                 ),
-//                                 ),
-//                                 onChanged: (String? value) {
-//                                 setState(() {
-//                                     // TODO: Tambahkan variabel yang sesuai
-//                                     _amount = int.parse(value!);
-//                                 });
-//                                 },
-//                                 validator: (String? value) {
-//                                 if (value == null || value.isEmpty) {
-//                                     return "Banyak item tidak boleh kosong!";
-//                                 }
-//                                 if (int.tryParse(value) == null) {
-//                                     return "Banyak item harus berupa angka!";
-//                                 }
-//                                 return null;
-//                                 },
-//                             ),
-//                             ),
-//                                                         Padding(
-//                             padding: const EdgeInsets.all(8.0),
-//                             child: TextFormField(
-//                                 decoration: InputDecoration(
-//                                 hintText: "Deskripsi",
-//                                 labelText: "Deskripsi",
-//                                 border: OutlineInputBorder(
-//                                     borderRadius: BorderRadius.circular(5.0),
-//                                 ),
-//                                 ),
-//                                 onChanged: (String? value) {
-//                                 setState(() {
-//                                     // TODO: Tambahkan variabel yang sesuai
-//                                     _description = value!;
-//                                 });
-//                                 },
-//                                 validator: (String? value) {
-//                                 if (value == null || value.isEmpty) {
-//                                     return "Deskripsi tidak boleh kosong!";
-//                                 }
-//                                 return null;
-//                                 },
-//                             ),
-//                             ),
-//                             Align(
-//                                 alignment: Alignment.bottomCenter,
-//                                 child: Padding(
-//                                     padding: const EdgeInsets.all(8.0),
-//                                     child: ElevatedButton(
-//                                         style: ButtonStyle(
-//                                             backgroundColor:
-//                                                 MaterialStateProperty.all(Colors.indigo),
-//                                         ),
-//                                         onPressed: () async {
-//                                           if (_formKey.currentState!.validate()) {
-//                                               // Kirim ke Django dan tunggu respons
-//                                               // TODO: Ganti URL dan jangan lupa tambahkan trailing slash (/) di akhir URL!
-//                                               final response = await request.postJson(
-//                                               "http://127.0.0.1:8000/create-flutter/",
-//                                               jsonEncode(<String, String>{
-//                                                   'name': _name,
-//                                                   'price': _price.toString(),
-//                                                   'amount': _amount.toString(),
-//                                                   'description': _description,
-//                                                   'date_added':_dateAdded,
-//                                               }));
-//                                               if (response['status'] == 'success') {
-//                                                   ScaffoldMessenger.of(context)
-//                                                       .showSnackBar(const SnackBar(
-//                                                   content: Text("Produk baru berhasil disimpan!"),
-//                                                   ));
-//                                                   Navigator.pushReplacement(
-//                                                       context,
-//                                                       MaterialPageRoute(builder: (context) => ReviewPage()), //sementara
-//                                                   );
-//                                               } else {
-//                                                   ScaffoldMessenger.of(context)
-//                                                       .showSnackBar(const SnackBar(
-//                                                       content:
-//                                                           Text("Terdapat kesalahan, silakan coba lagi."),
-//                                                   ));
-//                                               }
-//                                           }
-//                                       },
-//                                         child: const Text(
-//                                             "Save",
-//                                             style: TextStyle(color: Colors.white),
-//                                         ),
-//                                     ),
-//                                 ),
-//                             ),
-//                         ]
-//                     )
-//                 ),
-//             ),
-//         );
-//     }
-// }
+class _ShopFormPageState extends State<ReviewFormPage> {
+  final _formKey = GlobalKey<FormState>();
+  int? _rating; // Use int? to allow null, indicating no selection
+  String _reviewMessage = "";
+
+
+  @override
+  Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
+
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Center(
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      "Review Form",
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                Form(
+                  key: _formKey,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: FractionallySizedBox(
+                          widthFactor: 0.7,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: Colors.black,
+                                width: 1.0,
+                              ),
+                              borderRadius: BorderRadius.circular(10.0), // Set the border radius
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton<int>(
+                                value: _rating,
+                                onChanged: (int? value) {
+                                  setState(() {
+                                    _rating = value;
+                                  });
+                                },
+                                hint: Text("Rate (1-5)"), // Similar to hintText
+                                items: List.generate(
+                                  5,
+                                  (index) => DropdownMenuItem<int>(
+                                    value: index + 1,
+                                    child: Text((index + 1).toString()),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: FractionallySizedBox(
+                          widthFactor: 0.7, // Adjust the width factor as needed
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              hintText: "Deskripsi",
+                              labelText: "Deskripsi",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            onChanged: (String? value) {
+                              setState(() {
+                                _reviewMessage = value!;
+                              });
+                            },
+                            validator: (String? value) {
+                              if (value == null || value.isEmpty) {
+                                return "Deskripsi tidak boleh kosong!";
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: Colors.indigo,
+                              onPrimary: Colors.white,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                            ),
+                            onPressed: () async {
+                              if (_formKey.currentState!.validate()) {
+                                final response = await request.postJson(
+                                  "http://127.0.0.1:8000/review/add-review-flutter/",
+                                  jsonEncode(<String, String>{
+                                    'rating': _rating.toString(),
+                                    'review_message': _reviewMessage,
+                                    'id':widget.product.pk.toString(),
+                                  }),
+                                );
+                                if (response['status'] == 'success') {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text("Produk baru berhasil disimpan!"),
+                                    ),
+                                  );
+                                  Navigator.pushReplacement(
+                                    context,
+                                    MaterialPageRoute(builder: (context) => MyHomePage(title:'BALIK LAGI')),
+                                  );
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text("Terdapat kesalahan, silakan coba lagi."),
+                                    ),
+                                  );
+                                }
+                              }
+                            },
+                            child: const Text(
+                              "Save",
+                              style: TextStyle(fontSize: 16.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

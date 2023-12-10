@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:literasea_mobile/Katalog/Screens/book_details.dart';
 import 'dart:convert';
 
 import 'package:literasea_mobile/Katalog/models/product.dart';
+import 'package:literasea_mobile/review/screens/addreview.dart';
+import 'package:literasea_mobile/Katalog/Screens/book_details.dart';
+
 
 class ReviewProductPage extends StatefulWidget {
   const ReviewProductPage({Key? key}) : super(key: key);
@@ -14,7 +16,7 @@ class ReviewProductPage extends StatefulWidget {
 
 class _ReviewProductPageState extends State<ReviewProductPage> {
   Future<List<Product>> fetchProduct() async {
-    var url = Uri.parse('https://literasea.live/products/get_book/');
+    var url = Uri.parse('https://literasea.live/review/get-book-review/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -31,9 +33,7 @@ class _ReviewProductPageState extends State<ReviewProductPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Choose Your Book'),
-      ),
+      appBar: appBar(),
       body: FutureBuilder<List<Product>>(
         future: fetchProduct(),
         builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
@@ -81,21 +81,21 @@ class _ReviewProductPageState extends State<ReviewProductPage> {
                         children: [
                           Text(
                             product.fields.bookTitle,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
                             ),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Text(
                             'by ${product.fields.bookAuthor}',
                             style: TextStyle(color: Colors.grey.shade600),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          SizedBox(height: 4),
+                          const SizedBox(height: 4),
                           Text(
                             'Published: ${product.fields.yearOfPublication}',
                             style: TextStyle(color: Colors.grey.shade600),
@@ -114,8 +114,7 @@ class _ReviewProductPageState extends State<ReviewProductPage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => BookDetailsPage(product: product),
-                                    ),
+                                      builder: (context) =>  ReviewFormPage(product: product)) // BookDetailsPage(product: product)
                                   );
                                   _showReviewSnackbar();
                                 },
@@ -145,3 +144,20 @@ class _ReviewProductPageState extends State<ReviewProductPage> {
     );
   }
 }
+  AppBar appBar() {
+    return AppBar(
+      title: Text(
+        'Choose Book to Review!',
+        style: TextStyle(
+          color: Color(0xFF005B9C),
+          fontFamily: 'Inter',
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      iconTheme: IconThemeData(color: Colors.black),
+      backgroundColor: Colors.white,
+      centerTitle: true,
+      elevation: 0.0,
+    );
+  }
