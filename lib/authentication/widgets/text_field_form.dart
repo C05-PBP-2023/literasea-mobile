@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TextFormFieldWidget extends StatelessWidget {
-  const TextFormFieldWidget(
-      this.hintText, this.prefixIconData, this.obscureText, this.onChanged,
+  const TextFormFieldWidget(this.hintText, this.prefixIconData,
+      this.obscureText, this.onChanged, this.validate,
       {super.key});
 
   final String hintText;
   final IconData prefixIconData;
   final bool obscureText;
   final Function(String) onChanged;
+  final dynamic validate;
 
   @override
   Widget build(BuildContext context) {
@@ -50,12 +51,13 @@ class TextFormFieldWidget extends StatelessWidget {
         ),
       ),
       onChanged: onChanged,
-      validator: (String? val) {
-        if (val == null || val.isEmpty) {
-          return "$hintText can't be empty!";
-        }
-        return null;
-      },
+      validator: validate ??
+          (String? val) {
+            if (val == null || val.isEmpty) {
+              return "$hintText can't be empty!";
+            }
+            return null;
+          },
       obscureText: obscureText,
     );
   }

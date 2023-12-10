@@ -299,6 +299,7 @@ class _RegisterPageState extends State<RegisterPage> {
               _usernameController = val;
             });
           },
+          null,
         ),
         const SizedBox(height: 20.0),
         TextFormFieldWidget(
@@ -310,6 +311,7 @@ class _RegisterPageState extends State<RegisterPage> {
               _fullnameController = val;
             });
           },
+          null,
         ),
         const SizedBox(height: 20.0),
         TextFormFieldWidget(
@@ -320,6 +322,17 @@ class _RegisterPageState extends State<RegisterPage> {
             setState(() {
               _emailController = val;
             });
+          },
+          (val) {
+            String pattern =
+                r'(^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$)';
+            RegExp regExp = RegExp(pattern);
+            if (val == null || val.isEmpty) {
+              return "Email can't be empty!";
+            } else if (!regExp.hasMatch(val)) {
+              return 'Please enter a valid email.';
+            }
+            return null;
           },
         ),
         const SizedBox(height: 20.0),
@@ -332,49 +345,19 @@ class _RegisterPageState extends State<RegisterPage> {
               _passwordController = val;
             });
           },
+          null,
         ),
         const SizedBox(height: 20.0),
-        TextFormField(
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: InputDecoration(
-            prefixIcon: const Icon(
-              Icons.key,
-              size: 18,
-              color: Color(0xff3992C6),
-            ),
-            hintText: "Password confirmation",
-            filled: true,
-            enabledBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Color(0xff3992C6)),
-            ),
-            contentPadding: const EdgeInsets.only(top: 15.0),
-            errorStyle: GoogleFonts.inter(
-              textStyle: const TextStyle(fontSize: 11),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.red),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.red),
-            ),
-          ),
-          obscureText: true,
-          style: GoogleFonts.inter(
-            textStyle: const TextStyle(fontSize: 16),
-          ),
-          onChanged: (val) {
+        TextFormFieldWidget(
+          "Password",
+          Icons.email,
+          true,
+          (val) {
             setState(() {
-              _passwordConfController = val;
+              _passwordController = val;
             });
           },
-          validator: (String? val) {
+          (String? val) {
             if (val == null || val.isEmpty) {
               return "The two passwords didn't match.";
             } else if (val != _passwordController) {
