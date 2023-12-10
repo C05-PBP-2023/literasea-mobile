@@ -338,7 +338,7 @@ class _RegisterPageState extends State<RegisterPage> {
         const SizedBox(height: 20.0),
         TextFormFieldWidget(
           "Password",
-          Icons.email,
+          Icons.key,
           true,
           (val) {
             setState(() {
@@ -350,7 +350,7 @@ class _RegisterPageState extends State<RegisterPage> {
         const SizedBox(height: 20.0),
         TextFormFieldWidget(
           "Password",
-          Icons.email,
+          Icons.key,
           true,
           (val) {
             setState(() {
