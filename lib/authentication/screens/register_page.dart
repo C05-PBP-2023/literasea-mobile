@@ -199,12 +199,11 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
             ),
-            if (_isLoading)
+            if (_isLoading) ...[
               const Opacity(
                 opacity: 0.3,
                 child: ModalBarrier(dismissible: false, color: Colors.black),
               ),
-            if (_isLoading)
               Center(
                 child: Container(
                   height: 100,
@@ -215,10 +214,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                 ),
               ),
-            if (_isLoading)
               const Center(
                 child: CircularProgressIndicator(),
               ),
+            ]
           ],
         ),
       ),
@@ -354,7 +353,7 @@ class _RegisterPageState extends State<RegisterPage> {
           true,
           (val) {
             setState(() {
-              _passwordController = val;
+              _passwordConfController = val;
             });
           },
           (String? val) {
