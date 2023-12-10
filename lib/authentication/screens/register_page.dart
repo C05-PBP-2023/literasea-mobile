@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/authentication/screens/login_page.dart';
+import 'package:literasea_mobile/authentication/widgets/text_field_form.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -289,198 +290,47 @@ class _RegisterPageState extends State<RegisterPage> {
           ],
         ),
         const SizedBox(height: 20.0),
-        TextFormField(
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: InputDecoration(
-            prefixIcon: const Icon(
-              Icons.account_circle_outlined,
-              size: 18,
-              color: Color(0xff3992C6),
-            ),
-            hintText: "Username",
-            filled: true,
-            enabledBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Color(0xff3992C6)),
-            ),
-            contentPadding: const EdgeInsets.only(top: 15.0),
-            errorStyle: GoogleFonts.inter(
-              textStyle: const TextStyle(fontSize: 11),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.red),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.red),
-            ),
-          ),
-          style: GoogleFonts.inter(
-            textStyle: const TextStyle(
-              fontSize: 16,
-            ),
-          ),
-          onChanged: (val) {
+        TextFormFieldWidget(
+          "Username",
+          Icons.account_circle_outlined,
+          false,
+          (val) {
             setState(() {
               _usernameController = val;
             });
           },
-          validator: (String? val) {
-            if (val == null || val.isEmpty) {
-              return "Username can't be empty!";
-            }
-            return null;
-          },
         ),
         const SizedBox(height: 20.0),
-        TextFormField(
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: InputDecoration(
-            prefixIcon: const Icon(
-              Icons.assignment_ind,
-              size: 18,
-              color: Color(0xff3992C6),
-            ),
-            hintText: "Name",
-            filled: true,
-            enabledBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Color(0xff3992C6)),
-            ),
-            contentPadding: const EdgeInsets.only(top: 15.0),
-            errorStyle: GoogleFonts.inter(
-              textStyle: const TextStyle(fontSize: 11),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.red),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.red),
-            ),
-          ),
-          style: GoogleFonts.inter(
-            textStyle: const TextStyle(
-              fontSize: 16,
-            ),
-          ),
-          onChanged: (val) {
+        TextFormFieldWidget(
+          "Name",
+          Icons.assignment_ind,
+          false,
+          (val) {
             setState(() {
               _fullnameController = val;
             });
           },
-          validator: (String? val) {
-            if (val == null || val.isEmpty) {
-              return "Name can't be empty!";
-            }
-            return null;
-          },
         ),
         const SizedBox(height: 20.0),
-        TextFormField(
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: InputDecoration(
-            prefixIcon: const Icon(
-              Icons.email,
-              size: 18,
-              color: Color(0xff3992C6),
-            ),
-            hintText: "Email",
-            filled: true,
-            enabledBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Color(0xff3992C6)),
-            ),
-            contentPadding: const EdgeInsets.only(top: 15.0),
-            errorStyle: GoogleFonts.inter(
-              textStyle: const TextStyle(fontSize: 11),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.red),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.red),
-            ),
-          ),
-          style: GoogleFonts.inter(
-            textStyle: const TextStyle(
-              fontSize: 16,
-            ),
-          ),
-          onChanged: (val) {
+        TextFormFieldWidget(
+          "Email",
+          Icons.email,
+          false,
+          (val) {
             setState(() {
               _emailController = val;
             });
           },
-          validator: (String? val) {
-            if (val == null || val.isEmpty) {
-              return "Email can't be empty!";
-            }
-            return null;
-          },
         ),
         const SizedBox(height: 20.0),
-        TextFormField(
-          autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: InputDecoration(
-            prefixIcon: const Icon(
-              Icons.key,
-              size: 18,
-              color: Color(0xff3992C6),
-            ),
-            hintText: "Password",
-            filled: true,
-            enabledBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: BorderSide.none,
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Color(0xff3992C6)),
-            ),
-            contentPadding: const EdgeInsets.only(top: 15.0),
-            errorStyle: GoogleFonts.inter(
-              textStyle: const TextStyle(fontSize: 11),
-            ),
-            errorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.red),
-            ),
-            focusedErrorBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(color: Colors.red),
-            ),
-          ),
-          obscureText: true,
-          style: GoogleFonts.inter(
-            textStyle: const TextStyle(fontSize: 16),
-          ),
-          onChanged: (val) {
+        TextFormFieldWidget(
+          "Password",
+          Icons.email,
+          true,
+          (val) {
             setState(() {
               _passwordController = val;
             });
-          },
-          validator: (String? val) {
-            if (val == null || val.isEmpty) {
-              return "Password can't be empty!";
-            }
-            return null;
           },
         ),
         const SizedBox(height: 20.0),
