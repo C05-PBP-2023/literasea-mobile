@@ -18,8 +18,6 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
-  static const color = Color(0xffE5f5ff);
-
   List<String> item = ["buku1", "bbuku2", "cbuku3", "dbuku1 buku4", "ebuku1", "fbuku1buku13"];
 
     Widget _historySection(BuildContext context){
