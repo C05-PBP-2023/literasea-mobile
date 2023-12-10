@@ -17,13 +17,6 @@ class _LoginPageState extends State<LoginPage> {
 
   bool _isLoading = false;
 
-  // void _onLoading(){
-  //   setState(() {
-  //     _loading = true,
-  //     new Future.delayed()
-  //   },)
-  // }
-
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
@@ -96,66 +89,7 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(
                     height: 32,
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextField(
-                        controller: _usernameController,
-                        decoration: InputDecoration(
-                            prefixIcon: const Icon(
-                              Icons.account_circle_outlined,
-                              size: 18,
-                              color: Color(0xff3992C6),
-                            ),
-                            hintText: "Username",
-                            filled: true,
-                            enabledBorder: UnderlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none,
-                            ),
-                            focusedBorder: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide:
-                                  const BorderSide(color: Color(0xff3992C6)),
-                            ),
-                            contentPadding:
-                                const EdgeInsets.symmetric(vertical: 15.0)),
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 20.0),
-                      TextField(
-                        controller: _passwordController,
-                        decoration: InputDecoration(
-                          prefixIcon: const Icon(
-                            Icons.key,
-                            size: 18,
-                            color: Color(0xff3992C6),
-                          ),
-                          hintText: "Password",
-                          filled: true,
-                          enabledBorder: UnderlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide.none,
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide:
-                                const BorderSide(color: Color(0xff3992C6)),
-                          ),
-                          contentPadding:
-                              const EdgeInsets.symmetric(vertical: 15.0),
-                        ),
-                        obscureText: true,
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ],
-                  ),
+                  getTextFields(),
                   const SizedBox(height: 32.0),
                   MaterialButton(
                     elevation: 0.0,
@@ -248,6 +182,65 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget getTextFields() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        TextField(
+          controller: _usernameController,
+          decoration: InputDecoration(
+              prefixIcon: const Icon(
+                Icons.account_circle_outlined,
+                size: 18,
+                color: Color(0xff3992C6),
+              ),
+              hintText: "Username",
+              filled: true,
+              enabledBorder: UnderlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: BorderSide.none,
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10),
+                borderSide: const BorderSide(color: Color(0xff3992C6)),
+              ),
+              contentPadding: const EdgeInsets.symmetric(vertical: 15.0)),
+          style: GoogleFonts.inter(
+            textStyle: const TextStyle(
+              fontSize: 16,
+            ),
+          ),
+        ),
+        const SizedBox(height: 20.0),
+        TextField(
+          controller: _passwordController,
+          decoration: InputDecoration(
+            prefixIcon: const Icon(
+              Icons.key,
+              size: 18,
+              color: Color(0xff3992C6),
+            ),
+            hintText: "Password",
+            filled: true,
+            enabledBorder: UnderlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: BorderSide.none,
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(color: Color(0xff3992C6)),
+            ),
+            contentPadding: const EdgeInsets.symmetric(vertical: 15.0),
+          ),
+          obscureText: true,
+          style: GoogleFonts.inter(
+            textStyle: const TextStyle(fontSize: 16),
+          ),
+        ),
+      ],
     );
   }
 }
