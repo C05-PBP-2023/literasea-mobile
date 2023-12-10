@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:literasea_mobile/Katalog/Screens/addBook_form.dart';
 import 'package:literasea_mobile/Katalog/Screens/book_details.dart';
 import 'dart:convert';
 import 'package:literasea_mobile/Katalog/models/product.dart';
 
 
-class ProductPage extends StatefulWidget {
-  const ProductPage({Key? key}) : super(key: key);
+class WriterPage extends StatefulWidget {
+  const WriterPage({Key? key}) : super(key: key);
 
   @override
-  _ProductPageState createState() => _ProductPageState();
+  _WriterPageState createState() => _WriterPageState();
 }
 
-class _ProductPageState extends State<ProductPage> {
+class _WriterPageState extends State<WriterPage> {
   Future<List<Product>> fetchProduct() async {
     var url = Uri.parse('https://literasea.live/products/get_book/');
     var response = await http.get(
@@ -33,7 +34,20 @@ class _ProductPageState extends State<ProductPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Katalog Buku'),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.add),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AddBookPage()),
+              );
+            },
+            tooltip: 'Add Book',
+          ),
+        ],
       ),
+
       body: FutureBuilder<List<Product>>(
         future: fetchProduct(),
         builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
@@ -85,7 +99,7 @@ class _ProductPageState extends State<ProductPage> {
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
                             ),
-                            maxLines: 2,
+                            maxLines: 10,
                             overflow: TextOverflow.ellipsis,
                           ),
                           SizedBox(height: 4),

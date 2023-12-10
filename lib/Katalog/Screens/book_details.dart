@@ -12,7 +12,6 @@ class BookDetailsPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Detail Buku'),
         titleTextStyle: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-        automaticallyImplyLeading: false, // This removes the back arrow
       ),
       body: SingleChildScrollView( // To ensure the content is scrollable if it overflows
         child: Padding(
@@ -88,15 +87,6 @@ class BookDetailsPage extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.start, // Align buttons to the left
                 children: [
-                  ElevatedButton(
-                    onPressed: () => Navigator.pop(context),
-                    child: Text('Back to Catalog'),
-                    style: TextButton.styleFrom(
-                                  foregroundColor: Colors.blue[600],
-                                  backgroundColor: Colors.blue[50],
-                                ),
-                  ),
-                  SizedBox(width: 16), // Spacing between the buttons
                   ElevatedButton(
                     onPressed: () {
                       // TODO: Add functionality for adding to cart

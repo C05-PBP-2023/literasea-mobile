@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/Katalog/Screens/reader.dart';
+import 'package:literasea_mobile/Katalog/Screens/writer.dart';
 import 'package:literasea_mobile/json/const.dart';
 import 'package:literasea_mobile/review/screens/review.dart';
 
@@ -64,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const ProductPage()));
+                                builder: (context) => const WriterPage()));
                       } else if (homePageButtons[index]["name"] == "Reviews") {
                         Navigator.push(
                             context,
