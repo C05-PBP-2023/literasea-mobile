@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:literasea_mobile/screens/checkout_form.dart';
-import 'package:literasea_mobile/screens/history.dart';
-import 'package:literasea_mobile/widgets/cart_card.dart';
+import 'package:literasea_mobile/cart/screens/checkout_form.dart';
+import 'package:literasea_mobile/cart/screens/history.dart';
+import 'package:literasea_mobile/cart/widgets/cart_card.dart';
 
 void main() {
   runApp(const MaterialApp(
