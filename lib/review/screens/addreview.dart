@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:literasea_mobile/authentication/screens/user.dart';
 import 'package:literasea_mobile/screens/home_page.dart';
 // TODO: Impor drawer yang sudah dibuat sebelumnya
 import 'dart:convert'; // Import for jsonEncode
@@ -127,8 +128,9 @@ class _ShopFormPageState extends State<ReviewFormPage> {
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 final response = await request.postJson(
-                                  "http://127.0.0.1:8000/review/add-review-flutter/",
+                                  "http://127.0.0.1:8000/review/add-review-flutter/", //ubah ulang ke deploy
                                   jsonEncode(<String, String>{
+                                    'username': loginUser.username,
                                     'rating': _rating.toString(),
                                     'review_message': _reviewMessage,
                                     'id':widget.product.pk.toString(),
