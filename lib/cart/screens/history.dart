@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:literasea_mobile/cart/widgets/history_card.dart';
+import 'package:literasea_mobile/main.dart';
 
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
@@ -15,6 +16,7 @@ class HistoryPage extends StatefulWidget {
 }
 
 class _HistoryPageState extends State<HistoryPage> {
+
   Future<List<History>> fetchHistory() async {
     var url = Uri.parse("http://127.0.0.1:8000/cart/get-history/");
     var response = await http.get(
@@ -27,12 +29,12 @@ class _HistoryPageState extends State<HistoryPage> {
     List<History> listHistory = [];
     for (var d in data) {
         if (d != null) {
-          //listHistory.add(History.fromJson(d));
-          History history = History.fromJson(d);
+          listHistory.add(History.fromJson(d));
+          // History history = History.fromJson(d);
 
-          if(history.fields.user == userLoggedIn?.id){
-            listHistory.add(History.fromJson(d));
-          }
+          // if(history.fields.user == UserInfo.data["id"]){
+          //   listHistory.add(History.fromJson(d));
+          // }
         }
     }
     return listHistory;

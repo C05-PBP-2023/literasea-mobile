@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/authentication/screens/logout_page.dart';
 import 'package:literasea_mobile/cart/screens/history.dart';
-import 'package:literasea_mobile/cart/screens/main.dart';
+import 'package:literasea_mobile/cart/screens/cart.dart';
 import 'package:literasea_mobile/json/const.dart';
 import 'package:literasea_mobile/screens/home_page.dart';
 

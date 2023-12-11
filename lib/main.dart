@@ -7,6 +7,21 @@ void main() {
   runApp(const MyApp());
 }
 
+class UserInfo {
+  static bool loggedIn = false;
+  static Map<String, dynamic> data = {};
+
+  static void login(Map<String, dynamic> data) {
+    loggedIn = true;
+    UserInfo.data = data;
+  }
+
+  static void logout() {
+    loggedIn = false;
+    data = {};
+  }
+}
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -18,8 +33,10 @@ class MyApp extends StatelessWidget {
         CookieRequest request = CookieRequest();
         return request;
       },
-      child: const MaterialApp(
-          debugShowCheckedModeBanner: false, home: WelcomePage()),
+      child: MaterialApp(
+          theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+          debugShowCheckedModeBanner: false,
+          home: const WelcomePage()),
     );
   }
 }
