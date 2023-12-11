@@ -32,7 +32,8 @@ class TextFormFieldWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
           borderSide: const BorderSide(color: Color(0xff3992C6)),
         ),
-        contentPadding: const EdgeInsets.only(top: 15.0),
+        isDense: true,
+        contentPadding: const EdgeInsets.symmetric(vertical: 20.0),
         errorStyle: GoogleFonts.inter(
           textStyle: const TextStyle(fontSize: 11),
         ),
@@ -45,10 +46,8 @@ class TextFormFieldWidget extends StatelessWidget {
           borderSide: const BorderSide(color: Colors.red),
         ),
       ),
-      style: GoogleFonts.inter(
-        textStyle: const TextStyle(
-          fontSize: 16,
-        ),
+      style: const TextStyle(
+        fontSize: 16,
       ),
       onChanged: onChanged,
       validator: validate ??

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:literasea_mobile/main.dart';
 import 'package:literasea_mobile/screens/root_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -170,6 +171,13 @@ class _LoginPageState extends State<LoginPage> {
                           setState(() {
                             _isLoading = false;
                           });
+                          Map<String, dynamic> data = {
+                            "username": response["username"],
+                            "fullname": response["fullname"],
+                            "id": response["id"],
+                            "type": response["type"],
+                          };
+                          UserInfo.login(data);
                           navigator.pushAndRemoveUntil(
                             MaterialPageRoute(
                               builder: (context) => const RootPage(),
