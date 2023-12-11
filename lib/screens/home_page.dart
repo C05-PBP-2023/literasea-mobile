@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const WriterPage()));
+                                builder: (context) => const ProductPage()));
                       } else if (homePageButtons[index]["name"] == "Reviews") {
                         Navigator.push(
                             context,

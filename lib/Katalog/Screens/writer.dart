@@ -99,7 +99,7 @@ class _WriterPageState extends State<WriterPage> {
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
                             ),
-                            maxLines: 10,
+                            maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
                           SizedBox(height: 4),
