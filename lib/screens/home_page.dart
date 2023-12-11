@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/Katalog/Screens/reader.dart';
+import 'package:literasea_mobile/forum/screens/forum.dart';
 import 'package:literasea_mobile/json/const.dart';
 import 'package:literasea_mobile/review/screens/review.dart';
 
@@ -74,7 +75,10 @@ class _MyHomePageState extends State<MyHomePage> {
                               MaterialPageRoute(
                                   builder: (context) => const ReviewPage()));
                         } else if (homePageButtons[index]["name"] == "Q & A") {
-                          // ke page qna
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const QNAPage()));
                         }
                       },
                     ),
