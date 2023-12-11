@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/authentication/screens/logout_page.dart';
 import 'package:literasea_mobile/json/const.dart';
+import 'package:literasea_mobile/main.dart';
 import 'package:literasea_mobile/screens/home_page.dart';
 
 class RootPage extends StatefulWidget {
@@ -22,7 +23,7 @@ class _RootPageState extends State<RootPage> {
         toolbarHeight: 60,
         title: Text(
           _activeTab == 0
-              ? "Hello, user!"
+              ? "Hello, ${UserInfo.data["fullname"]}!"
               : bottomNavBarIcons[_activeTab]["name"],
           style: GoogleFonts.inter(
               textStyle: const TextStyle(
