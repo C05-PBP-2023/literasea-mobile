@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:literasea_mobile/authentication/screens/user.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/screens/root_page.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -68,7 +67,6 @@ class _LoginPageState extends State<LoginPage> {
                 if (request.loggedIn) {
                   String message = response['message'];
                   String uname = response['username'];
-                  loginUser = User(uname); //tambahan buat objek
                   await navigator.pushAndRemoveUntil(
                       MaterialPageRoute(builder: (context) => const RootPage()),
                       (route) => false);

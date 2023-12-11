@@ -1,10 +1,44 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:literasea_mobile/review/screens/choose_book.dart';
 import 'package:literasea_mobile/review/screens/addreview.dart';
+import 'package:literasea_mobile/Katalog/models/product.dart';
+import 'package:http/http.dart' as http;
 
-class ReviewPage extends StatelessWidget {
+class ReviewPage extends StatefulWidget {
   const ReviewPage({Key? key}) : super(key: key);
+  
 
+  @override
+  _ReviewPageState createState() => _ReviewPageState();
+
+}
+
+class _ReviewPageState extends State<ReviewPage> {
+List<Product> list_review = [];
+Future<List<Product>> fetchProduct() async {
+    var url = Uri.parse(
+        'http://127.0.0.1:8000/review/show-review-flutter/');
+    var response = await http.get(
+        url,
+        headers: {"Content-Type": "application/json"},
+    );
+
+    // melakukan decode response menjadi bentuk json
+    var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+    list_review.clear();
+
+    // melakukan konversi data json menjadi object Product
+    // List<Product> list_review = [];
+    for (var d in data) {
+        if (d != null) {
+            list_review.add(Product.fromJson(d));
+        }
+    }
+    return list_review;
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -147,7 +181,7 @@ class ReviewPage extends StatelessWidget {
                 height: 175,
                 child: ListView.separated(
                     scrollDirection: Axis.horizontal,
-                    itemCount: 15, //ini nyoba dulu
+                    itemCount: 10, //NYOBAIN list_review.length
                     separatorBuilder: (context, index) => const SizedBox(width: 30),
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     itemBuilder: (context, index) {

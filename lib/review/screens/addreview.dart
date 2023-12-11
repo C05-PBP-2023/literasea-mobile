@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:literasea_mobile/authentication/screens/user.dart';
 import 'package:literasea_mobile/screens/home_page.dart';
 // TODO: Impor drawer yang sudah dibuat sebelumnya
 import 'dart:convert'; // Import for jsonEncode
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:literasea_mobile/Katalog/models/product.dart';
+import 'package:http/http.dart' as http;
 
 
 class ReviewFormPage extends StatefulWidget {
@@ -21,7 +21,6 @@ class _ShopFormPageState extends State<ReviewFormPage> {
   final _formKey = GlobalKey<FormState>();
   int? _rating; // Use int? to allow null, indicating no selection
   String _reviewMessage = "";
-
 
   @override
   Widget build(BuildContext context) {
@@ -130,7 +129,7 @@ class _ShopFormPageState extends State<ReviewFormPage> {
                                 final response = await request.postJson(
                                   "http://127.0.0.1:8000/review/add-review-flutter/", //ubah ulang ke deploy
                                   jsonEncode(<String, String>{
-                                    'username': loginUser.username,
+                                    'username': "",
                                     'rating': _rating.toString(),
                                     'review_message': _reviewMessage,
                                     'id':widget.product.pk.toString(),
