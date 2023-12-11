@@ -7,6 +7,8 @@ import 'package:literasea_mobile/cart/models/product.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
+import 'package:literasea_mobile/main.dart';
+
 // void main() {
 //   runApp(const MaterialApp(
 //     home: Cart(),
@@ -21,11 +23,12 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartState extends State<CartPage> {
-  List<String> item = ["buku1", "bbuku2", "cbuku3", "dbuku1 buku4", "ebuku1", "fbuku1buku13"];
+  //List<String> item = ["buku1", "bbuku2", "cbuku3", "dbuku1 buku4", "ebuku1", "fbuku1buku13"];
+  int banyakBuku = 0;
 
   Future<List<Product>> fetchProduct() async {
     //var url = Uri.parse("http://127.0.0.1:8000/products/get_book/");
-    var url = Uri.parse("http://127.0.0.1:8000/cart/get-cart/");
+    var url = Uri.parse("http://127.0.0.1:8000/cart/get-cart-id/${UserInfo.data["id"]}");
     //var url = Uri.parse("http://127.0.0.1:8000/cart/get-history/");
 
     final response = await http.get(url);
@@ -132,16 +135,17 @@ class _CartState extends State<CartPage> {
                     } else {
 
                       List<Product> data = snapshot.data!;
+                      banyakBuku = data.length;
                       
                       return ListView.builder(
-                        itemCount: data.length,
+                        itemCount: data.length+1,
                         itemBuilder: (_, index){
                           return index != 0 ? 
                               CartCard(
-                                  itemName: data[index].fields.bookTitle, 
-                                  itemAuthor: data[index].fields.bookAuthor, 
-                                  itemYear: "${data[index].fields.yearOfPublication}",
-                                  itemImage: data[index].fields.image,
+                                  itemName: data[index-1].fields.bookTitle, 
+                                  itemAuthor: data[index-1].fields.bookAuthor, 
+                                  itemYear: "${data[index-1].fields.yearOfPublication}",
+                                  itemImage: data[index-1].fields.image,
                                 ) : 
                               _historySection(context);
                         },
@@ -162,7 +166,7 @@ class _CartState extends State<CartPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Books ordered"),
-                        Text("${item.length}"),
+                        Text("${banyakBuku}"),
                       ],
                     ),
                     Row(
@@ -179,7 +183,7 @@ class _CartState extends State<CartPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text("Total"),
-                        Text("${item.length*100}"),
+                        Text("${banyakBuku}"),
                       ],
                     ),
                     ElevatedButton(

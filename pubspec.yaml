@@ -78,20 +78,14 @@ flutter:
   fonts:
     - family: Inter
       fonts:
-        - asset: assets/fonts/Inter-ExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/Inter-Bold.ttf
-          weight: 700
-        - asset: assets/fonts/Inter-SemiBold.ttf
+        - asset: fonts/Inter-SemiBold.ttf
           weight: 600
-        - asset: assets/fonts/Inter-Medium.ttf
+        - asset: fonts/Inter-Medium.ttf
           weight: 500
-        - asset: assets/fonts/Inter-Regular.ttf
+        - asset: fonts/Inter-Bold.ttf
+          weight: 700
+        - asset: fonts/Inter-Regular.ttf
           weight: 400
-        - asset: assets/fonts/Inter-Light.ttf
-          weight: 300
-        - asset: assets/fonts/Inter-ExtraLight.ttf
-          weight: 200
-  #
+
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

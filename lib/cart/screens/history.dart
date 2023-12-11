@@ -29,12 +29,12 @@ class _HistoryPageState extends State<HistoryPage> {
     List<History> listHistory = [];
     for (var d in data) {
         if (d != null) {
-          listHistory.add(History.fromJson(d));
-          // History history = History.fromJson(d);
+          //listHistory.add(History.fromJson(d));
+          History history = History.fromJson(d);
 
-          // if(history.fields.user == UserInfo.data["id"]){
-          //   listHistory.add(History.fromJson(d));
-          // }
+          if(history.fields.user == UserInfo.data["id"]){
+            listHistory.add(History.fromJson(d));
+          }
         }
     }
     return listHistory;
