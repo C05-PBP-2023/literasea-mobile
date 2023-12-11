@@ -23,7 +23,6 @@ class _RegisterPageState extends State<RegisterPage> {
   String _passwordConfController = "";
 
   bool _isLoading = false;
-  bool _formIsValid = true;
 
   @override
   Widget build(BuildContext context) {
@@ -48,16 +47,8 @@ class _RegisterPageState extends State<RegisterPage> {
             SingleChildScrollView(
               child: Container(
                 decoration: const BoxDecoration(color: Colors.white),
-                height: MediaQuery.of(context).viewInsets.bottom > 0
-                    ? (_formIsValid
-                            ? MediaQuery.of(context).size.height -
-                                MediaQuery.of(context).viewInsets.bottom / 3
-                            : MediaQuery.of(context).size.height) -
-                        MediaQuery.of(context).viewInsets.bottom / 4
-                    : MediaQuery.of(context).size.height -
-                        MediaQuery.of(context).viewInsets.bottom / 2 -
-                        90,
-                padding: const EdgeInsets.symmetric(horizontal: 30),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
                 child: Column(
                   children: [
                     Container(
@@ -123,7 +114,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                 String password2 = _passwordConfController;
                                 setState(() {
                                   _isLoading = true;
-                                  _formIsValid = true;
                                 });
                                 final response = await request.postJson(
                                     "https://literasea.live/auth/register-mobile/",
@@ -171,10 +161,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                       _isLoading = false;
                                     });
                                   }
-                                });
-                              } else {
-                                setState(() {
-                                  _formIsValid = false;
                                 });
                               }
                             },
@@ -247,7 +233,9 @@ class _RegisterPageState extends State<RegisterPage> {
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(color: Color(0xff3992C6)),
             ),
-            contentPadding: const EdgeInsets.only(top: 12.0, right: 12.0),
+            isDense: true,
+            contentPadding:
+                const EdgeInsets.only(top: 16.0, bottom: 16, right: 12.0),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
               borderSide: const BorderSide(color: Colors.red),
@@ -269,12 +257,10 @@ class _RegisterPageState extends State<RegisterPage> {
             }
             return null;
           },
-          hint: Text(
+          hint: const Text(
             "Choose your account type...",
-            style: GoogleFonts.inter(
-              textStyle: const TextStyle(
-                fontSize: 16,
-              ),
+            style: TextStyle(
+              fontSize: 16,
             ),
           ),
           items: const [
@@ -348,7 +334,7 @@ class _RegisterPageState extends State<RegisterPage> {
         ),
         const SizedBox(height: 20.0),
         TextFormFieldWidget(
-          "Password",
+          "Password confirmation",
           Icons.key,
           true,
           (val) {
