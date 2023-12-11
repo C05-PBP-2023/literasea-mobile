@@ -18,8 +18,10 @@ class MyApp extends StatelessWidget {
         CookieRequest request = CookieRequest();
         return request;
       },
-      child: const MaterialApp(
-          debugShowCheckedModeBanner: false, home: WelcomePage()),
+      child: MaterialApp(
+          theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+          debugShowCheckedModeBanner: false,
+          home: const WelcomePage()),
     );
   }
 }
