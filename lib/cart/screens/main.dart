@@ -3,22 +3,66 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/cart/screens/checkout_form.dart';
 import 'package:literasea_mobile/cart/screens/history.dart';
 import 'package:literasea_mobile/cart/widgets/cart_card.dart';
+import 'package:literasea_mobile/cart/models/product.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
-void main() {
-  runApp(const MaterialApp(
-    home: Cart(),
-  ));
-}
+// void main() {
+//   runApp(const MaterialApp(
+//     home: Cart(),
+//   ));
+// }
 
-class Cart extends StatefulWidget {
-  const Cart({super.key});
+class CartPage extends StatefulWidget {
+  const CartPage({super.key});
 
   @override
-  State<Cart> createState() => _CartState();
+  State<CartPage> createState() => _CartState();
 }
 
-class _CartState extends State<Cart> {
+class _CartState extends State<CartPage> {
   List<String> item = ["buku1", "bbuku2", "cbuku3", "dbuku1 buku4", "ebuku1", "fbuku1buku13"];
+
+  Future<List<Product>> fetchProduct() async {
+    //var url = Uri.parse("http://127.0.0.1:8000/products/get_book/");
+    var url = Uri.parse("http://127.0.0.1:8000/cart/get-cart/");
+    //var url = Uri.parse("http://127.0.0.1:8000/cart/get-history/");
+
+    final response = await http.get(url);
+
+    // var response = await http.get(
+    //   url,
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     },
+    // );
+    
+
+    // var response = await http.post(
+    //   url,
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: jsonEncode({
+    //     "username": "ethan2",
+    //     "password": "plsletme1n"
+    //   })
+    // );
+
+    //print("Response:" + response.body);
+
+    var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+    //print(data);
+
+    List<Product> listProduct = [];
+    for (var d in data) {
+        if (d != null) {
+            listProduct.add(Product.fromJson(d));
+        }
+    }
+    return listProduct;
+  }
 
     Widget _historySection(BuildContext context){
     return Container(
@@ -30,7 +74,7 @@ class _CartState extends State<Cart> {
                 children: [
                   TextButton(
                     onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const History()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const HistoryPage()));
                     },
                     child: Text("History"),
                   )
@@ -44,6 +88,9 @@ class _CartState extends State<Cart> {
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: Color(0xff00134E)
+          ),
           title: Text("My Cart",
               style: GoogleFonts.inter(
                   textStyle: const TextStyle(
@@ -57,13 +104,50 @@ class _CartState extends State<Cart> {
         ),
         body: Column(
           children: [
+            // Expanded(
+            //   child: ListView.builder(
+            //     itemCount: item.length,
+            //     itemBuilder: (context, index) {
+            //       return index != 0 ? 
+            //           CartCard(itemName: item[index], itemAuthor: item[index], itemYear: item[index],) : 
+            //           _historySection(context);
+            //     },
+            //   ),
+            // ),
             Expanded(
-              child: ListView.builder(
-                itemCount: item.length,
-                itemBuilder: (context, index) {
-                  return index != 0 ? 
-                      CartCard(itemName: item[index], itemAuthor: item[index], itemYear: item[index],) : 
-                      _historySection(context);
+              child: FutureBuilder(
+                future: fetchProduct(),
+                builder: (context, AsyncSnapshot snapshot){
+                  if(snapshot.data == null){
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  } else {
+                    if(!snapshot.hasData){
+                      return const Column(
+                        children: [
+                          Text("Empty Cart")
+                        ],
+                      );
+                    } else {
+
+                      List<Product> data = snapshot.data!;
+                      
+                      return ListView.builder(
+                        itemCount: data.length,
+                        itemBuilder: (_, index){
+                          return index != 0 ? 
+                              CartCard(
+                                  itemName: data[index].fields.bookTitle, 
+                                  itemAuthor: data[index].fields.bookAuthor, 
+                                  itemYear: "${data[index].fields.yearOfPublication}",
+                                  itemImage: data[index].fields.image,
+                                ) : 
+                              _historySection(context);
+                        },
+                      );
+                    }
+                  }
                 },
               ),
             ),

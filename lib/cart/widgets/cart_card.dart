@@ -4,7 +4,9 @@ class CartCard extends StatelessWidget {
   final String itemName;
   final String itemAuthor;
   final String itemYear;
-  const CartCard({super.key, required this.itemName, required this.itemAuthor, required this.itemYear});
+  final String itemImage;
+  const CartCard({super.key, required this.itemName, required this.itemAuthor, 
+  required this.itemYear, required this.itemImage});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class CartCard extends StatelessWidget {
             height: 100,
             margin: EdgeInsets.all(5),
             color: Colors.transparent,
-            child: Image.network("https://cdn.gramedia.com/uploads/picture_meta/2023/6/8/3qaxyret7kcgarrevayw6d.jpg"),
+            child: Image.network("${itemImage}"),
           ),
           Expanded(
             flex: 6,
@@ -35,7 +37,13 @@ class CartCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text("${itemName}"),
+                  Expanded(
+                    child: Text(
+                      "${itemName}",
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    ),
                   Text("${itemAuthor}"),
                   Text("${itemYear}"),
                 ],

@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
                 String username = _usernameController.text;
                 String password = _passwordController.text;
                 final response = await request
-                    .login("https://literasea.live/auth/login-mobile/", {
+                    .login("http://127.0.0.1:8000/auth/login-mobile/", {
                   'username': username,
                   'password': password,
                 });

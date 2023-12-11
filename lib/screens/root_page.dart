@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/authentication/screens/logout_page.dart';
+import 'package:literasea_mobile/cart/screens/history.dart';
+import 'package:literasea_mobile/cart/screens/main.dart';
 import 'package:literasea_mobile/json/const.dart';
 import 'package:literasea_mobile/screens/home_page.dart';
 
@@ -36,7 +38,12 @@ class _RootPageState extends State<RootPage> {
               icon: const Icon(Icons.shopping_cart),
               color: Colors.black,
               tooltip: "Open shopping cart",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const CartPage()));
+              },
             ),
           )
         ],
@@ -117,7 +124,7 @@ class _RootPageState extends State<RootPage> {
       children: const [
         MyHomePage(title: "Literasea"),
         Center(child: Text("Page 2")),
-        Center(child: Text("Page 3")),
+        HistoryPage(),
         LogoutPage()
       ],
     );
