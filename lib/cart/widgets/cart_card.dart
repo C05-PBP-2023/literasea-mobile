@@ -1,15 +1,27 @@
+import 'dart:html';
+import 'package:literasea_mobile/main.dart';
 import 'package:flutter/material.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class CartCard extends StatelessWidget {
+  final int pk;
   final String itemName;
   final String itemAuthor;
   final String itemYear;
   final String itemImage;
-  const CartCard({super.key, required this.itemName, required this.itemAuthor, 
-  required this.itemYear, required this.itemImage});
+  final void Function() refreshCart;
+
+  const CartCard({super.key, required this.pk, required this.itemName, required this.itemAuthor, 
+  required this.itemYear, required this.itemImage, required this.refreshCart});
 
   @override
   Widget build(BuildContext context) {
+    
+    final request = context.watch<CookieRequest>();
+
     return Container(
       height: 150,
       margin: const EdgeInsets.fromLTRB(80, 12, 80, 12),
@@ -63,7 +75,20 @@ class CartCard extends StatelessWidget {
                     icon: Icon(
                       Icons.delete,
                     ), 
-                    onPressed: () {  },
+                    onPressed: () async { 
+                      // final response = await request.postJson(
+                      //   "http://127.0.0.1:8080/cart/remove-flutter/${UserInfo.data["id"]}/${pk}",
+
+                      // )
+                      
+                      final response = await http.post(
+                        Uri.parse("http://127.0.0.1:8000/cart/remove-flutter/${UserInfo.data["id"]}/${pk}"),
+                      );
+
+                      if (response.statusCode == 200) {
+                        refreshCart();
+                      }
+                    },
                   )
                 ],
               ),

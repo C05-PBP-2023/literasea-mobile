@@ -8,7 +8,9 @@ import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
 class CheckoutForm extends StatefulWidget {
-  const CheckoutForm({super.key});
+  final int total;
+
+  const CheckoutForm({super.key, required this.total});
 
   @override
   State<CheckoutForm> createState() => _CheckoutFormState();
@@ -130,7 +132,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("Rp300,00"),
+                        Text("Rp${widget.total},00"),
                       ],
                     ),
                     ElevatedButton(
@@ -146,7 +148,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                           if (response['status'] == 'success') {
                             ScaffoldMessenger.of(context)
                                 .showSnackBar(const SnackBar(
-                              content: Text("Produk baru berhasil disimpan!"),
+                              content: Text("Checkout berhasil!"),
                             ));
                             Navigator.pushReplacement(
                               context,

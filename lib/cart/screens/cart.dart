@@ -23,8 +23,16 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartState extends State<CartPage> {
+
+  void refreshCart() {
+    setState(() {
+      
+    });
+  }
+
   //List<String> item = ["buku1", "bbuku2", "cbuku3", "dbuku1 buku4", "ebuku1", "fbuku1buku13"];
   int banyakBuku = 0;
+  bool get = true;
 
   Future<List<Product>> fetchProduct() async {
     //var url = Uri.parse("http://127.0.0.1:8000/products/get_book/");
@@ -39,18 +47,6 @@ class _CartState extends State<CartPage> {
     //     "Content-Type": "application/json",
     //     },
     // );
-    
-
-    // var response = await http.post(
-    //   url,
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: jsonEncode({
-    //     "username": "ethan2",
-    //     "password": "plsletme1n"
-    //   })
-    // );
 
     //print("Response:" + response.body);
 
@@ -64,6 +60,14 @@ class _CartState extends State<CartPage> {
             listProduct.add(Product.fromJson(d));
         }
     }
+
+    if (get) {
+      setState(() {
+        banyakBuku = listProduct.length;
+        get = false;
+      });
+    }
+
     return listProduct;
   }
 
@@ -126,28 +130,40 @@ class _CartState extends State<CartPage> {
                       child: CircularProgressIndicator(),
                     );
                   } else {
-                    if(!snapshot.hasData){
-                      return const Column(
-                        children: [
-                          Text("Empty Cart")
-                        ],
+                    if(snapshot.data.length == 0){
+                      return const Center(
+                        child:
+                          Text("Empty Cart"),
                       );
                     } else {
 
                       List<Product> data = snapshot.data!;
-                      banyakBuku = data.length;
                       
                       return ListView.builder(
                         itemCount: data.length+1,
                         itemBuilder: (_, index){
-                          return index != 0 ? 
-                              CartCard(
+                          if(index != 0){
+                            return CartCard(
+                                  pk: data[index-1].pk,
                                   itemName: data[index-1].fields.bookTitle, 
                                   itemAuthor: data[index-1].fields.bookAuthor, 
                                   itemYear: "${data[index-1].fields.yearOfPublication}",
                                   itemImage: data[index-1].fields.image,
-                                ) : 
-                              _historySection(context);
+                                  refreshCart: refreshCart,
+                                );
+                          }else {
+                            return _historySection(context);
+                          }
+                          // return index != 0 ? 
+                          //     CartCard(
+                          //         pk: data[index-1].pk,
+                          //         itemName: data[index-1].fields.bookTitle, 
+                          //         itemAuthor: data[index-1].fields.bookAuthor, 
+                          //         itemYear: "${data[index-1].fields.yearOfPublication}",
+                          //         itemImage: data[index-1].fields.image,
+                          //         refreshCart: refreshCart,
+                          //       ) : 
+                          //     _historySection(context);
                         },
                       );
                     }
@@ -188,8 +204,11 @@ class _CartState extends State<CartPage> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => const CheckoutForm()));
+                        if(banyakBuku == 0) return;
+                        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => CheckoutForm(total: banyakBuku*100)));
                       }, 
+                      style: banyakBuku == 0 ? ElevatedButton.styleFrom(backgroundColor: Colors.grey) :
+                              ElevatedButton.styleFrom(backgroundColor: Colors.blue),
                       child: Text("Checkout Books"),
                     )
                   ],
