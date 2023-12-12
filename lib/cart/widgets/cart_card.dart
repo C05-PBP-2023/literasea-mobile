@@ -1,10 +1,6 @@
-import 'dart:html';
 import 'package:literasea_mobile/main.dart';
 import 'package:flutter/material.dart';
-import 'package:pbp_django_auth/pbp_django_auth.dart';
-import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 class CartCard extends StatelessWidget {
   final int pk;
@@ -19,9 +15,6 @@ class CartCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
-    final request = context.watch<CookieRequest>();
-
     return Container(
       height: 150,
       margin: const EdgeInsets.fromLTRB(80, 12, 80, 12),
