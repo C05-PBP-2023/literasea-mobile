@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/forum/models/question.dart';
-import 'package:literasea_mobile/forum/screens/answer.dart';
+import 'package:literasea_mobile/forum/widgets/answer.dart';
 import 'package:literasea_mobile/forum/util/fetch.dart';
 import 'package:literasea_mobile/main.dart';
 
@@ -13,6 +13,7 @@ class QNAPage extends StatefulWidget {
 }
 
 class _QNAPageState extends State<QNAPage> {
+  Future<List<Question>> _data = fetchQuestions();
   List<Question> listQuestions = [];
 
   @override
@@ -92,7 +93,7 @@ class _QNAPageState extends State<QNAPage> {
             Container(
               padding: const EdgeInsets.symmetric(vertical: 12),
               child: FutureBuilder(
-                future: fetchQuestions(),
+                future: _data,
                 builder: (context, AsyncSnapshot snapshot) {
                   if (snapshot.data == null) {
                     return const Padding(
@@ -217,7 +218,26 @@ class _QNAPageState extends State<QNAPage> {
                                                 ),
                                               ],
                                             ),
-                                            onPressed: () {},
+                                            onPressed: () {
+                                              showModalBottomSheet(
+                                                context: context,
+                                                shape:
+                                                    const RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.vertical(
+                                                    top: Radius.circular(32),
+                                                  ),
+                                                ),
+                                                showDragHandle: true,
+                                                isScrollControlled: true,
+                                                builder:
+                                                    (BuildContext context) {
+                                                  return AnswerForm(
+                                                    snapshot.data![index],
+                                                  );
+                                                },
+                                              );
+                                            },
                                           )
                                         : UserInfo.data["type"] == "reader"
                                             ? Text(
@@ -278,11 +298,18 @@ class _QNAPageState extends State<QNAPage> {
                                                             Radius.circular(32),
                                                       ),
                                                     ),
+                                                    showDragHandle: true,
+                                                    isScrollControlled: true,
                                                     builder:
                                                         (BuildContext context) {
-                                                      return AnswerForm(snapshot
-                                                          .data![index]);
+                                                      return AnswerForm(
+                                                        snapshot.data![index],
+                                                      );
                                                     },
+                                                  ).then(
+                                                    (_) => setState(() {
+                                                      _data = fetchQuestions();
+                                                    }),
                                                   );
                                                 },
                                               )
