@@ -18,8 +18,7 @@ class _AddBookPageState extends State<AddBookPage> {
 
   Future<void> _submitBook() async {
     if (_formKey.currentState!.validate()) {
-      // You might want to update the URL and headers as per your backend configuration
-      var url = Uri.parse('127.0.0.1:8000/products/create_book_flutter/');
+      var url = Uri.parse('https://literasea.live/products/create_book_flutter/');
       var response = await http.post(
         url,
         headers: {"Content-Type": "application/json"},
@@ -34,9 +33,9 @@ class _AddBookPageState extends State<AddBookPage> {
       );
 
       if (response.statusCode == 200) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Book added successfully!')));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Book added successfully!')));
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text('Failed to add book')));
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Failed to add book')));
       }
     }
   }
@@ -45,19 +44,19 @@ class _AddBookPageState extends State<AddBookPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add New Book'),
+        title: const Text('Add New Book'),
       ),
       body: SingleChildScrollView(
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 TextFormField(
                   controller: _isbnController,
-                  decoration: InputDecoration(labelText: 'ISBN'),
+                  decoration: const InputDecoration(labelText: 'ISBN'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter ISBN';
@@ -67,7 +66,7 @@ class _AddBookPageState extends State<AddBookPage> {
                 ),
                 TextFormField(
                   controller: _titleController,
-                  decoration: InputDecoration(labelText: 'Book Title'),
+                  decoration: const InputDecoration(labelText: 'Book Title'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter book title';
@@ -77,7 +76,7 @@ class _AddBookPageState extends State<AddBookPage> {
                 ),
                 TextFormField(
                   controller: _authorController,
-                  decoration: InputDecoration(labelText: 'Author'),
+                  decoration: const InputDecoration(labelText: 'Author'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter author name';
@@ -87,7 +86,7 @@ class _AddBookPageState extends State<AddBookPage> {
                 ),
                 TextFormField(
                   controller: _yearController,
-                  decoration: InputDecoration(labelText: 'Year of Publication'),
+                  decoration: const InputDecoration(labelText: 'Year of Publication'),
                   keyboardType: TextInputType.number,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -98,7 +97,7 @@ class _AddBookPageState extends State<AddBookPage> {
                 ),
                 TextFormField(
                   controller: _publisherController,
-                  decoration: InputDecoration(labelText: 'Publisher'),
+                  decoration: const InputDecoration(labelText: 'Publisher'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter publisher';
@@ -108,7 +107,7 @@ class _AddBookPageState extends State<AddBookPage> {
                 ),
                 TextFormField(
                   controller: _imageController,
-                  decoration: InputDecoration(labelText: 'Image URL'),
+                  decoration: const InputDecoration(labelText: 'Image URL'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter image URL';
@@ -116,10 +115,10 @@ class _AddBookPageState extends State<AddBookPage> {
                     return null;
                   },
                 ),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: _submitBook,
-                  child: Text('Add Book'),
+                  child: const Text('Add Book'),
                 ),
               ],
             ),

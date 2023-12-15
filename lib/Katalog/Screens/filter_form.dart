@@ -29,21 +29,21 @@ class _FilterFormState extends State<FilterForm> {
       child: Column(
         children: <Widget>[
           TextFormField(
-            decoration: InputDecoration(labelText: 'Author Name'),
+            decoration: const InputDecoration(labelText: 'Author Name'),
             onSaved: (value) => authorName = value,
           ),
           TextFormField(
-            decoration: InputDecoration(labelText: 'Publisher'),
+            decoration: const InputDecoration(labelText: 'Publisher'),
             onSaved: (value) => publisher = value,
           ),
           TextFormField(
-            decoration: InputDecoration(labelText: 'Published Year'),
+            decoration: const InputDecoration(labelText: 'Published Year'),
             keyboardType: TextInputType.number,
             onSaved: (value) => publishedYear = int.tryParse(value ?? ''),
           ),
           ElevatedButton(
             onPressed: _submitForm,
-            child: Text('Filter'),
+            child: const Text('Filter'),
           ),
         ],
       ),

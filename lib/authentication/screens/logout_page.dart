@@ -22,7 +22,7 @@ class LogoutPage extends StatelessWidget {
           minWidth: double.infinity,
           onPressed: () async {
             final response = await request
-                .logout("https://literasea.live/auth/logout-mobile/");
+                .logout("http://127.0.0.1:8000/auth/logout-mobile/");
             if (response["status"]) {
               UserInfo.logout();
               navigator.pushReplacement(

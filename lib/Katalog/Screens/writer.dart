@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:literasea_mobile/Katalog/Screens/addBook_form.dart';
-import 'package:literasea_mobile/Katalog/Screens/book_details.dart';
+import 'package:literasea_mobile/Katalog/Screens/writer_book_details.dart';
 import 'dart:convert';
 import 'package:literasea_mobile/Katalog/models/product.dart';
 
@@ -95,7 +95,7 @@ class _WriterPageState extends State<WriterPage> {
                         children: [
                           Text(
                             product.fields.bookTitle,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.bold,
                             ),
@@ -128,7 +128,7 @@ class _WriterPageState extends State<WriterPage> {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => BookDetailsPage(product: product),
+                                      builder: (context) => WriterBookDetailsPage(product: product),
                                     ),
                                   );
                                 },
