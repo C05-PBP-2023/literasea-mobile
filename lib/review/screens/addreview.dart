@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:literasea_mobile/review/screens/review.dart';
 import 'package:literasea_mobile/screens/home_page.dart';
-// TODO: Impor drawer yang sudah dibuat sebelumnya
+import 'package:literasea_mobile/main.dart';
 import 'dart:convert'; // Import for jsonEncode
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -129,7 +130,7 @@ class _ShopFormPageState extends State<ReviewFormPage> {
                                 final response = await request.postJson(
                                   "http://127.0.0.1:8000/review/add-review-flutter/", //ubah ulang ke deploy
                                   jsonEncode(<String, String>{
-                                    'username': "",
+                                    'username': UserInfo.data["username"],
                                     'rating': _rating.toString(),
                                     'review_message': _reviewMessage,
                                     'id':widget.product.pk.toString(),
@@ -143,7 +144,7 @@ class _ShopFormPageState extends State<ReviewFormPage> {
                                   );
                                   Navigator.pushReplacement(
                                     context,
-                                    MaterialPageRoute(builder: (context) => MyHomePage(title:'BALIK LAGI')),
+                                    MaterialPageRoute(builder: (context) => ReviewPage()),
                                   );
                                 } else {
                                   ScaffoldMessenger.of(context).showSnackBar(
