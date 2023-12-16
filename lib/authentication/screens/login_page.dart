@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                         _isLoading = true;
                       });
                       final response = await request
-                          .login("https:literasea.live/auth/login-mobile/", {
+                          .login("https://literasea.live/auth/login-mobile/", {
                         'username': username,
                         'password': password,
                       });
