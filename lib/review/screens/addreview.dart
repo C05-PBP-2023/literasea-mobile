@@ -132,7 +132,7 @@ class _ShopFormPageState extends State<ReviewFormPage> {
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 final response = await request.postJson(
-                                  "http://127.0.0.1:8000/review/add-review-flutter/",
+                                  "https://literasea.live/review/add-review-flutter/",
                                   jsonEncode(<String, String>{
                                     'username': UserInfo.data["username"],
                                     'rating': _rating.toString(),

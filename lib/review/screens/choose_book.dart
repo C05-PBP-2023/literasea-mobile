@@ -15,7 +15,7 @@ class ReviewProductPage extends StatefulWidget {
 
 class _ReviewProductPageState extends State<ReviewProductPage> {
   Future<List<Product>> fetchProduct() async {
-    var url = Uri.parse('http://127.0.0.1:8000/review/get-book-review/');
+    var url = Uri.parse('https://literasea.live/review/get-book-review/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},

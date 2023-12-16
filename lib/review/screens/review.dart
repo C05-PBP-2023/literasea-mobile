@@ -19,7 +19,7 @@ class _ReviewPageState extends State<ReviewPage> {
   List<ProductR> list_random = [];
 
   Future<List<Review>> fetchReview() async {
-    var url = Uri.parse('http://127.0.0.1:8000/review/show-review-flutter/');
+    var url = Uri.parse('https://literasea.live/review/show-review-flutter/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -38,7 +38,7 @@ class _ReviewPageState extends State<ReviewPage> {
   }
 
   Future<List<ProductR>> fetchRandomProduct() async {
-    var url = Uri.parse('http://127.0.0.1:8000/review/show-random-book-flutter/');
+    var url = Uri.parse('https://literasea.live/review/show-random-book-flutter/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -59,7 +59,7 @@ class _ReviewPageState extends State<ReviewPage> {
   }
 
   Future<List<Review>> fetchLatestReview() async {
-    var url = Uri.parse('http://127.0.0.1:8000/review/get-latest-reviews/');
+    var url = Uri.parse('https://literasea.live/review/get-latest-reviews/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
