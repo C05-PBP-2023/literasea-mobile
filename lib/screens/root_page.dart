@@ -86,6 +86,7 @@ class _RootPageState extends State<RootPage> {
                           const SizedBox(height: 4),
                           Text(
                             bottomNavBarIcons[idx]["name"],
+                            textAlign: TextAlign.center,
                             style: GoogleFonts.inter(
                               textStyle: TextStyle(
                                   fontSize: 12,
