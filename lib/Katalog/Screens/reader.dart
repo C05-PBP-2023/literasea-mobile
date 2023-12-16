@@ -15,7 +15,7 @@ class ProductPage extends StatefulWidget {
 
 Future<void> addToCart(BuildContext context, int bookId) async {
   var userId = UserInfo.data["id"];
-  var url = Uri.parse('http://literasea.live/products/add_to_cart_flutter/$bookId/$userId/');
+  var url = Uri.parse('https://literasea.live/products/add_to_cart_flutter/$bookId/$userId/');
 
   var requestBody = {"user_id": userId};
 
