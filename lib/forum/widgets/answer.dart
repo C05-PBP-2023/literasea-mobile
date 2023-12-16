@@ -69,18 +69,32 @@ class _AnswerFormState extends State<AnswerForm> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        widget.question.bookTitle,
+                        "Book Title",
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12),
+                              fontWeight: FontWeight.bold, fontSize: 14),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        widget.question.bookTitle,
+                        style: GoogleFonts.inter(
+                          textStyle: const TextStyle(fontSize: 14),
                         ),
                       ),
                       const SizedBox(height: 8),
                       Text(
-                        "by ${widget.question.bookAuthor}",
+                        "Book Author",
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 12),
+                              fontWeight: FontWeight.bold, fontSize: 14),
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        widget.question.bookAuthor,
+                        style: GoogleFonts.inter(
+                          textStyle: const TextStyle(fontSize: 14),
                         ),
                       ),
                     ],
@@ -115,10 +129,11 @@ class _AnswerFormState extends State<AnswerForm> {
               style: GoogleFonts.inter(
                 textStyle: const TextStyle(
                   height: 1.5,
+                  fontSize: 15,
                 ),
               ),
             ),
-            const SizedBox(height: 12),
+            const SizedBox(height: 16),
             !_isLoading
                 ? (!widget.question.answered)
                     ? Form(
@@ -260,6 +275,7 @@ class _AnswerFormState extends State<AnswerForm> {
                               ),
                             ),
                           ),
+                          const SizedBox(height: 12),
                           Container(
                             width: double.infinity,
                             padding: const EdgeInsets.all(16),
