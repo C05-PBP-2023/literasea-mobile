@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/Katalog/Screens/reader.dart';
 import 'package:literasea_mobile/forum/screens/forum.dart';
+import 'package:literasea_mobile/Katalog/Screens/writer.dart';
 import 'package:literasea_mobile/json/const.dart';
 import 'package:literasea_mobile/review/screens/review.dart';
+import 'package:literasea_mobile/main.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key, required this.title});
@@ -64,10 +66,17 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       onTap: () {
                         if (homePageButtons[index]["name"] == "Catalogue") {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const ProductPage()));
+                          if (UserInfo.data["type"] == "writer") {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const WriterPage()));
+                          } else {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ProductPage()));
+                          }
                         } else if (homePageButtons[index]["name"] ==
                             "Reviews") {
                           Navigator.push(
