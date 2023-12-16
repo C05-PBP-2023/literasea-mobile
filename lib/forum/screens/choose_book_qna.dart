@@ -16,7 +16,6 @@ class QNAChooseBook extends StatefulWidget {
 class _QNAChooseBookState extends State<QNAChooseBook> {
   late List<Product> _allProducts;
   late List<Product> _filteredProducts;
-  bool _showFilterForm = false;
 
   @override
   void initState() {
@@ -73,14 +72,27 @@ class _QNAChooseBookState extends State<QNAChooseBook> {
         actions: [
           TextButton(
             onPressed: () {
-              setState(() {
-                _showFilterForm = !_showFilterForm;
-              });
+              showModalBottomSheet(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(32),
+                  ),
+                ),
+                showDragHandle: true,
+                isScrollControlled: true,
+                builder: (BuildContext context) {
+                  return FilterForm(
+                      onFilter: (authorName, publisher, publishedYear) {
+                    _applyFilters(authorName, publisher, publishedYear);
+                  });
+                },
+              );
             },
             child: Padding(
               padding: const EdgeInsets.only(right: 8.0),
               child: Text(
-                _showFilterForm ? 'HIDE FILTER' : 'FILTER',
+                'FILTER',
                 style: GoogleFonts.inter(
                   textStyle: const TextStyle(
                     color: Colors.black,
@@ -94,10 +106,6 @@ class _QNAChooseBookState extends State<QNAChooseBook> {
       ),
       body: Column(
         children: [
-          if (_showFilterForm)
-            FilterForm(onFilter: (authorName, publisher, publishedYear) {
-              _applyFilters(authorName, publisher, publishedYear);
-            }),
           Expanded(
             child: _buildProductGrid(),
           ),
