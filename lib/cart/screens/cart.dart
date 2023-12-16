@@ -36,7 +36,7 @@ class _CartState extends State<CartPage> {
 
   Future<List<Product>> fetchProduct() async {
     //var url = Uri.parse("http://127.0.0.1:8000/products/get_book/");
-    var url = Uri.parse("http://127.0.0.1:8000/cart/get-cart-id/${UserInfo.data["id"]}");
+    var url = Uri.parse("https://literasea.live/cart/get-cart-id/${UserInfo.data["id"]}");
     //var url = Uri.parse("http://127.0.0.1:8000/cart/get-history/");
 
     final response = await http.get(url);
@@ -73,21 +73,21 @@ class _CartState extends State<CartPage> {
 
     Widget _historySection(BuildContext context){
     return Container(
-              margin: EdgeInsets.fromLTRB(0, 15, 70, 15),
-              height: 50,
-              color: Colors.white,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  TextButton(
-                    onPressed: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => const HistoryPage()));
-                    },
-                    child: Text("History"),
-                  )
-                ],
-              ),
-            );
+            margin: EdgeInsets.fromLTRB(0, 15, 70, 15),
+            height: 50,
+            color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const HistoryPage()));
+                  },
+                  child: Text("History"),
+                )
+              ],
+            ),
+          );
   }
 
   @override
@@ -111,6 +111,22 @@ class _CartState extends State<CartPage> {
         ),
         body: Column(
           children: [
+            Container(
+              margin: EdgeInsets.fromLTRB(0, 15, 70, 15),
+            height: 50,
+            color: Colors.white,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                TextButton(
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const HistoryPage()));
+                  },
+                  child: Text("History"),
+                )
+              ],
+            ),
+            ),
             // Expanded(
             //   child: ListView.builder(
             //     itemCount: item.length,
@@ -140,19 +156,20 @@ class _CartState extends State<CartPage> {
                       List<Product> data = snapshot.data!;
                       
                       return ListView.builder(
-                        itemCount: data.length+1,
+                        itemCount: data.length,
                         itemBuilder: (_, index){
-                          if(index != 0){
-                            return CartCard(
-                                  pk: data[index-1].pk,
-                                  itemName: data[index-1].fields.bookTitle, 
-                                  itemAuthor: data[index-1].fields.bookAuthor, 
-                                  itemYear: "${data[index-1].fields.yearOfPublication}",
-                                  itemImage: data[index-1].fields.image,
-                                  refreshCart: refreshCart,
-                                );
-                          }else {
-                            return _historySection(context);
+                          // String imageLink = data[index].fields.image;
+                          // String substring = imageLink.substring(14);
+                  
+                            //print(substring);
+                          return CartCard(
+                                pk: data[index].pk,
+                                itemName: data[index].fields.bookTitle, 
+                                itemAuthor: data[index].fields.bookAuthor, 
+                                itemYear: "${data[index].fields.yearOfPublication}",
+                                itemImage: data[index].fields.image,
+                                refreshCart: refreshCart,
+                              );
                           }
                           // return index != 0 ? 
                           //     CartCard(
@@ -164,7 +181,6 @@ class _CartState extends State<CartPage> {
                           //         refreshCart: refreshCart,
                           //       ) : 
                           //     _historySection(context);
-                        },
                       );
                     }
                   }

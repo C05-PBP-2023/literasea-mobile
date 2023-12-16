@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:literasea_mobile/Katalog/models/product.dart';
 import 'package:literasea_mobile/cart/models/historyModels.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -7,6 +8,7 @@ import 'package:literasea_mobile/cart/widgets/history_card.dart';
 import 'package:literasea_mobile/main.dart';
 
 class HistoryPage extends StatefulWidget {
+
   const HistoryPage({super.key});
 
   @override
@@ -16,7 +18,7 @@ class HistoryPage extends StatefulWidget {
 class _HistoryPageState extends State<HistoryPage> {
 
   Future<List<History>> fetchHistory() async {
-    var url = Uri.parse("http://127.0.0.1:8000/cart/get-history/");
+    var url = Uri.parse("https://literasea.live/cart/get-history/");
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -36,6 +38,32 @@ class _HistoryPageState extends State<HistoryPage> {
         }
     }
     return listHistory;
+  }
+
+  Future<List<Product>> fetchBook() async {
+    var url = Uri.parse("https://literasea.live/products/get_book/");
+    var response = await http.get(
+      url,
+      headers: {"Content-Type": "application/json"},
+    );
+
+    var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+    List<Product> futureBuku = [];
+
+    for (var d in data) {
+        if (d != null) {
+          futureBuku.add(Product.fromJson(d));
+        }
+    }
+
+    return futureBuku;
+  }
+
+  getBook() async {
+    List<Product> listBuku = await fetchBook();
+
+    return listBuku;
   }
 
   @override
@@ -72,10 +100,12 @@ class _HistoryPageState extends State<HistoryPage> {
               return ListView.builder(
                 itemCount: data.length,
                 itemBuilder: (_, index){
+
                   return HistoryCard(
                     namaPembeli: data[index].fields.nama, 
                     alamatPembeli: data[index].fields.alamat, 
                     tanggal: "${data[index].fields.tanggal}", 
+                    //listBuku: data[index].fields.buku,
                     listBuku: data[index].fields.buku,
                   );
                 },
