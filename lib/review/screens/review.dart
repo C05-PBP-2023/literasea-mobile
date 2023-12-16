@@ -2,9 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:literasea_mobile/review/models/reviewProduct.dart';
+import 'package:literasea_mobile/review/models/ProductRandom.dart';
 import 'package:literasea_mobile/review/screens/choose_book.dart';
-import 'package:literasea_mobile/review/screens/addreview.dart';
-import 'package:literasea_mobile/Katalog/models/product.dart';
 import 'package:http/http.dart' as http;
 
 class ReviewPage extends StatefulWidget {
@@ -16,20 +15,15 @@ class ReviewPage extends StatefulWidget {
 
 class _ReviewPageState extends State<ReviewPage> {
   List<Review> list_review = [];
-  List<Product> list_product = [];
   List<Review> latest_review = [];
+  List<ProductR> list_random = [];
+
   Future<List<Review>> fetchReview() async {
-    var url = Uri.parse('http://127.0.0.1:8000/review/show-review-flutter/');
+    var url = Uri.parse('https://literasea.live/review/show-review-flutter/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
     );
-
-    @override
-    void initState() {
-      fetchProduct();
-      fetchReview();
-    }
 
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
@@ -42,8 +36,9 @@ class _ReviewPageState extends State<ReviewPage> {
     }
     return list_review;
   }
-  Future<List<Product>> fetchProduct() async {
-    var url = Uri.parse('http://127.0.0.1:8000/products/get_book/');
+
+  Future<List<ProductR>> fetchRandomProduct() async {
+    var url = Uri.parse('https://literasea.live/review/show-random-book-flutter/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -51,18 +46,20 @@ class _ReviewPageState extends State<ReviewPage> {
 
     var data = jsonDecode(utf8.decode(response.bodyBytes));
 
-    list_product.clear();
+    list_random.clear();
 
     for (var d in data) {
+      // print(d+ "TEST");
       if (d != null) {
-        list_product.add(Product.fromJson(d));
+        // print(d + "ZCZC");
+        list_random.add(ProductR.fromJson(d));
       }
     }
-    return list_product;
+    return list_random;
   }
 
-    Future<List<Review>> fetchLatestReview() async {
-    var url = Uri.parse('http://127.0.0.1:8000/review/get-latest-reviews/');
+  Future<List<Review>> fetchLatestReview() async {
+    var url = Uri.parse('https://literasea.live/review/get-latest-reviews/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -106,12 +103,11 @@ class _ReviewPageState extends State<ReviewPage> {
               ElevatedButton(
                 onPressed: () {
                   showRedirectingSnackbar(context); // Show snackbar
-                  // Uncomment the next line if you want to navigate to another page
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              const ReviewProductPage())); // ReviewFormPage()
+                              const ReviewProductPage()));
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(80, 40),
@@ -143,36 +139,110 @@ class _ReviewPageState extends State<ReviewPage> {
               const SizedBox(height: 15),
               FutureBuilder(
                 future: fetchLatestReview(),
-                builder: (context, snapshot) {
+                builder: (context, AsyncSnapshot snapshot) {
                   return Container(
                     height: 175,
                     child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: latest_review.length,
-                        separatorBuilder: (context, index) =>
-                            const SizedBox(width: 30),
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        itemBuilder: (context, index) {
-                          Review lastReview = latest_review[index];
-                          return Container(
-                            width: 325,
-                            decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 36, 79, 114)
-                                    .withOpacity(0.35),
-                                borderRadius: BorderRadius.circular(20)),
-                            child : Row(
-                              children: [
-                                Text(
-                                  lastReview.reviewMessage,
-                                  style: TextStyle(
-                                    color:  Colors.white,
-                                    fontFamily: 'Inter',
-                                    fontSize: 10
-                                  ),
-                                )
-                              ],)
-                          );
-                        }),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: latest_review.length,
+                      separatorBuilder: (context, index) => const SizedBox(width: 30),
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      itemBuilder: (context, index) {
+                        Review review = latest_review[index];
+                        return Container(
+                          width: 350,
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF5FBDFF).withOpacity(0.4),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            children: [
+                              const SizedBox(width: 10),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(6.0),
+                                child: Image.network(
+                                  review.image,
+                                  width: 65,
+                                  height: 130,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              const SizedBox(width: 25, height: 10),
+                              Container(
+                                width: 230,
+                                height: 150,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text(
+                                        "${review.bookTitle}",
+                                        maxLines: 2,
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Inter',
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text(
+                                        "${review.bookAuthor}",
+                                        style: TextStyle(
+                                          color: Colors.black.withOpacity(0.5),
+                                          fontFamily: 'Inter',
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(
+                                        "'${review.reviewMessage}'",
+                                        maxLines: 2,
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Inter',
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text(
+                                        review.rating == 1
+                                          ? "★"
+                                          : (review.rating == 2
+                                            ? "★★"
+                                            : (review.rating == 3
+                                              ? "★★★"
+                                              : (review.rating == 4
+                                                ? "★★★★"
+                                                : (review.rating == 5
+                                                  ? "★★★★★ -${review.fullname}"
+                                                  : "Gamungkin")))),
+                                        textAlign: TextAlign.left,
+                                        style: const TextStyle(
+                                          color: Colors.yellowAccent,
+                                          fontFamily: 'Inter',
+                                          fontSize: 20,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   );
                 }
               ),
@@ -192,37 +262,78 @@ class _ReviewPageState extends State<ReviewPage> {
                 ),
               ),
               const SizedBox(height: 20),
-              Container(
-                height: 125,
-                child: ListView.separated(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: 3, //ini nyoba dulu
-                    separatorBuilder: (context, index) =>
-                        const SizedBox(width: 30),
-                    padding: const EdgeInsets.only(left: 20, right: 10),
-                    itemBuilder: (context, index) {
-                      List<Color> backgroundJuara = [
-                        Color(0xFFBB5C),
-                        Color(0xB6BBC4),
-                        Color(0x994D1C)
-                      ];
-                      return Container(
-                        width: 125,
-                        height: 125,
-                        decoration: BoxDecoration(
-                            color: backgroundJuara[index].withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(20)),
-                        child: Center(
-                            child: Text(
-                          'BOOK ${index + 1}',
-                          style: const TextStyle(
-                              fontFamily: 'Inter',
-                              color: Colors.white,
-                              fontSize: 8,
-                              fontWeight: FontWeight.bold),
-                        )),
-                      );
-                    }),
+               FutureBuilder(
+                future: fetchRandomProduct(),
+                builder: (context, AsyncSnapshot snapshot) {
+                  return Container(
+                    height: 175,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: list_random.length,
+                      separatorBuilder: (context, index) => const SizedBox(width: 30),
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      itemBuilder: (context, index) {
+                        ProductR review = list_random[index];
+                        return Container(
+                          width: 350,
+                          decoration: BoxDecoration(
+                            color: Colors.blue.withOpacity(0.65),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            children: [
+                              const SizedBox(width: 10),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(6.0),
+                                child: Image.network(
+                                  review.image,
+                                  width: 65,
+                                  height: 130,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              const SizedBox(width: 25, height: 10),
+                              Container(
+                                width: 230,
+                                height: 150,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text(
+                                        "${review.bookTitle}",
+                                        maxLines: 2,
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Inter',
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text(
+                                        "${review.bookAuthor}",
+                                        style: TextStyle(
+                                          color: Colors.black.withOpacity(0.5),
+                                          fontFamily: 'Inter',
+                                          fontSize: 13,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                }
               ),
               const SizedBox(height: 15),
               Container(
@@ -246,98 +357,106 @@ class _ReviewPageState extends State<ReviewPage> {
                   return Container(
                     height: 175,
                     child: ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: list_review.length,
-                        separatorBuilder: (context, index) =>
-                            const SizedBox(width: 30),
-                        padding: const EdgeInsets.only(left: 20, right: 20),
-                        itemBuilder: (context, index) {
-                          Review review = list_review[index];
-                          return Container(
-                            width: 350,
-                            decoration: BoxDecoration(
-                                color: Colors.blue.withOpacity(0.35),
-                                borderRadius: BorderRadius.circular(20)),
-                            child: Row(
-                              children: [
-                                const SizedBox(width: 10),
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(6.0),
-                                  child: Image.network(
-                                    review.image,
-                                    width: 65,
-                                    height: 130,
-                                    fit: BoxFit.cover,    
-                                  ),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: list_review.length,
+                      separatorBuilder: (context, index) => const SizedBox(width: 30),
+                      padding: const EdgeInsets.only(left: 20, right: 20),
+                      itemBuilder: (context, index) {
+                        Review review = list_review[index];
+                        return Container(
+                          width: 350,
+                          decoration: BoxDecoration(
+                            color: Colors.blue.withOpacity(0.65),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Row(
+                            children: [
+                              const SizedBox(width: 10),
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(6.0),
+                                child: Image.network(
+                                  review.image,
+                                  width: 65,
+                                  height: 130,
+                                  fit: BoxFit.cover,
                                 ),
-                                const SizedBox(width: 25),
-                                Container(
-                                  width: 230,
-                                  height: 150,
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: 
-                                        Text(
-                                          "${review.bookTitle}",
-                                          maxLines: 2,
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'Inter',
-                                            fontWeight: FontWeight.bold,
-                                            fontSize: 15
-                                            ),
-                                        ), 
+                              ),
+                              const SizedBox(width: 25, height: 10),
+                              Container(
+                                width: 230,
+                                height: 150,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text(
+                                        "${review.bookTitle}",
+                                        maxLines: 2,
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Inter',
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                        ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(5.0),
-                                        child: 
-                                        Text(
-                                          "'${review.reviewMessage}'",
-                                          maxLines: 2,
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'Inter',
-                                            fontStyle: FontStyle.italic,
-                                            fontSize: 13
-                                            ),
-                                        ), 
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text(
+                                        "${review.bookAuthor}",
+                                        style: TextStyle(
+                                          color: Colors.black.withOpacity(0.5),
+                                          fontFamily: 'Inter',
+                                          fontSize: 13,
+                                        ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(1.0),
-                                        child: 
-                                        Text(
-                                          "Rate: ${review.rating} / 5",
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'Inter',
-                                            fontSize: 13
-                                            ),
-                                        ), 
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Text(
+                                        "'${review.reviewMessage}'",
+                                        maxLines: 2,
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Inter',
+                                          fontStyle: FontStyle.italic,
+                                          fontSize: 13,
+                                        ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.all(1.0),
-                                        child: 
-                                        Text(
-                                          "Author : ${review.bookAuthor}",
-                                          style: TextStyle(
-                                            color: Colors.black,
-                                            fontFamily: 'Inter',
-                                            fontSize: 13
-                                            ),
-                                        ), 
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.all(5.0),
+                                      child: Text(
+                                        review.rating == 1
+                                          ? "★"
+                                          : (review.rating == 2
+                                            ? "★★"
+                                            : (review.rating == 3
+                                              ? "★★★"
+                                              : (review.rating == 4
+                                                ? "★★★★"
+                                                : (review.rating == 5
+                                                  ? "★★★★★"
+                                                  : "Gamungkin")))),
+                                        textAlign: TextAlign.left,
+                                        style: const TextStyle(
+                                          color: Colors.yellowAccent,
+                                          fontFamily: 'Inter',
+                                          fontSize: 20,
+                                        ),
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                          );
-                        }),
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    ),
                   );
                 }
               ),
