@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/forum/models/question.dart';
+import 'package:literasea_mobile/forum/screens/choose_book_qna.dart';
 import 'package:literasea_mobile/forum/widgets/answer.dart';
 import 'package:literasea_mobile/forum/util/fetch.dart';
 import 'package:literasea_mobile/main.dart';
@@ -47,9 +48,21 @@ class _QNAPageState extends State<QNAPage> {
               icon: const Icon(Icons.add),
               color: Colors.black,
               tooltip: "Add question",
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context)
+                    .push(
+                      MaterialPageRoute(
+                        builder: (context) => const QNAChooseBook(),
+                      ),
+                    )
+                    .then(
+                      (_) => setState(() {
+                        _data = fetchQuestions();
+                      }),
+                    );
+              },
             ),
-          )
+          ),
         ],
       ),
       body: SingleChildScrollView(

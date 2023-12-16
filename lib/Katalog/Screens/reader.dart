@@ -15,7 +15,8 @@ class ProductPage extends StatefulWidget {
 
 Future<void> addToCart(BuildContext context, int bookId) async {
   var userId = UserInfo.data["id"];
-  var url = Uri.parse('https://literasea.live/products/add_to_cart_flutter/$bookId/$userId/');
+  var url = Uri.parse(
+      'https://literasea.live/products/add_to_cart_flutter/$bookId/$userId/');
 
   var requestBody = {"user_id": userId};
 
@@ -35,9 +36,8 @@ Future<void> addToCart(BuildContext context, int bookId) async {
 }
 
 class _ProductPageState extends State<ProductPage> {
-  late List<Product> _allProducts; 
-  late List<Product> _filteredProducts; 
-  bool _showFilterForm = false;
+  late List<Product> _allProducts;
+  late List<Product> _filteredProducts;
 
   @override
   void initState() {
@@ -56,8 +56,9 @@ class _ProductPageState extends State<ProductPage> {
 
     if (response.statusCode == 200) {
       List<dynamic> body = json.decode(response.body);
-      _allProducts = body.map((dynamic item) => Product.fromJson(item)).toList();
-      _filteredProducts = List.from(_allProducts); 
+      _allProducts =
+          body.map((dynamic item) => Product.fromJson(item)).toList();
+      _filteredProducts = List.from(_allProducts);
       setState(() {});
     } else {
       throw Exception('Failed to load products');
@@ -72,23 +73,32 @@ class _ProductPageState extends State<ProductPage> {
         actions: [
           ElevatedButton(
             onPressed: () {
-              setState(() {
-                _showFilterForm = !_showFilterForm;
-              });
+              showModalBottomSheet(
+                context: context,
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.vertical(
+                    top: Radius.circular(32),
+                  ),
+                ),
+                showDragHandle: true,
+                isScrollControlled: true,
+                builder: (BuildContext context) {
+                  return FilterForm(
+                      onFilter: (authorName, publisher, publishedYear) {
+                    _applyFilters(authorName, publisher, publishedYear);
+                  });
+                },
+              );
             },
             style: ElevatedButton.styleFrom(
               primary: Colors.blue,
             ),
-            child: Text(_showFilterForm ? 'Hide Filter' : 'Filter'),
+            child: const Text('Filter'),
           ),
         ],
       ),
       body: Column(
         children: [
-          if (_showFilterForm)
-            FilterForm(onFilter: (authorName, publisher, publishedYear) {
-              _applyFilters(authorName, publisher, publishedYear);
-            }),
           Expanded(
             child: _buildProductGrid(),
           ),
@@ -165,7 +175,8 @@ class _ProductPageState extends State<ProductPage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => BookDetailsPage(product: product),
+                                builder: (context) =>
+                                    BookDetailsPage(product: product),
                               ),
                             );
                           },
@@ -183,12 +194,16 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 
-  void _applyFilters(String? authorName, String? publisher, int? publishedYear) {
+  void _applyFilters(
+      String? authorName, String? publisher, int? publishedYear) {
     setState(() {
       _filteredProducts = _allProducts.where((product) {
-        return (authorName == null || product.fields.bookAuthor.contains(authorName)) &&
-            (publisher == null || product.fields.publisher.contains(publisher)) &&
-            (publishedYear == null || product.fields.yearOfPublication == publishedYear);
+        return (authorName == null ||
+                product.fields.bookAuthor.contains(authorName)) &&
+            (publisher == null ||
+                product.fields.publisher.contains(publisher)) &&
+            (publishedYear == null ||
+                product.fields.yearOfPublication == publishedYear);
       }).toList();
     });
   }
