@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/cart/screens/checkout_form.dart';
 import 'package:literasea_mobile/cart/screens/history.dart';
 import 'package:literasea_mobile/cart/widgets/cart_card.dart';
-import 'package:literasea_mobile/cart/models/product.dart';
+import 'package:literasea_mobile/Katalog/models/product.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
