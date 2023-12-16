@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/Katalog/models/product.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
@@ -69,12 +70,14 @@ class _HistoryCardState extends State<HistoryCard> {
 
   @override
   Widget build(BuildContext context) {
+    double heightFactor = widget.listBuku.length.toDouble();
+
     return Container(
-      height: 400,
+      height: 150 + 60*heightFactor,
       margin: const EdgeInsets.fromLTRB(80, 12, 80, 12),
       padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
       decoration: BoxDecoration(
-        color: Color(0xff3894c8),
+        color: Color(0xff54a5d4),
         borderRadius: BorderRadius.circular(30),
       ),
       child: Column(
@@ -83,8 +86,24 @@ class _HistoryCardState extends State<HistoryCard> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("ORDER FINISHED"),
-              Text(widget.namaPembeli),
+              Text(
+                "ORDER FINISHED",
+                style: GoogleFonts.inter(
+                  color: Colors.white,
+                  fontSize: 17,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              SizedBox(
+            height: 8,
+          ),
+              Text(widget.namaPembeli,
+              style: GoogleFonts.inter(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w300,
+                ),
+              ),
             ],
           ),
           SizedBox(
@@ -93,17 +112,46 @@ class _HistoryCardState extends State<HistoryCard> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Address"),
-              Text(widget.alamatPembeli),
+              Text("ADDRESS",
+              style: GoogleFonts.inter(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              
+              Text(widget.alamatPembeli,
+              style: GoogleFonts.inter(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w300,
+                ),),
             ],
           ),
           SizedBox(
-            height: 10,
+            height: 20,
+          ),
+          Container(
+            height: 0.8,
+            width: 150,
+            color: Colors.white,
+          ),
+          SizedBox(
+            height: 20,
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("BOOKS ORDERED"),
+              Text("BOOKS ORDERED",
+              style: GoogleFonts.inter(
+                  color: Colors.white,
+                  fontSize: 13,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              SizedBox(
+            height: 4,
+          ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: widget.listBuku.map((buku) {
@@ -117,13 +165,32 @@ class _HistoryCardState extends State<HistoryCard> {
                     }
                   }
 
-                  return Text(
-                    "$title",
-                    style: TextStyle(
-                      color: Colors.white,
+                  return Container(
+                    margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Icon(
+                          Icons.bookmark,
+                          size: 18,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Flexible(
+                          child: Text(
+                            "$title",
+                            style: GoogleFonts.inter(
+                          color: Colors.white,
+                          fontSize: 13,
+                          fontWeight: FontWeight.w300,),
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        ),
+                      ],
                     ),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
                   );
                 }).toList(),
               ),

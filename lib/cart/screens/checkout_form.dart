@@ -32,12 +32,12 @@ class _CheckoutFormState extends State<CheckoutForm> {
               style: GoogleFonts.inter(
                   textStyle: const TextStyle(
                 fontWeight: FontWeight.w800,
-                fontSize: 25,
+                fontSize: 20,
                 color: Color(0xff00134E),
               ))),
-          centerTitle: false,
+          centerTitle: true,
           backgroundColor: Colors.white,
-          elevation: 1,
+          elevation: 0,
         ),
         body: Column(
           children: [
@@ -45,9 +45,16 @@ class _CheckoutFormState extends State<CheckoutForm> {
               height: 75,
             ),
             Container(
-              width: 100,
+              width: 132,
               color: Colors.white,
-              child: Text("Checkout Data"),
+              child: Text(
+                "CHECKOUT DATA",
+                style: GoogleFonts.inter(
+                  color: Color(0xff00134e),
+                  fontSize: 15,
+                  fontWeight: FontWeight.w800
+                ),
+              ),
             ),
             SizedBox(
               height: 30,
@@ -60,7 +67,14 @@ class _CheckoutFormState extends State<CheckoutForm> {
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: [Text("Nama Pembeli:")],
+                      children: [Text(
+                        "Nama Pembeli:",
+                        style: GoogleFonts.inter(
+                  color: Color(0xff00134e),
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500
+                ),
+                        )],
                     ),
                     SizedBox(
                       height: 10,
@@ -92,7 +106,14 @@ class _CheckoutFormState extends State<CheckoutForm> {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children: [Text("Alamat Kirim:")],
+                      children: [Text(
+                        "Alamat Kirim:",
+                        style: GoogleFonts.inter(
+                  color: Color(0xff00134e),
+                  fontSize: 13,
+                  fontWeight: FontWeight.w500),
+                
+                        )],
                     ),
                     SizedBox(
                       height: 10,
@@ -125,16 +146,46 @@ class _CheckoutFormState extends State<CheckoutForm> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("Grand Total:"),
+                        Text(
+                          
+                          "Grand Total:",
+
+                          style: GoogleFonts.inter(
+                  color: Color(0xff00134e),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w500
+                
+                          
+                          ),
+                          ),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Text("Rp${widget.total},00"),
+                        Text(
+                          "Rp${widget.total},00",
+                          style: GoogleFonts.inter(
+                  color: Color(0xff00134e),
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700
+                
+                          
+                          ),
+                          
+                          ),
                       ],
                     ),
+                    SizedBox(
+                      height: 60,
+                    ),
                     ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                              shape: StadiumBorder(),
+                              backgroundColor: Color(0xff3894c8),
+                              elevation: 0,
+                              padding: EdgeInsets.fromLTRB(140, 20, 140, 20),
+                            ),
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           final response = await request.postJson(

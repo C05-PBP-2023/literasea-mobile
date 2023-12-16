@@ -319,7 +319,11 @@ class _CartState extends State<CartPage> {
                       },
                       style: banyakBuku == 0
                           ? ElevatedButton.styleFrom(
-                              backgroundColor: Colors.grey)
+                              backgroundColor: Colors.grey,
+                              shape: StadiumBorder(),
+                              elevation: 0,
+                              padding: EdgeInsets.fromLTRB(140, 20, 140, 20),
+                          )
                           : ElevatedButton.styleFrom(
                               shape: StadiumBorder(),
                               backgroundColor: Color(0xff3894c8),
