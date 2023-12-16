@@ -4,6 +4,7 @@ import 'package:literasea_mobile/authentication/screens/logout_page.dart';
 import 'package:literasea_mobile/cart/screens/history.dart';
 import 'package:literasea_mobile/cart/screens/cart.dart';
 import 'package:literasea_mobile/json/const.dart';
+import 'package:literasea_mobile/main.dart';
 import 'package:literasea_mobile/screens/home_page.dart';
 
 class RootPage extends StatefulWidget {
@@ -24,7 +25,7 @@ class _RootPageState extends State<RootPage> {
         toolbarHeight: 60,
         title: Text(
           _activeTab == 0
-              ? "Hello, user!"
+              ? "Hello, ${UserInfo.data["fullname"]}!"
               : bottomNavBarIcons[_activeTab]["name"],
           style: GoogleFonts.inter(
               textStyle: const TextStyle(
@@ -39,10 +40,8 @@ class _RootPageState extends State<RootPage> {
               color: Colors.black,
               tooltip: "Open shopping cart",
               onPressed: () {
-                Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const CartPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const CartPage()));
               },
             ),
           )
