@@ -116,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   _isLoading = true;
                                 });
                                 final response = await request.postJson(
-                                    "http://127.0.0.1:8000/auth/register-mobile/",
+                                    "https://literasea.live/auth/register-mobile/",
                                     jsonEncode(<String, String>{
                                       'user_type': usertype!,
                                       'username': username,
