@@ -9,15 +9,18 @@ class HistoryCard extends StatefulWidget {
   final String tanggal;
   final List<int> listBuku;
 
-  const HistoryCard({super.key, required this.namaPembeli, required this.alamatPembeli, 
-  required this.tanggal, required this.listBuku});
+  const HistoryCard(
+      {super.key,
+      required this.namaPembeli,
+      required this.alamatPembeli,
+      required this.tanggal,
+      required this.listBuku});
 
   @override
   State<HistoryCard> createState() => _HistoryCardState();
 }
 
 class _HistoryCardState extends State<HistoryCard> {
-
   List<Product> a = [];
   String b = "aa";
 
@@ -33,11 +36,11 @@ class _HistoryCardState extends State<HistoryCard> {
     List<Product> futureBuku = [];
 
     for (var d in data) {
-        if (d != null) {
-          futureBuku.add(Product.fromJson(d));
-        }
+      if (d != null) {
+        futureBuku.add(Product.fromJson(d));
+      }
     }
-    
+
     return futureBuku;
   }
 
@@ -49,11 +52,9 @@ class _HistoryCardState extends State<HistoryCard> {
 
   @override
   void initState() {
-
     super.initState();
 
-    getBook().then((value){
-      
+    getBook().then((value) {
       setState(() {
         a = value;
         // for (Product p in value) {
@@ -68,7 +69,6 @@ class _HistoryCardState extends State<HistoryCard> {
 
   @override
   Widget build(BuildContext context) {
-
     return Container(
       height: 400,
       margin: const EdgeInsets.fromLTRB(80, 12, 80, 12),
@@ -78,65 +78,55 @@ class _HistoryCardState extends State<HistoryCard> {
         borderRadius: BorderRadius.circular(30),
       ),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("ORDER FINISHED"),
-                  Text(widget.namaPembeli),
-                ],
-              )
+              Text("ORDER FINISHED"),
+              Text(widget.namaPembeli),
             ],
           ),
           SizedBox(
             height: 10,
           ),
-          Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("Address"),
-                  Text(widget.alamatPembeli),
-                ],
-              )
+              Text("Address"),
+              Text(widget.alamatPembeli),
             ],
           ),
           SizedBox(
             height: 10,
           ),
-          Row(
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text("BOOKS ORDERED"),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text("BOOKS ORDERED"),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: widget.listBuku.map((buku) {
-                      String title = "";
+                children: widget.listBuku.map((buku) {
+                  String title = "";
 
-                      if(a.length != 0){
-                        for (Product p in a) {
-                          if (p.pk == buku) {
-                            title = p.fields.bookTitle;
-                          }
-                        }
+                  if (a.isNotEmpty) {
+                    for (Product p in a) {
+                      if (p.pk == buku) {
+                        title = p.fields.bookTitle;
                       }
+                    }
+                  }
 
-                      return Text(
-                        "${title}",
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                        overflow: TextOverflow.clip,
-                      );
-                    }).toList(),
-                  )
-                ],
-              )
+                  return Text(
+                    "$title",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  );
+                }).toList(),
+              ),
             ],
           ),
         ],
