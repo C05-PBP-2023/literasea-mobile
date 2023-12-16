@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:literasea_mobile/review/screens/review.dart';
-import 'package:literasea_mobile/screens/home_page.dart';
 import 'package:literasea_mobile/main.dart';
 import 'dart:convert'; // Import for jsonEncode
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:literasea_mobile/Katalog/models/product.dart';
-import 'package:http/http.dart' as http;
+
 
 
 class ReviewFormPage extends StatefulWidget {
@@ -93,8 +92,13 @@ class _ShopFormPageState extends State<ReviewFormPage> {
                           widthFactor: 0.7, // Adjust the width factor as needed
                           child: TextFormField(
                             decoration: InputDecoration(
-                              hintText: "Deskripsi",
-                              labelText: "Deskripsi",
+                            prefixIcon: const Icon(
+                              Icons.description,
+                              size: 18,
+                              color: Color(0xff3992C6),
+                            ),
+                              hintText: "Your review about this book",
+                              labelText: "Review",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
@@ -119,8 +123,8 @@ class _ShopFormPageState extends State<ReviewFormPage> {
                           padding: const EdgeInsets.all(8.0),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              primary: Colors.indigo,
-                              onPrimary: Colors.white,
+                              backgroundColor: Colors.indigo,
+                              foregroundColor: Colors.white,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
@@ -128,7 +132,7 @@ class _ShopFormPageState extends State<ReviewFormPage> {
                             onPressed: () async {
                               if (_formKey.currentState!.validate()) {
                                 final response = await request.postJson(
-                                  "http://127.0.0.1:8000/review/add-review-flutter/", //ubah ulang ke deploy
+                                  "http://127.0.0.1:8000/review/add-review-flutter/",
                                   jsonEncode(<String, String>{
                                     'username': UserInfo.data["username"],
                                     'rating': _rating.toString(),

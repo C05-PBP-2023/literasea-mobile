@@ -4,7 +4,6 @@ import 'dart:convert';
 
 import 'package:literasea_mobile/Katalog/models/product.dart';
 import 'package:literasea_mobile/review/screens/addreview.dart';
-import 'package:literasea_mobile/Katalog/Screens/book_details.dart';
 
 
 class ReviewProductPage extends StatefulWidget {
