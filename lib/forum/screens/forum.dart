@@ -120,19 +120,10 @@ class _QNAPageState extends State<QNAPage> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Recently Asked",
+                          "Questions",
                           style: GoogleFonts.inter(
                             textStyle: const TextStyle(
                               fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        Text(
-                          "See All",
-                          style: GoogleFonts.inter(
-                            textStyle: const TextStyle(
-                              fontSize: 16,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
