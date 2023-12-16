@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/main.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -17,10 +18,10 @@ class CartCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 150,
-      margin: const EdgeInsets.fromLTRB(80, 12, 80, 12),
-      padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
+      margin: const EdgeInsets.fromLTRB(14, 8, 14, 8),
+      padding: const EdgeInsets.fromLTRB(30, 20, 15, 20),
       decoration: BoxDecoration(
-        color: Colors.blueGrey,
+        color: Colors.white,
         borderRadius: BorderRadius.circular(30),
       ),
       child: Row(
@@ -30,8 +31,18 @@ class CartCard extends StatelessWidget {
             height: 100,
             margin: EdgeInsets.all(5),
             color: Colors.transparent,
-            child: Image.network("${itemImage}"),
+            child: Image.network(
+              "${itemImage}",
+              errorBuilder:
+                ((context, error, stackTrace) {
+                return Image.network(
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
+                width: 64,
+                );
+                }),
+              ),
           ),
+          SizedBox(width: 20,),
           Expanded(
             flex: 6,
             child: Container(
@@ -42,15 +53,40 @@ class CartCard extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  SizedBox(
+                    width: 20,
+                  ),
                   Expanded(
                     child: Text(
                       "${itemName}",
+                      style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600
+                        )
+                      ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     ),
-                  Text("${itemAuthor}"),
-                  Text("${itemYear}"),
+                  Text(
+                    "${itemAuthor}",
+                    style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w400
+                        )
+                      ),
+                  ),
+                  Text(
+                    "${itemYear}",
+                    style: GoogleFonts.inter(
+                        textStyle: TextStyle(
+                          fontSize: 11,
+                          fontWeight: FontWeight.w600
+                        )
+                      ),
+                  ),
                 ],
               ),
             ),
@@ -75,7 +111,7 @@ class CartCard extends StatelessWidget {
                       // )
                       
                       final response = await http.post(
-                        Uri.parse("http://127.0.0.1:8000/cart/remove-flutter/${UserInfo.data["id"]}/${pk}"),
+                        Uri.parse("https://literasea.live/cart/remove-flutter/${UserInfo.data["id"]}/${pk}"),
                       );
 
                       if (response.statusCode == 200) {
