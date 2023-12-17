@@ -73,7 +73,7 @@ class _HistoryCardState extends State<HistoryCard> {
     double heightFactor = widget.listBuku.length.toDouble();
 
     return Container(
-      height: 150 + 60*heightFactor,
+      height: 250 + 30*heightFactor,
       margin: const EdgeInsets.fromLTRB(80, 12, 80, 12),
       padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
       decoration: BoxDecoration(

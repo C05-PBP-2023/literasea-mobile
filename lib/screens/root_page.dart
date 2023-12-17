@@ -20,7 +20,7 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      appBar: _activeTab == 0 || _activeTab == 2 ? null : AppBar(
         backgroundColor: Colors.white,
         toolbarHeight: 60,
         title: Text(
@@ -49,7 +49,7 @@ class _RootPageState extends State<RootPage> {
       ),
       body: getBody(),
       bottomNavigationBar: customBottomNavbar(),
-      backgroundColor: Colors.white,
+      backgroundColor: _activeTab == 0 ? const Color(0xff3992c6) : Colors.white,
     );
   }
 
