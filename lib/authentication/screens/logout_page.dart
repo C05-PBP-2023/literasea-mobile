@@ -16,7 +16,7 @@ class LogoutPage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Icon(
+        const Icon(
           Icons.account_circle_rounded,
           size: 150,
           color: Color(0xff3992c6),
@@ -41,7 +41,7 @@ class LogoutPage extends StatelessWidget {
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 50,
         ),
         Row(
@@ -69,7 +69,7 @@ class LogoutPage extends StatelessWidget {
             )
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 50,
         ),
         Container(
@@ -77,7 +77,7 @@ class LogoutPage extends StatelessWidget {
           child: Center(
             child: MaterialButton(
               elevation: 0.0,
-              color: Color(0xff3894c8),
+              color: const Color(0xff3894c8),
               height: 55,
               minWidth: double.infinity,
               onPressed: () async {

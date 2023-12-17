@@ -27,7 +27,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
 
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Color(0xff00134E)),
+          iconTheme: const IconThemeData(color: Color(0xff00134E)),
           title: Text("Checkout",
               style: GoogleFonts.inter(
                   textStyle: const TextStyle(
@@ -42,7 +42,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
         body: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 75,
               ),
               Container(
@@ -51,17 +51,17 @@ class _CheckoutFormState extends State<CheckoutForm> {
                 child: Text(
                   "CHECKOUT DATA",
                   style: GoogleFonts.inter(
-                    color: Color(0xff00134e),
+                    color: const Color(0xff00134e),
                     fontSize: 15,
                     fontWeight: FontWeight.w800
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 30,
               ),
               Container(
-                margin: EdgeInsets.fromLTRB(40, 0, 40, 0),
+                margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
                 child: Form(
                   key: _formKey,
                   child: Column(
@@ -71,23 +71,23 @@ class _CheckoutFormState extends State<CheckoutForm> {
                         children: [Text(
                           "Nama Pembeli:",
                           style: GoogleFonts.inter(
-                    color: Color(0xff00134e),
+                    color: const Color(0xff00134e),
                     fontSize: 13,
                     fontWeight: FontWeight.w500
                   ),
                           )],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       TextFormField(
                         cursorOpacityAnimates: true,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             filled: true,
                             fillColor: Color(0xffF0F0F0),
                             focusColor: Colors.white,
                             contentPadding: EdgeInsets.fromLTRB(10, 0, 10, 0)),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                         ),
                         onChanged: (String? value) {
@@ -102,7 +102,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                           return null;
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 50,
                       ),
                       Row(
@@ -110,23 +110,23 @@ class _CheckoutFormState extends State<CheckoutForm> {
                         children: [Text(
                           "Alamat Kirim:",
                           style: GoogleFonts.inter(
-                    color: Color(0xff00134e),
+                    color: const Color(0xff00134e),
                     fontSize: 13,
                     fontWeight: FontWeight.w500),
                   
                           )],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       TextFormField(
                         cursorOpacityAnimates: true,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                             filled: true,
                             fillColor: Color(0xffF0F0F0),
                             focusColor: Colors.white,
                             contentPadding: EdgeInsets.fromLTRB(10, 0, 10, 0)),
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 14,
                         ),
                         onChanged: (String? value) {
@@ -141,7 +141,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                           return null;
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 75,
                       ),
                       Row(
@@ -152,7 +152,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                             "Grand Total:",
         
                             style: GoogleFonts.inter(
-                    color: Color(0xff00134e),
+                    color: const Color(0xff00134e),
                     fontSize: 14,
                     fontWeight: FontWeight.w500
                   
@@ -167,7 +167,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                           Text(
                             "Rp${widget.total},00",
                             style: GoogleFonts.inter(
-                    color: Color(0xff00134e),
+                    color: const Color(0xff00134e),
                     fontSize: 24,
                     fontWeight: FontWeight.w700
                   
@@ -177,15 +177,15 @@ class _CheckoutFormState extends State<CheckoutForm> {
                             ),
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 60,
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                                shape: StadiumBorder(),
-                                backgroundColor: Color(0xff3894c8),
+                                shape: const StadiumBorder(),
+                                backgroundColor: const Color(0xff3894c8),
                                 elevation: 0,
-                                padding: EdgeInsets.fromLTRB(140, 20, 140, 20),
+                                padding: const EdgeInsets.fromLTRB(140, 20, 140, 20),
                               ),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
@@ -204,7 +204,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                               Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CartPage()),
+                                    builder: (context) => const CartPage()),
                               );
                             } else {
                               ScaffoldMessenger.of(context)
@@ -215,7 +215,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                             }
                           }
                         },
-                        child: Text("Confirm"),
+                        child: const Text("Confirm"),
                       )
                     ],
                   ),

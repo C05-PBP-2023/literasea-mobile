@@ -68,7 +68,7 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Color(0xff00134E)),
+          iconTheme: const IconThemeData(color: Color(0xff00134E)),
           title: Text("My History",
               style: GoogleFonts.inter(
                   textStyle: const TextStyle(
@@ -77,7 +77,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 color: Color(0xff00134E),
               ))),
           centerTitle: false,
-          backgroundColor: Color(0xffddf3ff),
+          backgroundColor: const Color(0xffddf3ff),
           elevation: 0,
         ),
         body: Column(
@@ -109,15 +109,15 @@ class _HistoryPageState extends State<HistoryPage> {
                                         children: [
                                           Container(
                                             height: 180,
-                                            color: Color(0xffddf3ff),
-                                            margin: EdgeInsets.fromLTRB(
+                                            color: const Color(0xffddf3ff),
+                                            margin: const EdgeInsets.fromLTRB(
                                                 0, 0, 0, 30),
                                           ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 50,
                                               ),
                                               Text(
@@ -130,17 +130,17 @@ class _HistoryPageState extends State<HistoryPage> {
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 10,
                                               ),
-                                              Icon(
+                                              const Icon(
                                                 Icons.history,
                                                 size: 28,
                                                 color: Color(0xff00134e),
                                               )
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 25,
                                           )
                                         ],

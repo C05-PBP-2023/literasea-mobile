@@ -55,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 60, 0, 60),
+              padding: const EdgeInsets.fromLTRB(0, 60, 0, 60),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                           color: Colors.white
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 30,
                       ),
                       ElevatedButton(
@@ -88,19 +88,21 @@ class _MyHomePageState extends State<MyHomePage> {
                           ));
                         },
                         style: ElevatedButton.styleFrom(
-                          shape: StadiumBorder(),
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.all(Radius.circular(15)),
+                          ),
                           backgroundColor: Colors.white,
                           elevation: 0,
-                          padding: EdgeInsets.fromLTRB(35, 8, 35, 8),
+                          padding: const EdgeInsets.fromLTRB(35, 8, 35, 8),
                         ),
                         child: Row(
                           children: [
-                            Icon(
+                            const Icon(
                               Icons.shopping_cart,
                               size: 15,
                               color: Colors.black,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               width: 10,
                             ),
                             Text(
@@ -117,14 +119,14 @@ class _MyHomePageState extends State<MyHomePage> {
                     ],
                   ),
                   Padding(
-                    padding: EdgeInsets.all(5),
+                    padding: const EdgeInsets.all(5),
                     child: Image.asset('assets/images/buku_homepage.png', width: 140, height: 140,),
                   )
                 ],
               ),
             ),
             Container(
-              padding: EdgeInsets.only(top: 60, bottom: 30),
+              padding: const EdgeInsets.only(top: 60, bottom: 30),
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.white,
@@ -284,15 +286,22 @@ class _MyHomePageState extends State<MyHomePage> {
                                 );
                               },
                               child: Container(
-                                padding: EdgeInsets.all(5),
+                                padding: const EdgeInsets.all(5),
                                 margin: const EdgeInsets.only(left: 10, right: 10),
                                 height: 200,
                                 width: MediaQuery.of(context).size.width * 0.27,
-                                decoration: const BoxDecoration(
-                                  color: Color(0xffd7e9f4),
-                                  borderRadius: BorderRadius.vertical(
+                                decoration: BoxDecoration(
+                                  color: const Color(0xffd7e9f4),
+                                  borderRadius: const BorderRadius.vertical(
                                     top: Radius.circular(13), bottom: Radius.circular(13)
+                                    ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      blurRadius: 5,
+                                      offset: const Offset(0, 2)
                                     )
+                                  ]
                                 ),
                                 child: Image.network(
                                   imageLink, 
