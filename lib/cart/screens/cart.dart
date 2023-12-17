@@ -164,7 +164,7 @@ class _CartState extends State<CartPage> {
                       child: Column(
                         children: [
                           Container(
-                            margin: EdgeInsets.fromLTRB(0, 12, 70, 12),
+                            margin: EdgeInsets.fromLTRB(0, 12, 14, 12),
                             height: 35,
                             color: Color(0xffddf3ff),
                             child: Row(
@@ -179,7 +179,10 @@ class _CartState extends State<CartPage> {
                                                 const HistoryPage()));
                                   },
                                   style: ElevatedButton.styleFrom(
+                                    shape: StadiumBorder(),
                                     backgroundColor: Color(0xff42aee8),
+                                    elevation: 0,
+                                    padding: EdgeInsets.fromLTRB(35, 8, 35, 8),
                                     textStyle: TextStyle(
                                       color: Colors.white,
                                     )
