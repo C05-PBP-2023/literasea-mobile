@@ -24,6 +24,6 @@ List homePageButtons = [
     "icon": Icons.question_answer, 
     "name": "Q & A", 
     "color" : const Color(0xff3992c6),
-    "desc": "testest satu dua tigasatuduatiga"
+    "desc": "testest satu dua"
   },
 ];

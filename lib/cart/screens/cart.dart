@@ -234,7 +234,7 @@ class _CartState extends State<CartPage> {
           ),
           Container(
               padding: EdgeInsets.fromLTRB(25, 10, 25, 15),
-              height: 180,
+              height: 190,
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(
@@ -325,13 +325,13 @@ class _CartState extends State<CartPage> {
                               backgroundColor: Colors.grey,
                               shape: StadiumBorder(),
                               elevation: 0,
-                              padding: EdgeInsets.fromLTRB(140, 20, 140, 20),
+                              padding: EdgeInsets.fromLTRB(80, 15, 80, 15),
                           )
                           : ElevatedButton.styleFrom(
                               shape: StadiumBorder(),
                               backgroundColor: Color(0xff3894c8),
                               elevation: 0,
-                              padding: EdgeInsets.fromLTRB(140, 20, 140, 20),
+                              padding: EdgeInsets.fromLTRB(80, 15, 80, 15),
                             ),
                       child: Text(
                         "Checkout Books",

@@ -174,7 +174,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           style: GoogleFonts.inter(
                                             textStyle: const TextStyle(
                                               fontWeight: FontWeight.w300,
-                                              fontSize: 13,
+                                              fontSize: 11,
                                               color: Colors.white
                                             )
                                           ),
@@ -183,14 +183,14 @@ class _MyHomePageState extends State<MyHomePage> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(right: 40.0, bottom: 10),
+                                    padding: const EdgeInsets.only(right: 10.0, bottom: 10),
                                     child: Stack(
                                       children: [
                                         RotationTransition(
                                           turns:  const AlwaysStoppedAnimation(330 / 360),
                                           child: Container(
                                             height: 45,
-                                            width: 70,
+                                            width: 60,
                                             margin: const EdgeInsets.only(top: 40, left: 40, right: 40),
                                             decoration: BoxDecoration(
                                               color: Colors.white.withOpacity(0.3),
@@ -261,51 +261,55 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      ...List.generate(
-                        3,
-                        (index){
-                          String? imageLink = "";
-                          Product? book;
-
-                          if(_allProducts.isNotEmpty){
-                            book = _allProducts[Random().nextInt(_allProducts.length)];
-                            imageLink = book.fields.image;
+                  Padding(
+                    padding: const EdgeInsets.only(left: 5, right: 5),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ...List.generate(
+                          3,
+                          (index){
+                            String? imageLink = "";
+                            Product? book;
+                  
+                            if(_allProducts.isNotEmpty){
+                              book = _allProducts[Random().nextInt(_allProducts.length)];
+                              imageLink = book.fields.image;
+                            }
+                  
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                  context, MaterialPageRoute(builder: (context) => BookDetailsPage(product: book!,))
+                                );
+                              },
+                              child: Container(
+                                padding: EdgeInsets.all(5),
+                                margin: const EdgeInsets.only(left: 10, right: 10),
+                                height: 200,
+                                width: MediaQuery.of(context).size.width * 0.27,
+                                decoration: const BoxDecoration(
+                                  color: Color(0xffd7e9f4),
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(13), bottom: Radius.circular(13)
+                                    )
+                                ),
+                                child: Image.network(
+                                  imageLink, 
+                                  errorBuilder:
+                                    ((context, error, stackTrace) {
+                                    return Image.network(
+                                    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
+                                    width: 64,
+                                    );
+                                  }),
+                                ),
+                              ),
+                            );
                           }
-
-                          return InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context, MaterialPageRoute(builder: (context) => BookDetailsPage(product: book!,))
-                              );
-                            },
-                            child: Container(
-                              margin: const EdgeInsets.only(left: 10, right: 10),
-                              height: 200,
-                              width: MediaQuery.of(context).size.width * 0.28,
-                              decoration: const BoxDecoration(
-                                color: Color(0xffd7e9f4),
-                                borderRadius: BorderRadius.vertical(
-                                  top: Radius.circular(13), bottom: Radius.circular(13)
-                                  )
-                              ),
-                              child: Image.network(
-                                imageLink, 
-                                errorBuilder:
-                                  ((context, error, stackTrace) {
-                                  return Image.network(
-                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
-                                  width: 64,
-                                  );
-                                }),
-                              ),
-                            ),
-                          );
-                        }
-                      ),
-                    ],
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),
