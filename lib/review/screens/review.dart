@@ -2,9 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:literasea_mobile/review/models/reviewProduct.dart';
-import 'package:literasea_mobile/review/models/ProductRandom.dart';
+import 'package:literasea_mobile/review/models/RandomProduct.dart';
 import 'package:literasea_mobile/review/screens/choose_book.dart';
 import 'package:http/http.dart' as http;
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
 
 class ReviewPage extends StatefulWidget {
   const ReviewPage({Key? key}) : super(key: key);
@@ -38,7 +40,7 @@ class _ReviewPageState extends State<ReviewPage> {
   }
 
   Future<List<ProductR>> fetchRandomProduct() async {
-    var url = Uri.parse('https://literasea.live/review/show-random-book-flutter/');
+    var url = Uri.parse('http://127.0.0.1:8000/review/show-random-book-flutter/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -58,7 +60,7 @@ class _ReviewPageState extends State<ReviewPage> {
     return list_random;
   }
 
-  Future<List<Review>> fetchLatestReview() async {
+Future<List<Review>> fetchLatestReview() async {
     var url = Uri.parse('https://literasea.live/review/get-latest-reviews/');
     var response = await http.get(
       url,
@@ -78,8 +80,30 @@ class _ReviewPageState extends State<ReviewPage> {
   }
 
 
+
   @override
   Widget build(BuildContext context) {
+  final request = context.watch<CookieRequest>();
+    Future<List<ProductR>> data = request
+        .get("http://127.0.0.1:8000/review/show-bookUser-flutter/")
+        .then((value) {
+          // print(value + "HHAHAHAH KNTOL");
+      if (value == null) {
+        return [];
+      }
+      // print(value +"ZCZC");
+      var jsonValue = jsonDecode(value);
+
+      // print("JS VAL $jsonValue");
+      // print("JS VAL ${jsonValue['text']}");
+      List<ProductR> RecBook = [];
+      for (var data in jsonValue) {
+        if (data != null) {
+          RecBook.add(ProductR.fromJson(data));
+        }
+      }
+      return RecBook;
+    });
     return Scaffold(
       appBar: appBar(),
       body: SingleChildScrollView(
@@ -131,7 +155,7 @@ class _ReviewPageState extends State<ReviewPage> {
                   style: TextStyle(
                     fontFamily: 'Inter',
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -152,8 +176,15 @@ class _ReviewPageState extends State<ReviewPage> {
                         return Container(
                           width: 350,
                           decoration: BoxDecoration(
-                            color: const Color(0xFF5FBDFF).withOpacity(0.4),
+                            color: const Color(0xFF5FBDFF).withOpacity(0.9),
                             borderRadius: BorderRadius.circular(20),
+                            boxShadow: [
+                                  BoxShadow(
+                                    color: const Color(0x2F58CD).withOpacity(0.7),
+                                    spreadRadius: 1,
+                                    offset: Offset(3,0),
+                                  ),
+                                ],
                           ),
                           child: Row(
                             children: [
@@ -161,6 +192,13 @@ class _ReviewPageState extends State<ReviewPage> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(6.0),
                                 child: Image.network(
+                                errorBuilder:
+                                    ((context, error, stackTrace) {
+                                    return Image.network(
+                                    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
+                                    width: 64,
+                                    );
+                                    }),
                                   review.image,
                                   width: 65,
                                   height: 130,
@@ -213,27 +251,45 @@ class _ReviewPageState extends State<ReviewPage> {
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Text(
-                                        review.rating == 1
-                                          ? "★"
-                                          : (review.rating == 2
-                                            ? "★★"
-                                            : (review.rating == 3
-                                              ? "★★★"
-                                              : (review.rating == 4
-                                                ? "★★★★"
-                                                : (review.rating == 5
-                                                  ? "★★★★★ -${review.fullname}"
-                                                  : "Gamungkin")))),
-                                        textAlign: TextAlign.left,
-                                        style: const TextStyle(
-                                          color: Colors.yellowAccent,
-                                          fontFamily: 'Inter',
-                                          fontSize: 20,
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 5),
+                                          child: Text(
+                                            review.rating == 1
+                                              ? "★"
+                                              : (review.rating == 2
+                                                ? "★★"
+                                                : (review.rating == 3
+                                                  ? "★★★"
+                                                  : (review.rating == 4
+                                                    ? "★★★★"
+                                                    : (review.rating == 5
+                                                      ? "★★★★★"
+                                                      : "Gamungkin")))),  //${review.fullname}
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                              color: Colors.yellowAccent,
+                                              fontFamily: 'Inter',
+                                              fontSize: 20,
+                                            ),
+                                          ),
                                         ),
-                                      ),
+                                        Padding(
+                                          padding: const EdgeInsets.only(top: 5),
+                                          child: Text(
+                                            "—${review.fullname}",
+                                            maxLines: 2,
+                                            textAlign: TextAlign.left,
+                                            style: const TextStyle(
+                                              color: Colors.black,
+                                              fontFamily: 'Inter',
+                                              fontSize: 13.5,
+                                              fontStyle: FontStyle.italic
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -251,83 +307,82 @@ class _ReviewPageState extends State<ReviewPage> {
                 padding: const EdgeInsets.only(left: 20),
                 alignment: Alignment.centerLeft,
                 child: const Text(
-                  "Top 3 Books",
+                  "Our Recommendation Books",
                   textAlign: TextAlign.start,
                   style: TextStyle(
                     fontFamily: 'Inter',
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 20, width: 10),
                FutureBuilder(
-                future: fetchRandomProduct(),
+                future: data, //fetchRandomProduct()
                 builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.data == null) {
+                    return const Center(child: CircularProgressIndicator());
+                  } 
                   return Container(
-                    height: 175,
+                    height: 155,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemCount: list_random.length,
+                      itemCount: snapshot.data!.length,
                       separatorBuilder: (context, index) => const SizedBox(width: 30),
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       itemBuilder: (context, index) {
-                        ProductR review = list_random[index];
+                        ProductR review = snapshot.data[index];
                         return Container(
-                          width: 350,
+                          width: 155,
                           decoration: BoxDecoration(
-                            color: Colors.blue.withOpacity(0.65),
+                            color: Color(0xFFE382).withOpacity(0.8),
                             borderRadius: BorderRadius.circular(20),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: const Color(0xEC8F5E).withOpacity(0.5),
+                                    spreadRadius: 1,
+                                    offset: Offset(3,0),
+                                  ),
+                                ],
                           ),
-                          child: Row(
-                            children: [
-                              const SizedBox(width: 10),
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(6.0),
-                                child: Image.network(
-                                  review.image,
-                                  width: 65,
-                                  height: 130,
-                                  fit: BoxFit.cover,
+                          child: Center(
+                            child: Column(
+                              children: [
+                                const SizedBox(height: 10),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(6.0),
+                                  child: Image.network(
+                                  errorBuilder:
+                                    ((context, error, stackTrace) {
+                                    return Image.network(
+                                    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
+                                    width: 64,
+                                    );
+                                    }),
+                                    review.image,
+                                    width: 70,
+                                    height: 100,
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
-                              ),
-                              const SizedBox(width: 25, height: 10),
-                              Container(
-                                width: 230,
-                                height: 150,
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Text(
-                                        "${review.bookTitle}",
-                                        maxLines: 2,
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontFamily: 'Inter',
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 15
-                                        ),
-                                      ),
+                                // const SizedBox(width: 25, height: 10),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 10),
+                                  child: Text(
+                                    "${review.bookTitle}",
+                                    maxLines: 2,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontFamily: 'Inter',
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 11
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Text(
-                                        "${review.bookAuthor}",
-                                        style: TextStyle(
-                                          color: Colors.black.withOpacity(0.5),
-                                          fontFamily: 'Inter',
-                                          fontSize: 13,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
                         );
                       },
@@ -345,7 +400,7 @@ class _ReviewPageState extends State<ReviewPage> {
                   style: TextStyle(
                     fontFamily: 'Inter',
                     color: Colors.black,
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -366,8 +421,15 @@ class _ReviewPageState extends State<ReviewPage> {
                         return Container(
                           width: 350,
                           decoration: BoxDecoration(
-                            color: Colors.blue.withOpacity(0.65),
                             borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                  BoxShadow(
+                                    color: const Color(0x2F58CD).withOpacity(0.6),
+                                    spreadRadius: 1,
+                                    offset: Offset(3,0),
+                                  ),
+                                ],
+                            color: Color(0x8CC0DE).withOpacity(0.9),
                           ),
                           child: Row(
                             children: [
@@ -375,6 +437,13 @@ class _ReviewPageState extends State<ReviewPage> {
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(6.0),
                                 child: Image.network(
+                                  errorBuilder:
+                                    ((context, error, stackTrace) {
+                                    return Image.network(
+                                    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
+                                    width: 64,
+                                    );
+                                    }),
                                   review.image,
                                   width: 65,
                                   height: 130,
@@ -427,26 +496,47 @@ class _ReviewPageState extends State<ReviewPage> {
                                         ),
                                       ),
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.all(5.0),
-                                      child: Text(
-                                        review.rating == 1
-                                          ? "★"
-                                          : (review.rating == 2
-                                            ? "★★"
-                                            : (review.rating == 3
-                                              ? "★★★"
-                                              : (review.rating == 4
-                                                ? "★★★★"
-                                                : (review.rating == 5
-                                                  ? "★★★★★"
-                                                  : "Gamungkin")))),
-                                        textAlign: TextAlign.left,
-                                        style: const TextStyle(
-                                          color: Colors.yellowAccent,
-                                          fontFamily: 'Inter',
-                                          fontSize: 20,
-                                        ),
+                                    Container(
+                                      width: 240,
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 5),
+                                            child: Text(
+                                              review.rating == 1
+                                                ? "★"
+                                                : (review.rating == 2
+                                                  ? "★★"
+                                                  : (review.rating == 3
+                                                    ? "★★★"
+                                                    : (review.rating == 4
+                                                      ? "★★★★"
+                                                      : (review.rating == 5
+                                                        ? "★★★★★"
+                                                        : "Gamungkin")))),
+                                              textAlign: TextAlign.left,
+                                              style: const TextStyle(
+                                                color: Colors.yellowAccent,
+                                                fontFamily: 'Inter',
+                                                fontSize: 20,
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(top: 5),
+                                            child: Text(
+                                              "—${review.fullname}",
+                                              textAlign: TextAlign.left,
+                                              maxLines: 2,
+                                              style: const TextStyle(
+                                                color: Colors.black,
+                                                fontFamily: 'Inter',
+                                                fontSize: 13.5,
+                                                fontStyle: FontStyle.italic
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
