@@ -204,8 +204,6 @@ class _ReviewPageState extends State<ReviewPage> {
                                       const Color(0xFF1E549F).withOpacity(0.9),
                                   spreadRadius: 1,
                                   offset: const Offset(3, 0),
-                                  // blurRadius: 2,
-                                  // blurStyle: BlurStyle.normal,
                                 ),
                               ],
                             ),
@@ -407,7 +405,6 @@ class _ReviewPageState extends State<ReviewPage> {
                                           fit: BoxFit.cover,
                                         ),
                                       ),
-                                      // const SizedBox(width: 25, height: 10),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
                                             vertical: 2, horizontal: 10),
