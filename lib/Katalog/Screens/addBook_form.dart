@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:google_fonts/google_fonts.dart';
 
 class AddBookPage extends StatefulWidget {
+  const AddBookPage({super.key});
   @override
   _AddBookPageState createState() => _AddBookPageState();
 }
@@ -34,6 +36,7 @@ class _AddBookPageState extends State<AddBookPage> {
 
       if (response.statusCode == 200) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Book added successfully!')));
+        Navigator.of(context).pop();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Failed to add book')));
       }
@@ -44,7 +47,7 @@ class _AddBookPageState extends State<AddBookPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add New Book'),
+        title: Text('Add New Book', style: GoogleFonts.inter()),
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -54,77 +57,49 @@ class _AddBookPageState extends State<AddBookPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                TextFormField(
-                  controller: _isbnController,
-                  decoration: const InputDecoration(labelText: 'ISBN'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter ISBN';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: _titleController,
-                  decoration: const InputDecoration(labelText: 'Book Title'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter book title';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: _authorController,
-                  decoration: const InputDecoration(labelText: 'Author'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter author name';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: _yearController,
-                  decoration: const InputDecoration(labelText: 'Year of Publication'),
-                  keyboardType: TextInputType.number,
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter year of publication';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: _publisherController,
-                  decoration: const InputDecoration(labelText: 'Publisher'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter publisher';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: _imageController,
-                  decoration: const InputDecoration(labelText: 'Image URL'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter image URL';
-                    }
-                    return null;
-                  },
-                ),
+                _buildTextFormField(_isbnController, 'ISBN'),
+                _buildTextFormField(_titleController, 'Book Title'),
+                _buildTextFormField(_authorController, 'Author'),
+                _buildTextFormField(_yearController, 'Year of Publication', isNumber: true),
+                _buildTextFormField(_publisherController, 'Publisher'),
+                _buildTextFormField(_imageController, 'Image URL'),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: _submitBook,
-                  child: const Text('Add Book'),
+                  style: ElevatedButton.styleFrom(
+                    primary: const Color(0xff3992C6),
+                  ),
+                  child: Text(
+                    'Add Book',
+                    style: GoogleFonts.inter(textStyle: const TextStyle(color: Colors.white)),
+                  ),
                 ),
               ],
             ),
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildTextFormField(TextEditingController controller, String label, {bool isNumber = false}) {
+    return TextFormField(
+      controller: controller,
+      decoration: InputDecoration(
+        labelText: label,
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(
+            color: Color(0xff3992C6),
+          ),
+        ),
+      ),
+      keyboardType: isNumber ? TextInputType.number : TextInputType.text,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter $label';
+        }
+        return null;
+      },
     );
   }
 }
