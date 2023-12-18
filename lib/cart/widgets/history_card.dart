@@ -73,11 +73,11 @@ class _HistoryCardState extends State<HistoryCard> {
     double heightFactor = widget.listBuku.length.toDouble();
 
     return Container(
-      height: 150 + 60*heightFactor,
+      height: 250 + 30*heightFactor,
       margin: const EdgeInsets.fromLTRB(80, 12, 80, 12),
       padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
       decoration: BoxDecoration(
-        color: Color(0xff54a5d4),
+        color: const Color(0xff54a5d4),
         borderRadius: BorderRadius.circular(30),
       ),
       child: Column(
@@ -94,7 +94,7 @@ class _HistoryCardState extends State<HistoryCard> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
             height: 8,
           ),
               Text(widget.namaPembeli,
@@ -106,7 +106,7 @@ class _HistoryCardState extends State<HistoryCard> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
           Column(
@@ -128,7 +128,7 @@ class _HistoryCardState extends State<HistoryCard> {
                 ),),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Container(
@@ -136,7 +136,7 @@ class _HistoryCardState extends State<HistoryCard> {
             width: 150,
             color: Colors.white,
           ),
-          SizedBox(
+          const SizedBox(
             height: 20,
           ),
           Column(
@@ -149,7 +149,7 @@ class _HistoryCardState extends State<HistoryCard> {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
             height: 4,
           ),
               Column(
@@ -166,21 +166,21 @@ class _HistoryCardState extends State<HistoryCard> {
                   }
 
                   return Container(
-                    margin: EdgeInsets.fromLTRB(0, 10, 0, 0),
+                    margin: const EdgeInsets.fromLTRB(0, 10, 0, 0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Icon(
+                        const Icon(
                           Icons.bookmark,
                           size: 18,
                           color: Colors.white,
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
                         Flexible(
                           child: Text(
-                            "$title",
+                            title,
                             style: GoogleFonts.inter(
                           color: Colors.white,
                           fontSize: 13,

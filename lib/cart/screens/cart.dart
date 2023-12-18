@@ -74,9 +74,9 @@ class _CartState extends State<CartPage> {
 
   Widget _historySection(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(0, 12, 14, 12),
+      margin: const EdgeInsets.fromLTRB(0, 12, 14, 12),
       height: 35,
-      color: Color(0xffddf3ff),
+      color: const Color(0xffddf3ff),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
@@ -89,15 +89,17 @@ class _CartState extends State<CartPage> {
                           const HistoryPage()));
             },
             style: ElevatedButton.styleFrom(
-              shape: StadiumBorder(),
-              backgroundColor: Color(0xff42aee8),
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.all(Radius.circular(15)),
+              ),
+              backgroundColor: const Color(0xff42aee8),
               elevation: 0,
-              padding: EdgeInsets.fromLTRB(35, 8, 35, 8),
-              textStyle: TextStyle(
+              padding: const EdgeInsets.fromLTRB(35, 8, 35, 8),
+              textStyle: const TextStyle(
                 color: Colors.white,
               )
             ),
-            child: Text("Order History"),
+            child: const Text("Order History"),
           )
         ],
       ),
@@ -107,10 +109,10 @@ class _CartState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffddf3ff),
+      backgroundColor: const Color(0xffddf3ff),
       //backgroundColor: Colors.redAccent,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Color(0xff00134E)),
+        iconTheme: const IconThemeData(color: Color(0xff00134E)),
         title: Text("My Cart",
             style: GoogleFonts.inter(
                 textStyle: const TextStyle(
@@ -120,7 +122,7 @@ class _CartState extends State<CartPage> {
             ))),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Color(0xffddf3ff),
+        backgroundColor: const Color(0xffddf3ff),
       ),
       body: Column(
         children: [
@@ -164,9 +166,9 @@ class _CartState extends State<CartPage> {
                       child: Column(
                         children: [
                           Container(
-                            margin: EdgeInsets.fromLTRB(0, 12, 70, 12),
+                            margin: const EdgeInsets.fromLTRB(0, 12, 14, 12),
                             height: 35,
-                            color: Color(0xffddf3ff),
+                            color: const Color(0xffddf3ff),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
@@ -179,17 +181,35 @@ class _CartState extends State<CartPage> {
                                                 const HistoryPage()));
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xff42aee8),
-                                    textStyle: TextStyle(
+                                    shape: const RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.all(Radius.circular(15)),
+                                    ),
+                                    backgroundColor: const Color(0xff42aee8),
+                                    elevation: 0,
+                                    padding: const EdgeInsets.fromLTRB(35, 8, 35, 8),
+                                    textStyle: const TextStyle(
                                       color: Colors.white,
                                     )
                                   ),
-                                  child: Text("Order History"),
+                                  child: const Text("Order History"),
                                 )
                               ],
                             ),
                           ),
-                          Text("Empty Cart"),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 110),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.remove_shopping_cart_sharp,
+                                  color: Colors.black.withOpacity(0.15),
+                                  size: 250,
+                                ),
+                                const Text("Empty Cart"),
+                              ],
+                            ),
+                          ),
                         ],
                       ),
                     );
@@ -230,18 +250,18 @@ class _CartState extends State<CartPage> {
             ),
           ),
           Container(
-              padding: EdgeInsets.fromLTRB(25, 10, 25, 15),
-              height: 180,
+              padding: const EdgeInsets.fromLTRB(25, 10, 25, 15),
+              height: 190,
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(
                   width: 0.5,
-                  color: Color(0xffababab),
+                  color: const Color(0xffababab),
                 ),
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
               ),
               child: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
                     Row(
@@ -250,14 +270,14 @@ class _CartState extends State<CartPage> {
                         Text(
                           "Books ordered",
                           style: GoogleFonts.inter(
-                            color: Color(0xff00134e),
+                            color: const Color(0xff00134e),
                             fontSize: 13,
                             fontWeight: FontWeight.w500
                           ),
                           ),
-                        Text("${banyakBuku}",
+                        Text("$banyakBuku",
                         style: GoogleFonts.inter(
-                            color: Color(0xff00134e),
+                            color: const Color(0xff00134e),
                             fontSize: 13,
                             fontWeight: FontWeight.w500
 
@@ -269,21 +289,21 @@ class _CartState extends State<CartPage> {
                       children: [
                         Text("Price per book",
                         style: GoogleFonts.inter(
-                            color: Color(0xff00134e),
+                            color: const Color(0xff00134e),
                             fontSize: 13,
                             fontWeight: FontWeight.w500
 
                           ),),
                         Text("100",
                         style: GoogleFonts.inter(
-                            color: Color(0xff00134e),
+                            color: const Color(0xff00134e),
                             fontSize: 13,
                             fontWeight: FontWeight.w500
 
                           ),),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
@@ -291,21 +311,21 @@ class _CartState extends State<CartPage> {
                       children: [
                         Text("Total",
                         style: GoogleFonts.inter(
-                            color: Color(0xff00134e),
+                            color: const Color(0xff00134e),
                             fontSize: 19,
                             fontWeight: FontWeight.w700
 
                           ),),
                         Text("Rp${banyakBuku*100},00",
                         style: GoogleFonts.inter(
-                            color: Color(0xff00134e),
+                            color: const Color(0xff00134e),
                             fontSize: 19,
                             fontWeight: FontWeight.w700 
 
                           ),),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     ElevatedButton(
@@ -320,15 +340,15 @@ class _CartState extends State<CartPage> {
                       style: banyakBuku == 0
                           ? ElevatedButton.styleFrom(
                               backgroundColor: Colors.grey,
-                              shape: StadiumBorder(),
+                              shape: const StadiumBorder(),
                               elevation: 0,
-                              padding: EdgeInsets.fromLTRB(140, 20, 140, 20),
+                              padding: const EdgeInsets.fromLTRB(80, 15, 80, 15),
                           )
                           : ElevatedButton.styleFrom(
-                              shape: StadiumBorder(),
-                              backgroundColor: Color(0xff3894c8),
+                              shape: const StadiumBorder(),
+                              backgroundColor: const Color(0xff3894c8),
                               elevation: 0,
-                              padding: EdgeInsets.fromLTRB(140, 20, 140, 20),
+                              padding: const EdgeInsets.fromLTRB(80, 15, 80, 15),
                             ),
                       child: Text(
                         "Checkout Books",

@@ -45,7 +45,7 @@ class _LoginPageState extends State<LoginPage> {
                       begin: Alignment.topCenter,
                       stops: [0.6, 0.9],
                       end: Alignment.bottomCenter,
-                      colors: [Colors.white, Color(0xff3992C6)])),
+                      colors: [Colors.white, Color.fromARGB(255, 149, 205, 237)])),
               height: MediaQuery.of(context).size.height,
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
