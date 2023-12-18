@@ -26,6 +26,12 @@ class BookDetailsPage extends StatelessWidget {
                 width: 200,
                 height: 300,
                 fit: BoxFit.cover,
+                errorBuilder: ((context, error, stackTrace) {
+                  return Image.network(
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
+                    width: 64,
+                  );
+                }),
               ),
               const Padding(
                 padding: EdgeInsets.only(bottom: 20.0),
