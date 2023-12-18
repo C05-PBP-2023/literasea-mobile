@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/forum/models/question.dart';
-import 'package:literasea_mobile/main.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -206,7 +205,6 @@ class _AnswerFormState extends State<AnswerForm> {
                                     jsonEncode(<String, dynamic>{
                                       'answer': answer,
                                       'question_id': widget.question.id,
-                                      'user_id': UserInfo.data["id"],
                                     }),
                                   );
                                   await Future.delayed(
