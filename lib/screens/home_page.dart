@@ -71,7 +71,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ),
                       Text(
-                        "Lorem ipsum dolor sit amet, \nconsectetur",
+                        "Which book you wanna \nread today?",
                         style: GoogleFonts.inter(
                           fontSize: 13,
                           fontWeight: FontWeight.w300,
@@ -176,7 +176,7 @@ class _MyHomePageState extends State<MyHomePage> {
                                           style: GoogleFonts.inter(
                                             textStyle: const TextStyle(
                                               fontWeight: FontWeight.w300,
-                                              fontSize: 11,
+                                              fontSize: 13,
                                               color: Colors.white
                                             )
                                           ),

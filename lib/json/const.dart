@@ -18,12 +18,12 @@ List homePageButtons = [
     "icon": Icons.create_rounded, 
     "name": "Reviews", 
     "color" : const Color(0xffc66d39),
-    "desc": "hahaha ahahha lore lorem"
+    "desc": "lorem ipsum dolor"
   },
   {
     "icon": Icons.question_answer, 
     "name": "Q & A", 
     "color" : const Color(0xff3992c6),
-    "desc": "testest satu dua"
+    "desc": "lorem ipsum dolor"
   },
 ];
