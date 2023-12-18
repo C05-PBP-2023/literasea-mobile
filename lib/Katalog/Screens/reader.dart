@@ -30,7 +30,7 @@ Future<void> addToCart(BuildContext context, int bookId) async {
   if (response.statusCode == 200) {
     ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Book added successfully!')));
-        Navigator.of(context).pop();
+    Navigator.of(context).pop();
   } else {
     ScaffoldMessenger.of(context)
         .showSnackBar(const SnackBar(content: Text('Failed to add book')));
@@ -71,8 +71,7 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Katalog Buku'),
-        titleTextStyle: TextStyle(fontFamily: GoogleFonts.inter().fontFamily, fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black),
+        title: Text('Katalog Buku', style: GoogleFonts.inter(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
         actions: [
           ElevatedButton(
             onPressed: () {
@@ -97,7 +96,7 @@ class _ProductPageState extends State<ProductPage> {
               backgroundColor: Colors.blue[600],
               foregroundColor: Colors.white,
             ),
-            child: const Text('Filter'),
+            child: Text('Filter', style: GoogleFonts.inter()),
           ),
         ],
       ),
@@ -153,24 +152,21 @@ class _ProductPageState extends State<ProductPage> {
                   children: [
                     Text(
                       product.fields.bookTitle,
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: GoogleFonts.inter(fontSize: 16.0, fontWeight: FontWeight.bold),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'by ${product.fields.bookAuthor}',
-                      style: TextStyle(color: Colors.grey.shade600),
+                      style: GoogleFonts.inter(color: Colors.grey.shade600),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'Published: ${product.fields.yearOfPublication}',
-                      style: TextStyle(color: Colors.grey.shade600),
+                      style: GoogleFonts.inter(color: Colors.grey.shade600),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -191,7 +187,7 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                             );
                           },
-                          child: const Text('See Details'),
+                          child: Text('See Details', style: GoogleFonts.inter(fontWeight: FontWeight.bold)),
                         ),
                       ],
                     ),

@@ -44,7 +44,7 @@ class _WriterPageState extends State<WriterPage> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => AddBookPage()),
+                MaterialPageRoute(builder: (context) => const AddBookPage()),
               );
             },
             tooltip: 'Add Book',
@@ -105,25 +105,21 @@ class _WriterPageState extends State<WriterPage> {
                         children: [
                           Text(
                             product.fields.bookTitle,
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.bold,
-                              fontFamily: GoogleFonts.inter().fontFamily,
-                            ),
+                            style: GoogleFonts.inter(fontSize: 16.0, fontWeight: FontWeight.bold),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 4),
                           Text(
                             'by ${product.fields.bookAuthor}',
-                            style: TextStyle(color: Colors.grey.shade600, fontFamily: GoogleFonts.inter().fontFamily),
+                            style: GoogleFonts.inter(color: Colors.grey.shade600),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 4),
                           Text(
                             'Published: ${product.fields.yearOfPublication}',
-                            style: TextStyle(color: Colors.grey.shade600, fontFamily: GoogleFonts.inter().fontFamily),
+                            style: GoogleFonts.inter(color: Colors.grey.shade600),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -134,6 +130,7 @@ class _WriterPageState extends State<WriterPage> {
                                 style: TextButton.styleFrom(
                                   foregroundColor: Colors.blue[600],
                                   backgroundColor: Colors.blue[50],
+                                  textStyle: GoogleFonts.inter(fontWeight: FontWeight.bold)
                                 ),
                                 onPressed: () {
                                   Navigator.push(
