@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/Katalog/models/product.dart';
 import 'package:literasea_mobile/Katalog/Screens/reader.dart';
 
@@ -12,7 +13,7 @@ class BookDetailsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Detail Buku'),
-        titleTextStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+        titleTextStyle: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.bold),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -26,6 +27,12 @@ class BookDetailsPage extends StatelessWidget {
                 width: 200,
                 height: 300,
                 fit: BoxFit.cover,
+                errorBuilder: ((context, error, stackTrace) {
+                  return Image.network(
+                    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
+                    width: 64,
+                  );
+                }),
               ),
               const Padding(
                 padding: EdgeInsets.only(bottom: 20.0),
@@ -33,7 +40,7 @@ class BookDetailsPage extends StatelessWidget {
               const SizedBox(height: 12),
               Text(
                 product.fields.bookTitle,
-                style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: GoogleFonts.inter(fontSize: 18, fontWeight: FontWeight.bold),
               ),
               const Padding(
                 padding: EdgeInsets.only(bottom: 20.0),
@@ -42,12 +49,12 @@ class BookDetailsPage extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   text: 'ISBN: ',
-                  style: const TextStyle(
+                  style: GoogleFonts.inter(
                       fontWeight: FontWeight.bold, color: Colors.black),
                   children: <TextSpan>[
                     TextSpan(
                       text: product.fields.isbn,
-                      style: const TextStyle(
+                      style: GoogleFonts.inter(
                           fontWeight: FontWeight.normal, color: Colors.black),
                     ),
                   ],
@@ -57,12 +64,12 @@ class BookDetailsPage extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   text: 'Author: ',
-                  style: const TextStyle(
+                  style: GoogleFonts.inter(
                       fontWeight: FontWeight.bold, color: Colors.black),
                   children: <TextSpan>[
                     TextSpan(
                       text: product.fields.bookAuthor,
-                      style: const TextStyle(
+                      style: GoogleFonts.inter(
                           fontWeight: FontWeight.normal, color: Colors.black),
                     ),
                   ],
@@ -72,12 +79,12 @@ class BookDetailsPage extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   text: 'Publisher: ',
-                  style: const TextStyle(
+                  style: GoogleFonts.inter(
                       fontWeight: FontWeight.bold, color: Colors.black),
                   children: <TextSpan>[
                     TextSpan(
                       text: product.fields.publisher,
-                      style: const TextStyle(
+                      style: GoogleFonts.inter(
                           fontWeight: FontWeight.normal, color: Colors.black),
                     ),
                   ],
@@ -87,13 +94,12 @@ class BookDetailsPage extends StatelessWidget {
               RichText(
                 text: TextSpan(
                   text: 'Year of Publication: ',
-                  style: const TextStyle(
+                  style: GoogleFonts.inter(
                       fontWeight: FontWeight.bold, color: Colors.black),
                   children: <TextSpan>[
                     TextSpan(
                       text: '${product.fields.yearOfPublication}',
-                      style: const TextStyle(
-                          fontWeight: FontWeight.normal, color: Colors.black),
+                      style: GoogleFonts.inter(fontWeight: FontWeight.normal, color: Colors.black),
                     ),
                   ],
                 ),
@@ -109,6 +115,7 @@ class BookDetailsPage extends StatelessWidget {
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.blue[600],
                       backgroundColor: Colors.blue[50],
+                      textStyle: GoogleFonts.inter(fontWeight: FontWeight.bold)
                     ),
                     child: const Text('Add to Cart'),
                   ),
