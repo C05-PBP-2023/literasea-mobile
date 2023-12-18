@@ -121,7 +121,7 @@ class _QNAChooseBookState extends State<QNAChooseBook> {
         crossAxisCount: 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
-        childAspectRatio: 0.58,
+        childAspectRatio: 0.50,
       ),
       itemCount: _filteredProducts.length,
       itemBuilder: (BuildContext context, int index) {
