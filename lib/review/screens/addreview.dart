@@ -144,6 +144,7 @@ class _ShopFormPageState extends State<ReviewFormPage> {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
                                       content: Text("Your review has been published!"),
+                                      backgroundColor: Color(0xFF146C94),
                                     ),
                                   );
                                   Navigator.pushReplacement(
