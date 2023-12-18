@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:literasea_mobile/Katalog/Screens/book_details.dart';
+import 'package:literasea_mobile/Katalog/models/product.dart';
 import 'package:literasea_mobile/review/models/reviewProduct.dart';
 import 'package:literasea_mobile/review/models/RandomProduct.dart';
 import 'package:literasea_mobile/review/screens/choose_book.dart';
@@ -19,6 +21,13 @@ class _ReviewPageState extends State<ReviewPage> {
   List<Review> list_review = [];
   List<Review> latest_review = [];
   List<ProductR> list_random = [];
+  List<Product> list_product = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchProduct();
+  }
 
   Future<List<Review>> fetchReview() async {
     var url = Uri.parse('https://literasea.live/review/show-review-flutter/');
@@ -40,7 +49,7 @@ class _ReviewPageState extends State<ReviewPage> {
   }
 
   Future<List<ProductR>> fetchRandomProduct() async {
-    var url = Uri.parse('http://127.0.0.1:8000/review/show-random-book-flutter/');
+    var url = Uri.parse('https://literasea.live/review/show-random-book-flutter/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -78,6 +87,27 @@ Future<List<Review>> fetchLatestReview() async {
     }
     return latest_review;
   }
+  
+
+Future<List<Product>> fetchProduct() async {
+    var url = Uri.parse('https://literasea.live/products/get_book/');
+    var response = await http.get(
+      url,
+      headers: {"Content-Type": "application/json"},
+    );
+
+    var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+    list_product.clear();
+
+    for (var d in data) {
+      if (d != null) {
+        list_product.add(Product.fromJson(d));
+      }
+    }
+    // print(list_product);
+    return list_product;
+  }
 
 
 
@@ -85,23 +115,19 @@ Future<List<Review>> fetchLatestReview() async {
   Widget build(BuildContext context) {
   final request = context.watch<CookieRequest>();
     Future<List<ProductR>> data = request
-        .get("http://127.0.0.1:8000/review/show-bookUser-flutter/")
+        .get("https://literasea.live/review/show-bookUser-flutter/")
         .then((value) {
-          // print(value + "HHAHAHAH KNTOL");
       if (value == null) {
         return [];
       }
-      // print(value +"ZCZC");
       var jsonValue = jsonDecode(value);
-
-      // print("JS VAL $jsonValue");
-      // print("JS VAL ${jsonValue['text']}");
       List<ProductR> RecBook = [];
       for (var data in jsonValue) {
         if (data != null) {
           RecBook.add(ProductR.fromJson(data));
         }
       }
+      // print(RecBook);
       return RecBook;
     });
     return Scaffold(
@@ -176,13 +202,15 @@ Future<List<Review>> fetchLatestReview() async {
                         return Container(
                           width: 350,
                           decoration: BoxDecoration(
-                            color: const Color(0xFF5FBDFF).withOpacity(0.9),
+                            color: const Color(0xFF5FBDFF),
                             borderRadius: BorderRadius.circular(20),
                             boxShadow: [
                                   BoxShadow(
-                                    color: const Color(0x2F58CD).withOpacity(0.7),
+                                    color: const Color(0x1E549F).withOpacity(0.9),
                                     spreadRadius: 1,
                                     offset: Offset(3,0),
+                                    // blurRadius: 2,
+                                    // blurStyle: BlurStyle.normal,
                                   ),
                                 ],
                           ),
@@ -332,20 +360,38 @@ Future<List<Review>> fetchLatestReview() async {
                       separatorBuilder: (context, index) => const SizedBox(width: 30),
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       itemBuilder: (context, index) {
-                        ProductR review = snapshot.data[index];
-                        return Container(
-                          width: 155,
-                          decoration: BoxDecoration(
-                            color: Color(0xFFE382).withOpacity(0.8),
-                            borderRadius: BorderRadius.circular(20),
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: const Color(0xEC8F5E).withOpacity(0.5),
-                                    spreadRadius: 1,
-                                    offset: Offset(3,0),
-                                  ),
-                                ],
-                          ),
+                      ProductR recbook = snapshot.data[index];
+                        int yes = 0;
+                        for (int i = 0 ;i<list_product.length ; i ++){
+                            print(list_product[i].fields.bookTitle);
+                          if (list_product[i].fields.bookTitle == recbook.bookTitle){
+                            yes = i;
+                            print("MASUK");
+                            print(yes);
+                          }
+                        }
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => BookDetailsPage(product: list_product[yes]),
+                              ),
+                            );
+                          },
+                          child: Container(
+                            width: 155,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFE382).withOpacity(0.8),
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0xEC8F5E).withOpacity(0.5),
+                                  spreadRadius: 1,
+                                  offset: Offset(3, 0),
+                                ),
+                              ],
+                            ),
                           child: Center(
                             child: Column(
                               children: [
@@ -360,7 +406,7 @@ Future<List<Review>> fetchLatestReview() async {
                                     width: 64,
                                     );
                                     }),
-                                    review.image,
+                                    recbook.image,
                                     width: 70,
                                     height: 100,
                                     fit: BoxFit.cover,
@@ -368,9 +414,9 @@ Future<List<Review>> fetchLatestReview() async {
                                 ),
                                 // const SizedBox(width: 25, height: 10),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 10),
+                                  padding: const EdgeInsets.symmetric(vertical: 2,horizontal: 10),
                                   child: Text(
-                                    "${review.bookTitle}",
+                                    "${recbook.bookTitle}",
                                     maxLines: 2,
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
@@ -381,9 +427,23 @@ Future<List<Review>> fetchLatestReview() async {
                                     ),
                                   ),
                                 ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(),
+                                  child: Text(
+                                    "Click for Details!",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      color: Colors.black.withOpacity(0.7),
+                                      fontFamily: 'Inter',
+                                      fontStyle: FontStyle.italic,
+                                      fontSize: 9
+                                    ),
+                                  ),
+                                ),
                               ],
                             ),
                           ),
+                        )
                         );
                       },
                     ),
@@ -424,12 +484,13 @@ Future<List<Review>> fetchLatestReview() async {
                             borderRadius: BorderRadius.circular(20),
                               boxShadow: [
                                   BoxShadow(
-                                    color: const Color(0x2F58CD).withOpacity(0.6),
+                                    color: const Color(0x1E549F).withOpacity(0.7),
                                     spreadRadius: 1,
                                     offset: Offset(3,0),
+                                    // blurRadius: 1
                                   ),
                                 ],
-                            color: Color(0x8CC0DE).withOpacity(0.9),
+                            color: Color(0x93DEFF).withOpacity(1.0),
                           ),
                           child: Row(
                             children: [
