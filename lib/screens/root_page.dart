@@ -94,7 +94,7 @@ class _RootPageState extends State<RootPage> {
                                   ? FontWeight.bold
                                   : FontWeight.normal,
                               color: _activeTab == idx
-                                  ? Colors.blue
+                                  ? const Color(0xff3992c6)
                                   : Colors.black),
                         ),
                       ),

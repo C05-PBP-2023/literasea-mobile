@@ -51,11 +51,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    int len = (UserInfo.data["fullname"]).length;
+
     return SingleChildScrollView(
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(0, 60, 0, 60),
+              padding: const EdgeInsets.fromLTRB(20, 80, 0, 60),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -63,9 +65,9 @@ class _MyHomePageState extends State<MyHomePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Hello, ${UserInfo.data["fullname"]}!",
+                        len <= 12 ? "Hello, ${UserInfo.data["fullname"]}" : "Hello,\n${UserInfo.data["fullname"]}",
                         style: GoogleFonts.inter(
-                          fontSize: 26,
+                          fontSize: len <= 12 ? 25 : len <= 26 ? 20 : 16,
                           fontWeight: FontWeight.w800,
                           color: Colors.white
                         ),
@@ -118,19 +120,21 @@ class _MyHomePageState extends State<MyHomePage> {
                       )
                     ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: Image.asset('assets/images/buku_homepage.png', width: 140, height: 140,),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(20,5,5,5),
+                      child: Image.asset('assets/images/buku_homepage.png', width: 120, height: 120,),
+                    ),
                   )
                 ],
               ),
             ),
             Container(
-              padding: const EdgeInsets.only(top: 60, bottom: 30),
+              padding: const EdgeInsets.only(top: 20, bottom: 30),
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(80))
+                borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -144,6 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 130,
                         width: double.infinity,
                         child: Material(
+                          color: Colors.white,
                           child: InkWell(
                             child: Container(
                               padding: const EdgeInsets.only(bottom: 20),

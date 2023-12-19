@@ -87,7 +87,11 @@ class _HistoryPageState extends State<HistoryPage> {
                   future: fetchHistory(),
                   builder: (context, AsyncSnapshot snapshot) {
                     if (snapshot.data == null) {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Color(0xff3992c6),
+                        ),
+                      );
                     } else {
                       if (!snapshot.hasData) {
                         return const Center(
