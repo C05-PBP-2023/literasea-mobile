@@ -8,6 +8,10 @@ import 'package:provider/provider.dart';
 class LogoutPage extends StatelessWidget {
   const LogoutPage({super.key});
 
+  String capitalize(String val) {
+    return "${val[0].toUpperCase()}${val.substring(1)}";
+  }
+
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
@@ -25,20 +29,14 @@ class LogoutPage extends StatelessWidget {
           UserInfo.data["username"],
           style: GoogleFonts.inter(
             textStyle: const TextStyle(
-              fontWeight: FontWeight.w700,
-              fontSize: 22,
-              color: Colors.black
-            ),
+                fontWeight: FontWeight.w700, fontSize: 22, color: Colors.black),
           ),
         ),
         Text(
-          "READER",
+          capitalize(UserInfo.data["type"]),
           style: GoogleFonts.inter(
             textStyle: const TextStyle(
-              fontWeight: FontWeight.w300,
-              fontSize: 14,
-              color: Colors.black
-            ),
+                fontWeight: FontWeight.w300, fontSize: 14, color: Colors.black),
           ),
         ),
         const SizedBox(
@@ -51,20 +49,18 @@ class LogoutPage extends StatelessWidget {
               "Name",
               style: GoogleFonts.inter(
                 textStyle: const TextStyle(
-                  fontWeight: FontWeight.w300,
-                  fontSize: 14,
-                  color: Colors.black
-                ),
+                    fontWeight: FontWeight.w300,
+                    fontSize: 14,
+                    color: Colors.black),
               ),
             ),
             Text(
               UserInfo.data["fullname"],
               style: GoogleFonts.inter(
                 textStyle: const TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
-                  color: Color(0xff3992c6)
-                ),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 14,
+                    color: Color(0xff3992c6)),
               ),
             )
           ],
@@ -101,10 +97,9 @@ class LogoutPage extends StatelessWidget {
                 "Logout",
                 style: GoogleFonts.inter(
                   textStyle: const TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 18,
-                    color: Colors.white
-                  ),
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18,
+                      color: Colors.white),
                 ),
               ),
             ),

@@ -27,7 +27,6 @@ class _CartState extends State<CartPage> {
     setState(() {
       banyakBuku -= 1;
     });
-    
   }
 
   //List<String> item = ["buku1", "bbuku2", "cbuku3", "dbuku1 buku4", "ebuku1", "fbuku1buku13"];
@@ -82,23 +81,19 @@ class _CartState extends State<CartPage> {
         children: [
           ElevatedButton(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          const HistoryPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const HistoryPage()));
             },
             style: ElevatedButton.styleFrom(
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.all(Radius.circular(15)),
-              ),
-              backgroundColor: const Color(0xff42aee8),
-              elevation: 0,
-              padding: const EdgeInsets.fromLTRB(35, 8, 35, 8),
-              textStyle: const TextStyle(
-                color: Colors.white,
-              )
-            ),
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                ),
+                backgroundColor: const Color(0xff42aee8),
+                elevation: 0,
+                padding: const EdgeInsets.fromLTRB(35, 8, 35, 8),
+                textStyle: const TextStyle(
+                  color: Colors.white,
+                )),
             child: const Text("Order History"),
           )
         ],
@@ -158,7 +153,9 @@ class _CartState extends State<CartPage> {
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.data == null) {
                   return const Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                      color: Color(0xff3992c6),
+                    ),
                   );
                 } else {
                   if (snapshot.data.length == 0) {
@@ -181,16 +178,17 @@ class _CartState extends State<CartPage> {
                                                 const HistoryPage()));
                                   },
                                   style: ElevatedButton.styleFrom(
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.all(Radius.circular(15)),
-                                    ),
-                                    backgroundColor: const Color(0xff42aee8),
-                                    elevation: 0,
-                                    padding: const EdgeInsets.fromLTRB(35, 8, 35, 8),
-                                    textStyle: const TextStyle(
-                                      color: Colors.white,
-                                    )
-                                  ),
+                                      shape: const RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(15)),
+                                      ),
+                                      backgroundColor: const Color(0xff42aee8),
+                                      elevation: 0,
+                                      padding: const EdgeInsets.fromLTRB(
+                                          35, 8, 35, 8),
+                                      textStyle: const TextStyle(
+                                        color: Colors.white,
+                                      )),
                                   child: const Text("Order History"),
                                 )
                               ],
@@ -217,7 +215,7 @@ class _CartState extends State<CartPage> {
                     List<Product> data = snapshot.data!;
 
                     return ListView.builder(
-                        itemCount: data.length+1,
+                        itemCount: data.length + 1,
                         itemBuilder: (_, index) {
                           // String imageLink = data[index].fields.image;
                           // String substring = imageLink.substring(14);
@@ -258,7 +256,8 @@ class _CartState extends State<CartPage> {
                   width: 0.5,
                   color: const Color(0xffababab),
                 ),
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(20)),
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -270,37 +269,36 @@ class _CartState extends State<CartPage> {
                         Text(
                           "Books ordered",
                           style: GoogleFonts.inter(
-                            color: const Color(0xff00134e),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500
-                          ),
-                          ),
-                        Text("$banyakBuku",
-                        style: GoogleFonts.inter(
-                            color: const Color(0xff00134e),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500
-
-                          ),),
+                              color: const Color(0xff00134e),
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          "$banyakBuku",
+                          style: GoogleFonts.inter(
+                              color: const Color(0xff00134e),
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500),
+                        ),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Price per book",
-                        style: GoogleFonts.inter(
-                            color: const Color(0xff00134e),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500
-
-                          ),),
-                        Text("100",
-                        style: GoogleFonts.inter(
-                            color: const Color(0xff00134e),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500
-
-                          ),),
+                        Text(
+                          "Price per book",
+                          style: GoogleFonts.inter(
+                              color: const Color(0xff00134e),
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          "100",
+                          style: GoogleFonts.inter(
+                              color: const Color(0xff00134e),
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500),
+                        ),
                       ],
                     ),
                     const SizedBox(
@@ -309,20 +307,20 @@ class _CartState extends State<CartPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Total",
-                        style: GoogleFonts.inter(
-                            color: const Color(0xff00134e),
-                            fontSize: 19,
-                            fontWeight: FontWeight.w700
-
-                          ),),
-                        Text("Rp${banyakBuku*100},00",
-                        style: GoogleFonts.inter(
-                            color: const Color(0xff00134e),
-                            fontSize: 19,
-                            fontWeight: FontWeight.w700 
-
-                          ),),
+                        Text(
+                          "Total",
+                          style: GoogleFonts.inter(
+                              color: const Color(0xff00134e),
+                              fontSize: 19,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        Text(
+                          "Rp${banyakBuku * 100},00",
+                          style: GoogleFonts.inter(
+                              color: const Color(0xff00134e),
+                              fontSize: 19,
+                              fontWeight: FontWeight.w700),
+                        ),
                       ],
                     ),
                     const SizedBox(
@@ -342,13 +340,15 @@ class _CartState extends State<CartPage> {
                               backgroundColor: Colors.grey,
                               shape: const StadiumBorder(),
                               elevation: 0,
-                              padding: const EdgeInsets.fromLTRB(80, 15, 80, 15),
-                          )
+                              padding:
+                                  const EdgeInsets.fromLTRB(80, 15, 80, 15),
+                            )
                           : ElevatedButton.styleFrom(
                               shape: const StadiumBorder(),
                               backgroundColor: const Color(0xff3894c8),
                               elevation: 0,
-                              padding: const EdgeInsets.fromLTRB(80, 15, 80, 15),
+                              padding:
+                                  const EdgeInsets.fromLTRB(80, 15, 80, 15),
                             ),
                       child: Text(
                         "Checkout Books",
@@ -356,7 +356,7 @@ class _CartState extends State<CartPage> {
                           color: Colors.white,
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                        ),  
+                        ),
                       ),
                     )
                   ],

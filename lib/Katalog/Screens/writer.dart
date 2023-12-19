@@ -33,11 +33,11 @@ class _WriterPageState extends State<WriterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Katalog Buku', style: GoogleFonts.inter(
-          fontWeight: FontWeight.bold,
-          fontSize: 20.0,
-          color: Colors.black
-        )),
+        title: Text('Katalog Buku',
+            style: GoogleFonts.inter(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+                color: Colors.black)),
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
@@ -56,7 +56,11 @@ class _WriterPageState extends State<WriterPage> {
         future: fetchProduct(),
         builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Color(0xff3992c6),
+              ),
+            );
           } else if (snapshot.hasError) {
             return Center(child: Text("Error: ${snapshot.error}"));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -105,21 +109,24 @@ class _WriterPageState extends State<WriterPage> {
                         children: [
                           Text(
                             product.fields.bookTitle,
-                            style: GoogleFonts.inter(fontSize: 16.0, fontWeight: FontWeight.bold),
+                            style: GoogleFonts.inter(
+                                fontSize: 16.0, fontWeight: FontWeight.bold),
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 4),
                           Text(
                             'by ${product.fields.bookAuthor}',
-                            style: GoogleFonts.inter(color: Colors.grey.shade600),
+                            style:
+                                GoogleFonts.inter(color: Colors.grey.shade600),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
                           const SizedBox(height: 4),
                           Text(
                             'Published: ${product.fields.yearOfPublication}',
-                            style: GoogleFonts.inter(color: Colors.grey.shade600),
+                            style:
+                                GoogleFonts.inter(color: Colors.grey.shade600),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -128,16 +135,17 @@ class _WriterPageState extends State<WriterPage> {
                             children: [
                               TextButton(
                                 style: TextButton.styleFrom(
-                                  foregroundColor: Colors.blue[600],
-                                  backgroundColor: Colors.blue[50],
-                                  textStyle: GoogleFonts.inter(fontWeight: FontWeight.bold)
-                                ),
+                                    foregroundColor: Colors.blue[600],
+                                    backgroundColor: Colors.blue[50],
+                                    textStyle: GoogleFonts.inter(
+                                        fontWeight: FontWeight.bold)),
                                 onPressed: () {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) =>
-                                          WriterBookDetailsPage(product: product),
+                                          WriterBookDetailsPage(
+                                              product: product),
                                     ),
                                   );
                                 },

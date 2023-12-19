@@ -201,7 +201,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
               ),
               const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: Color(0xff3992c6),
+                ),
               ),
             ]
           ],

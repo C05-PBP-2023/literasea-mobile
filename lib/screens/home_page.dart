@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(20, 60, 0, 60),
+              padding: const EdgeInsets.fromLTRB(20, 80, 0, 60),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -130,11 +130,11 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
             Container(
-              padding: const EdgeInsets.only(top: 30, bottom: 30),
+              padding: const EdgeInsets.only(top: 20, bottom: 30),
               width: double.infinity,
               decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(50)),
+                borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

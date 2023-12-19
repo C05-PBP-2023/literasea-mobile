@@ -346,7 +346,11 @@ class _ReviewPageState extends State<ReviewPage> {
                   future: data, //fetchRandomProduct()
                   builder: (context, AsyncSnapshot snapshot) {
                     if (snapshot.data == null) {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Color(0xff3992c6),
+                        ),
+                      );
                     }
                     return SizedBox(
                       height: 155,

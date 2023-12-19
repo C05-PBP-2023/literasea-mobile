@@ -12,18 +12,18 @@ List homePageButtons = [
     "icon": Icons.shopping_basket_outlined, 
     "name": "Catalogue", 
     "color" : const Color(0xff39c6b4),
-    "desc": "explore our catalogue!"
+    "desc": "Explore our catalogue!"
   },
   {
     "icon": Icons.create_rounded, 
     "name": "Reviews", 
     "color" : const Color(0xffc66d39),
-    "desc": "lorem ipsum dolor"
+    "desc": "Read our user reviews!"
   },
   {
     "icon": Icons.question_answer, 
     "name": "Q & A", 
     "color" : const Color(0xff3992c6),
-    "desc": "lorem ipsum dolor"
+    "desc": "Ask anything about our books!"
   },
 ];
