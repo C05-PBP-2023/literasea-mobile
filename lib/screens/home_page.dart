@@ -148,6 +148,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         height: 130,
                         width: double.infinity,
                         child: Material(
+                          color: Colors.white,
                           child: InkWell(
                             child: Container(
                               padding: const EdgeInsets.only(bottom: 20),
