@@ -143,7 +143,8 @@ class _ShopFormPageState extends State<ReviewFormPage> {
                                 if (response['status'] == 'success') {
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     const SnackBar(
-                                      content: Text("Produk baru berhasil disimpan!"),
+                                      content: Text("Your review has been published!"),
+                                      backgroundColor: Color(0xFF146C94),
                                     ),
                                   );
                                   Navigator.pushReplacement(
