@@ -209,7 +209,7 @@ class _ReviewPageState extends State<ReviewPage> {
                             ),
                             child: Row(
                               children: [
-                                const SizedBox(width: 10),
+                                const SizedBox(width: 20),
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(6.0),
                                   child: Image.network(
@@ -486,7 +486,7 @@ class _ReviewPageState extends State<ReviewPage> {
                             ),
                             child: Row(
                               children: [
-                                const SizedBox(width: 10),
+                                const SizedBox(width: 20),
                                 ClipRRect(
                                   borderRadius: BorderRadius.circular(6.0),
                                   child: Image.network(
