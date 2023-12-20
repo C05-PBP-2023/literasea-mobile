@@ -8,13 +8,23 @@ import 'package:literasea_mobile/cart/widgets/history_card.dart';
 import 'package:literasea_mobile/main.dart';
 
 class HistoryPage extends StatefulWidget {
-  const HistoryPage({super.key});
+
+  final bool homePage;
+
+  const HistoryPage({super.key, required this.homePage});
 
   @override
   State<HistoryPage> createState() => _HistoryPageState();
 }
 
 class _HistoryPageState extends State<HistoryPage> {
+
+  void refreshHistory() {
+    setState(() {
+      
+    });
+  }
+
   Future<List<History>> fetchHistory() async {
     var url = Uri.parse("https://literasea.live/cart/get-history/");
     var response = await http.get(
@@ -122,7 +132,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                                 MainAxisAlignment.start,
                                             children: [
                                               const SizedBox(
-                                                width: 50,
+                                                width: 20,
                                               ),
                                               Text(
                                                 "Recently Ordered",
@@ -141,7 +151,34 @@ class _HistoryPageState extends State<HistoryPage> {
                                                 Icons.history,
                                                 size: 28,
                                                 color: Color(0xff00134e),
-                                              )
+                                              ),
+                                              SizedBox(
+                                                width: MediaQuery.of(context).size.width - (10 + 200 + 110),
+                                              ),
+                                              widget.homePage 
+                                                ? ElevatedButton(
+                                                    onPressed: () {
+                                                      refreshHistory();
+                                                    },
+                                                    style: ElevatedButton.styleFrom(
+                                                        shape: const RoundedRectangleBorder(
+                                                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                                                        ),
+                                                        backgroundColor: const Color(0xff42aee8),
+                                                        elevation: 0,
+                                                        padding: const EdgeInsets.fromLTRB(15, 8, 15, 8),
+                                                        textStyle: const TextStyle(
+                                                          color: Colors.white,
+                                                        )),
+                                                    child: Text(
+                                                      "Refresh",
+                                                      style: GoogleFonts.inter(
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  )
+                                                // ignore: dead_code
+                                                : const SizedBox(),
                                             ],
                                           ),
                                           const SizedBox(
@@ -152,13 +189,13 @@ class _HistoryPageState extends State<HistoryPage> {
                                     } else {
                                       return HistoryCard(
                                         namaPembeli:
-                                            data[index - 1].fields.nama,
+                                            data[data.length - index].fields.nama,
                                         alamatPembeli:
-                                            data[index - 1].fields.alamat,
+                                            data[data.length - index].fields.alamat,
                                         tanggal:
-                                            "${data[index - 1].fields.tanggal}",
+                                            "${data[data.length - index].fields.tanggal}",
                                         //listBuku: data[index].fields.buku,
-                                        listBuku: data[index - 1].fields.buku,
+                                        listBuku: data[data.length - index].fields.buku,
                                       );
                                     }
                                   },

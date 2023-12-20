@@ -74,7 +74,7 @@ class _HistoryCardState extends State<HistoryCard> {
 
     return Container(
       height: 250 + 30*heightFactor,
-      margin: const EdgeInsets.fromLTRB(80, 12, 80, 12),
+      margin: const EdgeInsets.fromLTRB(40, 12, 40, 12),
       padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
       decoration: BoxDecoration(
         color: const Color(0xff54a5d4),
