@@ -32,7 +32,7 @@ class CartCard extends StatelessWidget {
             margin: const EdgeInsets.all(5),
             color: Colors.transparent,
             child: Image.network(
-              "${itemImage}",
+              itemImage,
               errorBuilder:
                 ((context, error, stackTrace) {
                 return Image.network(
@@ -58,7 +58,7 @@ class CartCard extends StatelessWidget {
                   ),
                   Expanded(
                     child: Text(
-                      "${itemName}",
+                      itemName,
                       style: GoogleFonts.inter(
                         textStyle: const TextStyle(
                           fontSize: 14,
@@ -70,7 +70,7 @@ class CartCard extends StatelessWidget {
                     ),
                     ),
                   Text(
-                    "${itemAuthor}",
+                    itemAuthor,
                     style: GoogleFonts.inter(
                         textStyle: const TextStyle(
                           fontSize: 11,
@@ -79,7 +79,7 @@ class CartCard extends StatelessWidget {
                       ),
                   ),
                   Text(
-                    "${itemYear}",
+                    itemYear,
                     style: GoogleFonts.inter(
                         textStyle: const TextStyle(
                           fontSize: 11,
@@ -111,7 +111,7 @@ class CartCard extends StatelessWidget {
                       // )
                       
                       final response = await http.post(
-                        Uri.parse("https://literasea.live/cart/remove-flutter/${UserInfo.data["id"]}/${pk}"),
+                        Uri.parse("https://literasea.live/cart/remove-flutter/${UserInfo.data["id"]}/$pk"),
                       );
 
                       if (response.statusCode == 200) {

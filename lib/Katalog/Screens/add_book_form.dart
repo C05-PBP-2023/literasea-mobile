@@ -5,8 +5,9 @@ import 'package:google_fonts/google_fonts.dart';
 
 class AddBookPage extends StatefulWidget {
   const AddBookPage({super.key});
+
   @override
-  _AddBookPageState createState() => _AddBookPageState();
+  State<AddBookPage> createState() => _AddBookPageState();
 }
 
 class _AddBookPageState extends State<AddBookPage> {
@@ -20,7 +21,8 @@ class _AddBookPageState extends State<AddBookPage> {
 
   Future<void> _submitBook() async {
     if (_formKey.currentState!.validate()) {
-      var url = Uri.parse('https://literasea.live/products/create_book_flutter/');
+      var url =
+          Uri.parse('https://literasea.live/products/create_book_flutter/');
       var response = await http.post(
         url,
         headers: {"Content-Type": "application/json"},
@@ -33,12 +35,15 @@ class _AddBookPageState extends State<AddBookPage> {
           'Image': _imageController.text,
         }),
       );
-
-      if (response.statusCode == 200) {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Book added successfully!')));
-        Navigator.of(context).pop();
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text('Failed to add book')));
+      if (context.mounted) {
+        if (response.statusCode == 200) {
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Book added successfully!')));
+          Navigator.of(context).pop();
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Failed to add book')));
+        }
       }
     }
   }
@@ -60,18 +65,20 @@ class _AddBookPageState extends State<AddBookPage> {
                 _buildTextFormField(_isbnController, 'ISBN'),
                 _buildTextFormField(_titleController, 'Book Title'),
                 _buildTextFormField(_authorController, 'Author'),
-                _buildTextFormField(_yearController, 'Year of Publication', isNumber: true),
+                _buildTextFormField(_yearController, 'Year of Publication',
+                    isNumber: true),
                 _buildTextFormField(_publisherController, 'Publisher'),
                 _buildTextFormField(_imageController, 'Image URL'),
                 const SizedBox(height: 20),
                 ElevatedButton(
                   onPressed: _submitBook,
                   style: ElevatedButton.styleFrom(
-                    primary: const Color(0xff3992C6),
+                    backgroundColor: const Color(0xff3992C6),
                   ),
                   child: Text(
                     'Add Book',
-                    style: GoogleFonts.inter(textStyle: const TextStyle(color: Colors.white)),
+                    style: GoogleFonts.inter(
+                        textStyle: const TextStyle(color: Colors.white)),
                   ),
                 ),
               ],
@@ -82,7 +89,8 @@ class _AddBookPageState extends State<AddBookPage> {
     );
   }
 
-  Widget _buildTextFormField(TextEditingController controller, String label, {bool isNumber = false}) {
+  Widget _buildTextFormField(TextEditingController controller, String label,
+      {bool isNumber = false}) {
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(

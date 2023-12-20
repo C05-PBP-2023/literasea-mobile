@@ -10,7 +10,7 @@ class QNAChooseBook extends StatefulWidget {
   const QNAChooseBook({Key? key}) : super(key: key);
 
   @override
-  _QNAChooseBookState createState() => _QNAChooseBookState();
+  State<QNAChooseBook> createState() => _QNAChooseBookState();
 }
 
 class _QNAChooseBookState extends State<QNAChooseBook> {

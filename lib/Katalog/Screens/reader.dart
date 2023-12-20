@@ -11,7 +11,7 @@ class ProductPage extends StatefulWidget {
   const ProductPage({Key? key}) : super(key: key);
 
   @override
-  _ProductPageState createState() => _ProductPageState();
+  State<ProductPage> createState() => _ProductPageState();
 }
 
 Future<void> addToCart(BuildContext context, int bookId) async {
@@ -27,13 +27,15 @@ Future<void> addToCart(BuildContext context, int bookId) async {
     body: jsonEncode(requestBody),
   );
 
-  if (response.statusCode == 200) {
-    ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Book added successfully!')));
-    Navigator.of(context).pop();
-  } else {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text('Failed to add book')));
+  if (context.mounted) {
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Book added successfully!')));
+      Navigator.of(context).pop();
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Failed to add book')));
+    }
   }
 }
 
@@ -71,7 +73,11 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Katalog Buku', style: GoogleFonts.inter(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black)),
+        title: Text('Katalog Buku',
+            style: GoogleFonts.inter(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+                color: Colors.black)),
         actions: [
           ElevatedButton(
             onPressed: () {
@@ -137,11 +143,11 @@ class _ProductPageState extends State<ProductPage> {
                     product.fields.image,
                     fit: BoxFit.cover,
                     errorBuilder: ((context, error, stackTrace) {
-                        return Image.network(
-                          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
-                          width: 64,
-                        );
-                      }),
+                      return Image.network(
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
+                        width: 64,
+                      );
+                    }),
                   ),
                 ),
               ),
@@ -152,7 +158,8 @@ class _ProductPageState extends State<ProductPage> {
                   children: [
                     Text(
                       product.fields.bookTitle,
-                      style: GoogleFonts.inter(fontSize: 16.0, fontWeight: FontWeight.bold),
+                      style: GoogleFonts.inter(
+                          fontSize: 16.0, fontWeight: FontWeight.bold),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -187,7 +194,9 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                             );
                           },
-                          child: Text('See Details', style: GoogleFonts.inter(fontWeight: FontWeight.bold)),
+                          child: Text('See Details',
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.bold)),
                         ),
                       ],
                     ),

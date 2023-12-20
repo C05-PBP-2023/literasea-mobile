@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:literasea_mobile/Katalog/Screens/book_details.dart';
 import 'package:literasea_mobile/Katalog/models/product.dart';
-import 'package:literasea_mobile/review/models/reviewProduct.dart';
-import 'package:literasea_mobile/review/models/RandomProduct.dart';
+import 'package:literasea_mobile/review/models/review_product.dart';
+import 'package:literasea_mobile/review/models/random_product.dart';
 import 'package:literasea_mobile/review/screens/choose_book.dart';
 import 'package:http/http.dart' as http;
 import 'package:pbp_django_auth/pbp_django_auth.dart';
@@ -14,7 +14,7 @@ class ReviewPage extends StatefulWidget {
   const ReviewPage({Key? key}) : super(key: key);
 
   @override
-  _ReviewPageState createState() => _ReviewPageState();
+  State<ReviewPage> createState() => _ReviewPageState();
 }
 
 class _ReviewPageState extends State<ReviewPage> {

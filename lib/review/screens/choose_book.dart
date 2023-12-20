@@ -9,7 +9,7 @@ class ReviewProductPage extends StatefulWidget {
   const ReviewProductPage({Key? key}) : super(key: key);
 
   @override
-  _ReviewProductPageState createState() => _ReviewProductPageState();
+  State<ReviewProductPage> createState() => _ReviewProductPageState();
 }
 
 class _ReviewProductPageState extends State<ReviewProductPage> {
@@ -68,7 +68,7 @@ class _ReviewProductPageState extends State<ReviewProductPage> {
                   children: [
                     AspectRatio(
                       aspectRatio: 1,
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         child: Image.network(
                           product.fields.image,
@@ -152,7 +152,7 @@ class _ReviewProductPageState extends State<ReviewProductPage> {
 
 AppBar appBar() {
   return AppBar(
-    title: Text(
+    title: const Text(
       'Choose Book to Review!',
       style: TextStyle(
         color: Color(0xFF005B9C),
@@ -161,7 +161,7 @@ AppBar appBar() {
         fontWeight: FontWeight.bold,
       ),
     ),
-    iconTheme: IconThemeData(color: Colors.black),
+    iconTheme: const IconThemeData(color: Colors.black),
     backgroundColor: Colors.white,
     centerTitle: true,
     elevation: 0.0,
