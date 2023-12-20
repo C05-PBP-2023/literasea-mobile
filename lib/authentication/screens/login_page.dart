@@ -9,7 +9,7 @@ class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -45,7 +45,10 @@ class _LoginPageState extends State<LoginPage> {
                       begin: Alignment.topCenter,
                       stops: [0.6, 0.9],
                       end: Alignment.bottomCenter,
-                      colors: [Colors.white, Color.fromARGB(255, 149, 205, 237)])),
+                      colors: [
+                        Colors.white,
+                        Color.fromARGB(255, 149, 205, 237)
+                      ])),
               height: MediaQuery.of(context).size.height,
               padding: const EdgeInsets.symmetric(horizontal: 30),
               child: Column(
@@ -185,7 +188,9 @@ class _LoginPageState extends State<LoginPage> {
               ),
             if (_isLoading)
               const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: Color(0xff3992c6),
+                ),
               ),
           ],
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/Katalog/models/product.dart';
-import 'package:literasea_mobile/cart/models/historyModels.dart';
+import 'package:literasea_mobile/cart/models/history_models.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:literasea_mobile/cart/widgets/history_card.dart';
@@ -87,7 +87,11 @@ class _HistoryPageState extends State<HistoryPage> {
                   future: fetchHistory(),
                   builder: (context, AsyncSnapshot snapshot) {
                     if (snapshot.data == null) {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Color(0xff3992c6),
+                        ),
+                      );
                     } else {
                       if (!snapshot.hasData) {
                         return const Center(

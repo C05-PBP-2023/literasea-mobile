@@ -138,7 +138,10 @@ class _QNAPageState extends State<QNAPage> {
                       if (snapshot.data == null) {
                         return const Padding(
                           padding: EdgeInsets.only(top: 24.0),
-                          child: Center(child: CircularProgressIndicator()),
+                          child: Center(
+                            child: CircularProgressIndicator(
+                                color: Color(0xff3992c6)),
+                          ),
                         );
                       } else {
                         if (!snapshot.hasData) {

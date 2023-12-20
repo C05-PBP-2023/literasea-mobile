@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:literasea_mobile/Katalog/Screens/book_details.dart';
 import 'dart:convert';
@@ -10,7 +11,7 @@ class ProductPage extends StatefulWidget {
   const ProductPage({Key? key}) : super(key: key);
 
   @override
-  _ProductPageState createState() => _ProductPageState();
+  State<ProductPage> createState() => _ProductPageState();
 }
 
 Future<void> addToCart(BuildContext context, int bookId) async {
@@ -26,12 +27,15 @@ Future<void> addToCart(BuildContext context, int bookId) async {
     body: jsonEncode(requestBody),
   );
 
-  if (response.statusCode == 200) {
-    ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Book added successfully!')));
-  } else {
-    ScaffoldMessenger.of(context)
-        .showSnackBar(const SnackBar(content: Text('Failed to add book')));
+  if (context.mounted) {
+    if (response.statusCode == 200) {
+      ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Book added successfully!')));
+      Navigator.of(context).pop();
+    } else {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(const SnackBar(content: Text('Failed to add book')));
+    }
   }
 }
 
@@ -69,7 +73,11 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Katalog Buku'),
+        title: Text('Katalog Buku',
+            style: GoogleFonts.inter(
+                fontWeight: FontWeight.bold,
+                fontSize: 20.0,
+                color: Colors.black)),
         actions: [
           ElevatedButton(
             onPressed: () {
@@ -90,13 +98,15 @@ class _ProductPageState extends State<ProductPage> {
                 },
               );
             },
-            style: ElevatedButton.styleFrom(
-              primary: Colors.blue,
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.blue[600],
+              foregroundColor: Colors.white,
             ),
-            child: const Text('Filter'),
+            child: Text('Filter', style: GoogleFonts.inter()),
           ),
         ],
       ),
+      backgroundColor: Colors.blue[100],
       body: Column(
         children: [
           Expanded(
@@ -114,7 +124,7 @@ class _ProductPageState extends State<ProductPage> {
         crossAxisCount: 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
-        childAspectRatio: 0.55,
+        childAspectRatio: 0.60,
       ),
       itemCount: _filteredProducts.length,
       itemBuilder: (BuildContext context, int index) {
@@ -126,12 +136,18 @@ class _ProductPageState extends State<ProductPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AspectRatio(
-                aspectRatio: 1,
+                aspectRatio: 1.75,
                 child: SizedBox(
                   width: double.infinity,
                   child: Image.network(
                     product.fields.image,
                     fit: BoxFit.cover,
+                    errorBuilder: ((context, error, stackTrace) {
+                      return Image.network(
+                        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
+                        width: 64,
+                      );
+                    }),
                   ),
                 ),
               ),
@@ -142,24 +158,22 @@ class _ProductPageState extends State<ProductPage> {
                   children: [
                     Text(
                       product.fields.bookTitle,
-                      style: const TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold,
-                      ),
+                      style: GoogleFonts.inter(
+                          fontSize: 16.0, fontWeight: FontWeight.bold),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'by ${product.fields.bookAuthor}',
-                      style: TextStyle(color: Colors.grey.shade600),
+                      style: GoogleFonts.inter(color: Colors.grey.shade600),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 4),
                     Text(
                       'Published: ${product.fields.yearOfPublication}',
-                      style: TextStyle(color: Colors.grey.shade600),
+                      style: GoogleFonts.inter(color: Colors.grey.shade600),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -180,7 +194,9 @@ class _ProductPageState extends State<ProductPage> {
                               ),
                             );
                           },
-                          child: const Text('See Details'),
+                          child: Text('See Details',
+                              style: GoogleFonts.inter(
+                                  fontWeight: FontWeight.bold)),
                         ),
                       ],
                     ),

@@ -7,7 +7,7 @@ class FilterForm extends StatefulWidget {
   const FilterForm({Key? key, required this.onFilter}) : super(key: key);
 
   @override
-  _FilterFormState createState() => _FilterFormState();
+  State<FilterForm> createState() => _FilterFormState();
 }
 
 class _FilterFormState extends State<FilterForm> {

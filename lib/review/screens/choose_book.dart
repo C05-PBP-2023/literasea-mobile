@@ -5,12 +5,11 @@ import 'dart:convert';
 import 'package:literasea_mobile/Katalog/models/product.dart';
 import 'package:literasea_mobile/review/screens/addreview.dart';
 
-
 class ReviewProductPage extends StatefulWidget {
   const ReviewProductPage({Key? key}) : super(key: key);
 
   @override
-  _ReviewProductPageState createState() => _ReviewProductPageState();
+  State<ReviewProductPage> createState() => _ReviewProductPageState();
 }
 
 class _ReviewProductPageState extends State<ReviewProductPage> {
@@ -37,7 +36,11 @@ class _ReviewProductPageState extends State<ReviewProductPage> {
         future: fetchProduct(),
         builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
+            return const Center(
+              child: CircularProgressIndicator(
+                color: Color(0xff3992c6),
+              ),
+            );
           } else if (snapshot.hasError) {
             return Center(child: Text("Error: ${snapshot.error}"));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
@@ -65,7 +68,7 @@ class _ReviewProductPageState extends State<ReviewProductPage> {
                   children: [
                     AspectRatio(
                       aspectRatio: 1,
-                      child: Container(
+                      child: SizedBox(
                         width: double.infinity,
                         child: Image.network(
                           product.fields.image,
@@ -111,10 +114,12 @@ class _ReviewProductPageState extends State<ReviewProductPage> {
                                 ),
                                 onPressed: () {
                                   Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>  ReviewFormPage(product: product)) // BookDetailsPage(product: product)
-                                  );
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ReviewFormPage(
+                                              product:
+                                                  product)) // BookDetailsPage(product: product)
+                                      );
                                   _showReviewSnackbar();
                                 },
                                 child: const Text('Review this Book!'),
@@ -137,26 +142,28 @@ class _ReviewProductPageState extends State<ReviewProductPage> {
   void _showReviewSnackbar() {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
-        content: Text('Directing to our form page...'), backgroundColor: Color(0xFF0C356A),
+        content: Text('Directing to our form page...'),
+        backgroundColor: Color(0xFF0C356A),
         duration: Duration(seconds: 3),
       ),
     );
   }
 }
-  AppBar appBar() {
-    return AppBar(
-      title: Text(
-        'Choose Book to Review!',
-        style: TextStyle(
-          color: Color(0xFF005B9C),
-          fontFamily: 'Inter',
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
-        ),
+
+AppBar appBar() {
+  return AppBar(
+    title: const Text(
+      'Choose Book to Review!',
+      style: TextStyle(
+        color: Color(0xFF005B9C),
+        fontFamily: 'Inter',
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
       ),
-      iconTheme: IconThemeData(color: Colors.black),
-      backgroundColor: Colors.white,
-      centerTitle: true,
-      elevation: 0.0,
-    );
-  }
+    ),
+    iconTheme: const IconThemeData(color: Colors.black),
+    backgroundColor: Colors.white,
+    centerTitle: true,
+    elevation: 0.0,
+  );
+}

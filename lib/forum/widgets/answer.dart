@@ -293,7 +293,11 @@ class _AnswerFormState extends State<AnswerForm> {
                       )
                 : const Padding(
                     padding: EdgeInsets.symmetric(vertical: 16.0),
-                    child: Center(child: CircularProgressIndicator()),
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: Color(0xff3992c6),
+                      ),
+                    ),
                   ),
             const SizedBox(height: 28),
           ],
