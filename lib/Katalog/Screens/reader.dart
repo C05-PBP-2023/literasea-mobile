@@ -106,7 +106,6 @@ class _ProductPageState extends State<ProductPage> {
           ),
         ],
       ),
-      backgroundColor: Colors.blue[100],
       body: Column(
         children: [
           Expanded(

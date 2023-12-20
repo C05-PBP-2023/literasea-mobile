@@ -51,7 +51,6 @@ class _WriterPageState extends State<WriterPage> {
           ),
         ],
       ),
-      backgroundColor: Colors.blue[100],
       body: FutureBuilder<List<Product>>(
         future: fetchProduct(),
         builder: (BuildContext context, AsyncSnapshot<List<Product>> snapshot) {
