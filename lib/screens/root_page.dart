@@ -122,7 +122,7 @@ class _RootPageState extends State<RootPage> {
       children: const [
         MyHomePage(title: "Literasea"),
         Center(child: Text("Page 2")),
-        HistoryPage(),
+        HistoryPage(homePage: true,),
         LogoutPage()
       ],
     );
