@@ -27,7 +27,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
 
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Color(0xff00134E)),
+          iconTheme: const IconThemeData(color: Color(0xff00134E)),
           title: Text("Checkout",
               style: GoogleFonts.inter(
                   textStyle: const TextStyle(
@@ -39,188 +39,192 @@ class _CheckoutFormState extends State<CheckoutForm> {
           backgroundColor: Colors.white,
           elevation: 0,
         ),
-        body: Column(
-          children: [
-            SizedBox(
-              height: 75,
-            ),
-            Container(
-              width: 132,
-              color: Colors.white,
-              child: Text(
-                "CHECKOUT DATA",
-                style: GoogleFonts.inter(
-                  color: Color(0xff00134e),
-                  fontSize: 15,
-                  fontWeight: FontWeight.w800
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 75,
+              ),
+              Container(
+                width: 132,
+                color: Colors.white,
+                child: Text(
+                  "CHECKOUT DATA",
+                  style: GoogleFonts.inter(
+                    color: const Color(0xff00134e),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w800
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 30,
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(40, 0, 40, 0),
-              child: Form(
-                key: _formKey,
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [Text(
-                        "Nama Pembeli:",
-                        style: GoogleFonts.inter(
-                  color: Color(0xff00134e),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500
-                ),
-                        )],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextFormField(
-                      cursorOpacityAnimates: true,
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Color(0xffF0F0F0),
-                          focusColor: Colors.white,
-                          contentPadding: EdgeInsets.fromLTRB(10, 0, 10, 0)),
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
-                      onChanged: (String? value) {
-                        setState(() {
-                          _nama = value!;
-                        });
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Field must not be empty";
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(
-                      height: 50,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [Text(
-                        "Alamat Kirim:",
-                        style: GoogleFonts.inter(
-                  color: Color(0xff00134e),
-                  fontSize: 13,
-                  fontWeight: FontWeight.w500),
-                
-                        )],
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    TextFormField(
-                      cursorOpacityAnimates: true,
-                      decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Color(0xffF0F0F0),
-                          focusColor: Colors.white,
-                          contentPadding: EdgeInsets.fromLTRB(10, 0, 10, 0)),
-                      style: TextStyle(
-                        fontSize: 14,
-                      ),
-                      onChanged: (String? value) {
-                        setState(() {
-                          _alamat = value!;
-                        });
-                      },
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return "Field must not be empty";
-                        }
-                        return null;
-                      },
-                    ),
-                    SizedBox(
-                      height: 75,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          
-                          "Grand Total:",
-
+              const SizedBox(
+                height: 30,
+              ),
+              Container(
+                margin: const EdgeInsets.fromLTRB(40, 0, 40, 0),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [Text(
+                          "Nama Pembeli:",
                           style: GoogleFonts.inter(
-                  color: Color(0xff00134e),
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500
-                
-                          
-                          ),
-                          ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Rp${widget.total},00",
-                          style: GoogleFonts.inter(
-                  color: Color(0xff00134e),
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700
-                
-                          
-                          ),
-                          
-                          ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 60,
-                    ),
-                    ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                              shape: StadiumBorder(),
-                              backgroundColor: Color(0xff3894c8),
-                              elevation: 0,
-                              padding: EdgeInsets.fromLTRB(140, 20, 140, 20),
-                            ),
-                      onPressed: () async {
-                        if (_formKey.currentState!.validate()) {
-                          final response = await request.postJson(
-                              "https://literasea.live/cart/checkout-flutter/",
-                              jsonEncode(<String, String>{
-                                "nama": _nama,
-                                "alamat": _alamat,
-                              }));
-
-                          if (response['status'] == 'success') {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text("Checkout berhasil!"),
-                            ));
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CartPage()),
-                            );
-                          } else {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text(
-                                  "Terdapat kesalahan, silakan coba lagi."),
-                            ));
+                    color: const Color(0xff00134e),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500
+                  ),
+                          )],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        cursorOpacityAnimates: true,
+                        decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Color(0xffF0F0F0),
+                            focusColor: Colors.white,
+                            contentPadding: EdgeInsets.fromLTRB(10, 0, 10, 0)),
+                        style: const TextStyle(
+                          fontSize: 14,
+                        ),
+                        onChanged: (String? value) {
+                          setState(() {
+                            _nama = value!;
+                          });
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Field must not be empty";
                           }
-                        }
-                      },
-                      child: Text("Confirm"),
-                    )
-                  ],
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 50,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [Text(
+                          "Alamat Kirim:",
+                          style: GoogleFonts.inter(
+                    color: const Color(0xff00134e),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500),
+                  
+                          )],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      TextFormField(
+                        cursorOpacityAnimates: true,
+                        decoration: const InputDecoration(
+                            filled: true,
+                            fillColor: Color(0xffF0F0F0),
+                            focusColor: Colors.white,
+                            contentPadding: EdgeInsets.fromLTRB(10, 0, 10, 0)),
+                        style: const TextStyle(
+                          fontSize: 14,
+                        ),
+                        onChanged: (String? value) {
+                          setState(() {
+                            _alamat = value!;
+                          });
+                        },
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return "Field must not be empty";
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(
+                        height: 75,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            
+                            "Grand Total:",
+        
+                            style: GoogleFonts.inter(
+                    color: const Color(0xff00134e),
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500
+                  
+                            
+                            ),
+                            ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Rp${widget.total},00",
+                            style: GoogleFonts.inter(
+                    color: const Color(0xff00134e),
+                    fontSize: 24,
+                    fontWeight: FontWeight.w700
+                  
+                            
+                            ),
+                            
+                            ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 60,
+                      ),
+                      ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                                minimumSize: Size(double.infinity, 40),
+                                shape: const StadiumBorder(),
+                                backgroundColor: const Color(0xff3894c8),
+                                elevation: 0,
+                                padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
+                              ),
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            final response = await request.postJson(
+                                "https://literasea.live/cart/checkout-flutter/",
+                                jsonEncode(<String, String>{
+                                  "nama": _nama,
+                                  "alamat": _alamat,
+                                }));
+                            if (context.mounted) {
+                              if (response['status'] == 'success') {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text("Checkout berhasil!"),
+                                ));
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const CartPage()),
+                                );
+                              } else {
+                                ScaffoldMessenger.of(context)
+                                    .showSnackBar(const SnackBar(
+                                  content: Text(
+                                      "Terdapat kesalahan, silakan coba lagi."),
+                                ));
+                              }
+                            }
+                          }
+                        },
+                        child: const Text("Confirm"),
+                      )
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ));
   }
 }

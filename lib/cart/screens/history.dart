@@ -1,20 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:literasea_mobile/Katalog/models/product.dart';
-import 'package:literasea_mobile/cart/models/historyModels.dart';
+import 'package:literasea_mobile/cart/models/history_models.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:literasea_mobile/cart/widgets/history_card.dart';
 import 'package:literasea_mobile/main.dart';
 
 class HistoryPage extends StatefulWidget {
-  const HistoryPage({super.key});
+
+  final bool homePage;
+
+  const HistoryPage({super.key, required this.homePage});
 
   @override
   State<HistoryPage> createState() => _HistoryPageState();
 }
 
 class _HistoryPageState extends State<HistoryPage> {
+
+  void refreshHistory() {
+    setState(() {
+      
+    });
+  }
+
   Future<List<History>> fetchHistory() async {
     var url = Uri.parse("https://literasea.live/cart/get-history/");
     var response = await http.get(
@@ -68,7 +78,7 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Color(0xff00134E)),
+          iconTheme: const IconThemeData(color: Color(0xff00134E)),
           title: Text("My History",
               style: GoogleFonts.inter(
                   textStyle: const TextStyle(
@@ -77,7 +87,7 @@ class _HistoryPageState extends State<HistoryPage> {
                 color: Color(0xff00134E),
               ))),
           centerTitle: false,
-          backgroundColor: Color(0xffddf3ff),
+          backgroundColor: const Color(0xffddf3ff),
           elevation: 0,
         ),
         body: Column(
@@ -87,7 +97,11 @@ class _HistoryPageState extends State<HistoryPage> {
                   future: fetchHistory(),
                   builder: (context, AsyncSnapshot snapshot) {
                     if (snapshot.data == null) {
-                      return const Center(child: CircularProgressIndicator());
+                      return const Center(
+                        child: CircularProgressIndicator(
+                          color: Color(0xff3992c6),
+                        ),
+                      );
                     } else {
                       if (!snapshot.hasData) {
                         return const Center(
@@ -109,16 +123,16 @@ class _HistoryPageState extends State<HistoryPage> {
                                         children: [
                                           Container(
                                             height: 180,
-                                            color: Color(0xffddf3ff),
-                                            margin: EdgeInsets.fromLTRB(
+                                            color: const Color(0xffddf3ff),
+                                            margin: const EdgeInsets.fromLTRB(
                                                 0, 0, 0, 30),
                                           ),
                                           Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.start,
                                             children: [
-                                              SizedBox(
-                                                width: 50,
+                                              const SizedBox(
+                                                width: 20,
                                               ),
                                               Text(
                                                 "Recently Ordered",
@@ -130,17 +144,44 @@ class _HistoryPageState extends State<HistoryPage> {
                                                   ),
                                                 ),
                                               ),
-                                              SizedBox(
+                                              const SizedBox(
                                                 width: 10,
                                               ),
-                                              Icon(
+                                              const Icon(
                                                 Icons.history,
                                                 size: 28,
                                                 color: Color(0xff00134e),
-                                              )
+                                              ),
+                                              SizedBox(
+                                                width: MediaQuery.of(context).size.width - (10 + 200 + 110),
+                                              ),
+                                              widget.homePage 
+                                                ? ElevatedButton(
+                                                    onPressed: () {
+                                                      refreshHistory();
+                                                    },
+                                                    style: ElevatedButton.styleFrom(
+                                                        shape: const RoundedRectangleBorder(
+                                                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                                                        ),
+                                                        backgroundColor: const Color(0xff42aee8),
+                                                        elevation: 0,
+                                                        padding: const EdgeInsets.fromLTRB(15, 8, 15, 8),
+                                                        textStyle: const TextStyle(
+                                                          color: Colors.white,
+                                                        )),
+                                                    child: Text(
+                                                      "Refresh",
+                                                      style: GoogleFonts.inter(
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  )
+                                                // ignore: dead_code
+                                                : const SizedBox(),
                                             ],
                                           ),
-                                          SizedBox(
+                                          const SizedBox(
                                             height: 25,
                                           )
                                         ],
@@ -148,13 +189,13 @@ class _HistoryPageState extends State<HistoryPage> {
                                     } else {
                                       return HistoryCard(
                                         namaPembeli:
-                                            data[index - 1].fields.nama,
+                                            data[data.length - index].fields.nama,
                                         alamatPembeli:
-                                            data[index - 1].fields.alamat,
+                                            data[data.length - index].fields.alamat,
                                         tanggal:
-                                            "${data[index - 1].fields.tanggal}",
+                                            "${data[data.length - index].fields.tanggal}",
                                         //listBuku: data[index].fields.buku,
-                                        listBuku: data[index - 1].fields.buku,
+                                        listBuku: data[data.length - index].fields.buku,
                                       );
                                     }
                                   },

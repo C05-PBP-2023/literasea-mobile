@@ -29,10 +29,10 @@ class CartCard extends StatelessWidget {
         children: [
           Container(
             height: 100,
-            margin: EdgeInsets.all(5),
+            margin: const EdgeInsets.all(5),
             color: Colors.transparent,
             child: Image.network(
-              "${itemImage}",
+              itemImage,
               errorBuilder:
                 ((context, error, stackTrace) {
                 return Image.network(
@@ -42,25 +42,25 @@ class CartCard extends StatelessWidget {
                 }),
               ),
           ),
-          SizedBox(width: 20,),
+          const SizedBox(width: 20,),
           Expanded(
             flex: 6,
             child: Container(
               height: 100,
-              padding: EdgeInsets.all(5),
-              margin: EdgeInsets.all(5),
+              padding: const EdgeInsets.all(5),
+              margin: const EdgeInsets.all(5),
               color: Colors.transparent,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     width: 20,
                   ),
                   Expanded(
                     child: Text(
-                      "${itemName}",
+                      itemName,
                       style: GoogleFonts.inter(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 14,
                           fontWeight: FontWeight.w600
                         )
@@ -70,18 +70,18 @@ class CartCard extends StatelessWidget {
                     ),
                     ),
                   Text(
-                    "${itemAuthor}",
+                    itemAuthor,
                     style: GoogleFonts.inter(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w400
                         )
                       ),
                   ),
                   Text(
-                    "${itemYear}",
+                    itemYear,
                     style: GoogleFonts.inter(
-                        textStyle: TextStyle(
+                        textStyle: const TextStyle(
                           fontSize: 11,
                           fontWeight: FontWeight.w600
                         )
@@ -95,13 +95,13 @@ class CartCard extends StatelessWidget {
             flex: 2,
             child: Container(
               height: 100,
-              margin: EdgeInsets.all(5),
+              margin: const EdgeInsets.all(5),
               color: Colors.transparent,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.delete,
                     ), 
                     onPressed: () async { 
@@ -111,7 +111,7 @@ class CartCard extends StatelessWidget {
                       // )
                       
                       final response = await http.post(
-                        Uri.parse("https://literasea.live/cart/remove-flutter/${UserInfo.data["id"]}/${pk}"),
+                        Uri.parse("https://literasea.live/cart/remove-flutter/${UserInfo.data["id"]}/$pk"),
                       );
 
                       if (response.statusCode == 200) {

@@ -21,36 +21,40 @@ class _RootPageState extends State<RootPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        toolbarHeight: 60,
-        title: Text(
-          _activeTab == 0
-              ? "Hello, ${UserInfo.data["fullname"]}!"
-              : bottomNavBarIcons[_activeTab]["name"],
-          style: GoogleFonts.inter(
-              textStyle: const TextStyle(
-                  color: Colors.black, fontWeight: FontWeight.bold)),
-        ),
-        elevation: 0.0,
-        actions: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(right: 4.0),
-            child: IconButton(
-              icon: const Icon(Icons.shopping_cart),
-              color: Colors.black,
-              tooltip: "Open shopping cart",
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => const CartPage()));
-              },
+      appBar: _activeTab == 0 || _activeTab == 2
+          ? null
+          : AppBar(
+              backgroundColor: Colors.white,
+              toolbarHeight: 60,
+              title: Text(
+                _activeTab == 0
+                    ? "Hello, ${UserInfo.data["fullname"]}!"
+                    : bottomNavBarIcons[_activeTab]["name"],
+                style: GoogleFonts.inter(
+                    textStyle: const TextStyle(
+                        color: Colors.black, fontWeight: FontWeight.bold)),
+              ),
+              elevation: 0.0,
+              actions: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(right: 4.0),
+                  child: IconButton(
+                    icon: const Icon(Icons.shopping_cart),
+                    color: Colors.black,
+                    tooltip: "Open shopping cart",
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const CartPage()));
+                    },
+                  ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
       body: getBody(),
       bottomNavigationBar: customBottomNavbar(),
-      backgroundColor: Colors.white,
+      backgroundColor: _activeTab == 0 ? const Color(0xff3992c6) : Colors.white,
     );
   }
 
@@ -59,48 +63,43 @@ class _RootPageState extends State<RootPage> {
       height: 65,
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border(top: BorderSide(color: Colors.grey.withOpacity(0.2))),
+        border: Border(top: BorderSide(color: Colors.grey.withOpacity(0.1))),
       ),
       child: Padding(
-        padding: const EdgeInsets.only(left: 0, right: 0),
+        padding: const EdgeInsets.symmetric(horizontal: 0),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: List.generate(
             bottomNavBarIcons.length,
             (idx) {
               return AnimatedSwitcher(
                 duration: const Duration(milliseconds: 500),
                 child: InkWell(
-                  child: Container(
-                    padding: const EdgeInsets.only(left: 12.0, right: 12.0),
-                    child: SizedBox(
-                      width: 76,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Icon(bottomNavBarIcons[idx]["icon"],
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(bottomNavBarIcons[idx]["icon"],
+                          color: _activeTab == idx
+                              ? const Color(0xff3992c6)
+                              : Colors.black),
+                      const SizedBox(height: 4),
+                      Text(
+                        bottomNavBarIcons[idx]["name"],
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.inter(
+                          textStyle: TextStyle(
+                              fontSize: 12,
+                              fontWeight: _activeTab == idx
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
                               color: _activeTab == idx
-                                  ? Colors.blue
+                                  ? const Color(0xff3992c6)
                                   : Colors.black),
-                          const SizedBox(height: 4),
-                          Text(
-                            bottomNavBarIcons[idx]["name"],
-                            style: GoogleFonts.inter(
-                              textStyle: TextStyle(
-                                  fontSize: 12,
-                                  fontWeight: _activeTab == idx
-                                      ? FontWeight.bold
-                                      : FontWeight.normal,
-                                  color: _activeTab == idx
-                                      ? Colors.blue
-                                      : Colors.black),
-                            ),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                   onTap: () {
                     setState(
@@ -124,7 +123,7 @@ class _RootPageState extends State<RootPage> {
       children: const [
         MyHomePage(title: "Literasea"),
         SeeBookTracker(),
-        HistoryPage(),
+        HistoryPage(homePage: true,),
         LogoutPage()
       ],
     );

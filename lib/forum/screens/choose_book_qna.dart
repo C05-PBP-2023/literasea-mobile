@@ -10,7 +10,7 @@ class QNAChooseBook extends StatefulWidget {
   const QNAChooseBook({Key? key}) : super(key: key);
 
   @override
-  _QNAChooseBookState createState() => _QNAChooseBookState();
+  State<QNAChooseBook> createState() => _QNAChooseBookState();
 }
 
 class _QNAChooseBookState extends State<QNAChooseBook> {
@@ -121,7 +121,7 @@ class _QNAChooseBookState extends State<QNAChooseBook> {
         crossAxisCount: 2,
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
-        childAspectRatio: 0.58,
+        childAspectRatio: 0.50,
       ),
       itemCount: _filteredProducts.length,
       itemBuilder: (BuildContext context, int index) {

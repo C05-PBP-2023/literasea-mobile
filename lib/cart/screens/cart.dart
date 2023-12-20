@@ -27,7 +27,6 @@ class _CartState extends State<CartPage> {
     setState(() {
       banyakBuku -= 1;
     });
-    
   }
 
   //List<String> item = ["buku1", "bbuku2", "cbuku3", "dbuku1 buku4", "ebuku1", "fbuku1buku13"];
@@ -74,30 +73,33 @@ class _CartState extends State<CartPage> {
 
   Widget _historySection(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(0, 12, 14, 12),
+      margin: const EdgeInsets.fromLTRB(0, 12, 14, 12),
       height: 35,
-      color: Color(0xffddf3ff),
+      color: const Color(0xffddf3ff),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
           ElevatedButton(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          const HistoryPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const HistoryPage(homePage: false,)));
             },
             style: ElevatedButton.styleFrom(
-              shape: StadiumBorder(),
-              backgroundColor: Color(0xff42aee8),
-              elevation: 0,
-              padding: EdgeInsets.fromLTRB(35, 8, 35, 8),
-              textStyle: TextStyle(
+                shape: const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(15)),
+                ),
+                backgroundColor: const Color(0xff42aee8),
+                elevation: 0,
+                padding: const EdgeInsets.fromLTRB(35, 8, 35, 8),
+                textStyle: const TextStyle(
+                  color: Colors.white,
+                )),
+            child: Text(
+              "Order History",
+              style: GoogleFonts.inter(
                 color: Colors.white,
-              )
+              ),
             ),
-            child: Text("Order History"),
           )
         ],
       ),
@@ -107,10 +109,10 @@ class _CartState extends State<CartPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffddf3ff),
+      backgroundColor: const Color(0xffddf3ff),
       //backgroundColor: Colors.redAccent,
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Color(0xff00134E)),
+        iconTheme: const IconThemeData(color: Color(0xff00134E)),
         title: Text("My Cart",
             style: GoogleFonts.inter(
                 textStyle: const TextStyle(
@@ -120,7 +122,7 @@ class _CartState extends State<CartPage> {
             ))),
         centerTitle: true,
         elevation: 0,
-        backgroundColor: Color(0xffddf3ff),
+        backgroundColor: const Color(0xffddf3ff),
       ),
       body: Column(
         children: [
@@ -156,48 +158,76 @@ class _CartState extends State<CartPage> {
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.data == null) {
                   return const Center(
-                    child: CircularProgressIndicator(),
+                    child: CircularProgressIndicator(
+                      color: Color(0xff3992c6),
+                    ),
                   );
                 } else {
                   if (snapshot.data.length == 0) {
-                    return Center(
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: EdgeInsets.fromLTRB(0, 12, 70, 12),
-                            height: 35,
-                            color: Color(0xffddf3ff),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const HistoryPage()));
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: Color(0xff42aee8),
-                                    textStyle: TextStyle(
-                                      color: Colors.white,
-                                    )
-                                  ),
-                                  child: Text("Order History"),
-                                )
-                              ],
+                    return SingleChildScrollView(
+                      child: Center(
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.fromLTRB(0, 12, 14, 12),
+                              height: 35,
+                              color: Color.fromARGB(255, 219, 239, 250),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const HistoryPage(homePage: false,)));
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(15)),
+                                        ),
+                                        backgroundColor: const Color(0xff42aee8),
+                                        elevation: 0,
+                                        padding: const EdgeInsets.fromLTRB(
+                                            35, 8, 35, 8),
+                                        textStyle: const TextStyle(
+                                          color: Colors.white,
+                                        )),
+                                    child: Text(
+                                      "Order History",
+                                      style: GoogleFonts.inter(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          Text("Empty Cart"),
-                        ],
+                            Padding(
+                              padding: const EdgeInsets.only(top: 110),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.remove_shopping_cart_sharp,
+                                    color: Colors.black.withOpacity(0.15),
+                                    size: 250,
+                                  ),
+                                  const Text("Empty Cart"),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     );
                   } else {
                     List<Product> data = snapshot.data!;
 
                     return ListView.builder(
-                        itemCount: data.length+1,
+                        itemCount: data.length + 1,
                         itemBuilder: (_, index) {
                           // String imageLink = data[index].fields.image;
                           // String substring = imageLink.substring(14);
@@ -230,18 +260,19 @@ class _CartState extends State<CartPage> {
             ),
           ),
           Container(
-              padding: EdgeInsets.fromLTRB(25, 10, 25, 15),
-              height: 180,
+              padding: const EdgeInsets.fromLTRB(25, 10, 25, 15),
+              height: 190,
               decoration: BoxDecoration(
                 color: Colors.white,
                 border: Border.all(
                   width: 0.5,
-                  color: Color(0xffababab),
+                  color: const Color(0xffababab),
                 ),
-                borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                borderRadius:
+                    const BorderRadius.vertical(top: Radius.circular(20)),
               ),
               child: Padding(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Column(
                   children: [
                     Row(
@@ -250,62 +281,61 @@ class _CartState extends State<CartPage> {
                         Text(
                           "Books ordered",
                           style: GoogleFonts.inter(
-                            color: Color(0xff00134e),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500
-                          ),
-                          ),
-                        Text("${banyakBuku}",
-                        style: GoogleFonts.inter(
-                            color: Color(0xff00134e),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500
-
-                          ),),
+                              color: const Color(0xff00134e),
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          "$banyakBuku",
+                          style: GoogleFonts.inter(
+                              color: const Color(0xff00134e),
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500),
+                        ),
                       ],
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Price per book",
-                        style: GoogleFonts.inter(
-                            color: Color(0xff00134e),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500
-
-                          ),),
-                        Text("100",
-                        style: GoogleFonts.inter(
-                            color: Color(0xff00134e),
-                            fontSize: 13,
-                            fontWeight: FontWeight.w500
-
-                          ),),
+                        Text(
+                          "Price per book",
+                          style: GoogleFonts.inter(
+                              color: const Color(0xff00134e),
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          "100",
+                          style: GoogleFonts.inter(
+                              color: const Color(0xff00134e),
+                              fontSize: 13,
+                              fontWeight: FontWeight.w500),
+                        ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text("Total",
-                        style: GoogleFonts.inter(
-                            color: Color(0xff00134e),
-                            fontSize: 19,
-                            fontWeight: FontWeight.w700
-
-                          ),),
-                        Text("Rp${banyakBuku*100},00",
-                        style: GoogleFonts.inter(
-                            color: Color(0xff00134e),
-                            fontSize: 19,
-                            fontWeight: FontWeight.w700 
-
-                          ),),
+                        Text(
+                          "Total",
+                          style: GoogleFonts.inter(
+                              color: const Color(0xff00134e),
+                              fontSize: 19,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        Text(
+                          "Rp${banyakBuku * 100},00",
+                          style: GoogleFonts.inter(
+                              color: const Color(0xff00134e),
+                              fontSize: 19,
+                              fontWeight: FontWeight.w700),
+                        ),
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     ElevatedButton(
@@ -320,15 +350,17 @@ class _CartState extends State<CartPage> {
                       style: banyakBuku == 0
                           ? ElevatedButton.styleFrom(
                               backgroundColor: Colors.grey,
-                              shape: StadiumBorder(),
+                              shape: const StadiumBorder(),
                               elevation: 0,
-                              padding: EdgeInsets.fromLTRB(140, 20, 140, 20),
-                          )
+                              padding:
+                                  const EdgeInsets.fromLTRB(80, 15, 80, 15),
+                            )
                           : ElevatedButton.styleFrom(
-                              shape: StadiumBorder(),
-                              backgroundColor: Color(0xff3894c8),
+                              shape: const StadiumBorder(),
+                              backgroundColor: const Color(0xff3894c8),
                               elevation: 0,
-                              padding: EdgeInsets.fromLTRB(140, 20, 140, 20),
+                              padding:
+                                  const EdgeInsets.fromLTRB(80, 15, 80, 15),
                             ),
                       child: Text(
                         "Checkout Books",
@@ -336,7 +368,7 @@ class _CartState extends State<CartPage> {
                           color: Colors.white,
                           fontSize: 14,
                           fontWeight: FontWeight.w500,
-                        ),  
+                        ),
                       ),
                     )
                   ],
