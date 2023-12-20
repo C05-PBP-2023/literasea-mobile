@@ -55,7 +55,7 @@ class _ReviewProductPageState extends State<ReviewProductPage> {
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              childAspectRatio: 0.55,
+              childAspectRatio: 0.50,
             ),
             itemCount: products.length,
             itemBuilder: (BuildContext context, int index) {
