@@ -52,6 +52,7 @@ class _AddBookPageState extends State<AddBookPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const BackButton(color: Colors.black),
         title: Text('Add New Book', style: GoogleFonts.inter()),
       ),
       body: SingleChildScrollView(

@@ -73,6 +73,8 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const BackButton(color: Colors.black),
+        elevation: 0.0,
         title: Text('Katalog Buku',
             style: GoogleFonts.inter(
                 fontWeight: FontWeight.bold,

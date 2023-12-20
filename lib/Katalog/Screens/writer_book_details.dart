@@ -11,6 +11,7 @@ class WriterBookDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const BackButton(color: Colors.black),
         title: const Text('Detail Buku'),
         titleTextStyle: GoogleFonts.inter(fontSize: 20, fontWeight: FontWeight.bold),
       ),

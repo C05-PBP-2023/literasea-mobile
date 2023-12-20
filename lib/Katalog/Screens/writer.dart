@@ -33,6 +33,8 @@ class _WriterPageState extends State<WriterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: const BackButton(color: Colors.black),
+        elevation: 0.0,
         title: Text('Katalog Buku',
             style: GoogleFonts.inter(
                 fontWeight: FontWeight.bold,
