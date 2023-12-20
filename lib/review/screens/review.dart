@@ -420,7 +420,7 @@ class _ReviewPageState extends State<ReviewPage> {
                                               color: Colors.black,
                                               fontFamily: 'Inter',
                                               fontWeight: FontWeight.bold,
-                                              fontSize: 11),
+                                              fontSize: 10),
                                         ),
                                       ),
                                       Padding(
