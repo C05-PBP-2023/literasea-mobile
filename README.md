@@ -3,6 +3,7 @@
 ![Staging badge](https://github.com/C05-PBP-2023/literasea-mobile/actions/workflows/staging.yml/badge.svg)
 ![Pre-release badge](https://github.com/C05-PBP-2023/literasea-mobile/actions/workflows/pre-release.yml/badge.svg)
 ![Release badge](https://github.com/C05-PBP-2023/literasea-mobile/actions/workflows/release.yml/badge.svg)
+![MS App Center badge](https://build.appcenter.ms/v0.1/apps/ee53c95c-cd4f-4467-bb06-3085334376c9/branches/main/badge)
 
 # Dive into knowledge, sail with Literasea! 📖⛵
 

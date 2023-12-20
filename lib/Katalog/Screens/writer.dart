@@ -33,6 +33,9 @@ class _WriterPageState extends State<WriterPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
+        leading: const BackButton(color: Colors.black),
+        elevation: 0.0,
         title: Text('Katalog Buku',
             style: GoogleFonts.inter(
                 fontWeight: FontWeight.bold,
@@ -41,6 +44,7 @@ class _WriterPageState extends State<WriterPage> {
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.add),
+            color: Colors.black,
             onPressed: () {
               Navigator.push(
                 context,
@@ -74,88 +78,75 @@ class _WriterPageState extends State<WriterPage> {
               crossAxisCount: 2,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              childAspectRatio: 0.60,
+              childAspectRatio: 0.70,
             ),
             itemCount: products.length,
             itemBuilder: (BuildContext context, int index) {
               Product product = products[index];
-              return Card(
-                color: Colors.white,
-                clipBehavior: Clip.antiAlias,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    AspectRatio(
-                      aspectRatio: 1.75,
-                      child: SizedBox(
-                        width: double.infinity,
-                        child: Image.network(
-                          product.fields.image,
-                          fit: BoxFit.cover,
-                          errorBuilder: ((context, error, stackTrace) {
-                            return Image.network(
-                              "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
-                              width: 64,
-                            );
-                          }),
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => WriterBookDetailsPage(product: product),
+                    ),
+                  );
+                },
+                child: Card(
+                  color: Colors.white,
+                  clipBehavior: Clip.antiAlias,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AspectRatio(
+                        aspectRatio: 1.6,
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Image.network(
+                            product.fields.image,
+                            fit: BoxFit.cover,
+                            errorBuilder: ((context, error, stackTrace) {
+                              return Image.network(
+                                "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
+                                width: 64,
+                              );
+                            }),
+                          ),
                         ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            product.fields.bookTitle,
-                            style: GoogleFonts.inter(
-                                fontSize: 16.0, fontWeight: FontWeight.bold),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'by ${product.fields.bookAuthor}',
-                            style:
-                                GoogleFonts.inter(color: Colors.grey.shade600),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            'Published: ${product.fields.yearOfPublication}',
-                            style:
-                                GoogleFonts.inter(color: Colors.grey.shade600),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          ButtonBar(
-                            alignment: MainAxisAlignment.start,
-                            children: [
-                              TextButton(
-                                style: TextButton.styleFrom(
-                                    foregroundColor: Colors.blue[600],
-                                    backgroundColor: Colors.blue[50],
-                                    textStyle: GoogleFonts.inter(
-                                        fontWeight: FontWeight.bold)),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          WriterBookDetailsPage(
-                                              product: product),
-                                    ),
-                                  );
-                                },
-                                child: const Text('See Details'),
-                              ),
-                            ],
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              product.fields.bookTitle,
+                              style: GoogleFonts.inter(
+                                  fontSize: 16.0, fontWeight: FontWeight.bold),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'by ${product.fields.bookAuthor}',
+                              style:
+                                  GoogleFonts.inter(color: Colors.grey.shade600),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              'Published: ${product.fields.yearOfPublication}',
+                              style:
+                                  GoogleFonts.inter(color: Colors.grey.shade600),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
             },

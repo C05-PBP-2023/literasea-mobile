@@ -81,8 +81,12 @@ class _CartState extends State<CartPage> {
         children: [
           ElevatedButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HistoryPage()));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const HistoryPage(
+                            homePage: false,
+                          )));
             },
             style: ElevatedButton.styleFrom(
                 shape: const RoundedRectangleBorder(
@@ -164,61 +168,66 @@ class _CartState extends State<CartPage> {
                   );
                 } else {
                   if (snapshot.data.length == 0) {
-                    return Center(
-                      child: Column(
-                        children: [
-                          Container(
-                            margin: const EdgeInsets.fromLTRB(0, 12, 14, 12),
-                            height: 35,
-                            color: const Color(0xffddf3ff),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const HistoryPage()));
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                      shape: const RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(15)),
-                                      ),
-                                      backgroundColor: const Color(0xff42aee8),
-                                      elevation: 0,
-                                      padding: const EdgeInsets.fromLTRB(
-                                          35, 8, 35, 8),
-                                      textStyle: const TextStyle(
+                    return SingleChildScrollView(
+                      child: Center(
+                        child: Column(
+                          children: [
+                            Container(
+                              margin: const EdgeInsets.fromLTRB(0, 12, 14, 12),
+                              height: 35,
+                              color: const Color.fromARGB(255, 219, 239, 250),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const HistoryPage(
+                                                    homePage: false,
+                                                  )));
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                        shape: const RoundedRectangleBorder(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(15)),
+                                        ),
+                                        backgroundColor:
+                                            const Color(0xff42aee8),
+                                        elevation: 0,
+                                        padding: const EdgeInsets.fromLTRB(
+                                            35, 8, 35, 8),
+                                        textStyle: const TextStyle(
+                                          color: Colors.white,
+                                        )),
+                                    child: Text(
+                                      "Order History",
+                                      style: GoogleFonts.inter(
                                         color: Colors.white,
-                                      )),
-                                  child: Text(
-                                    "Order History",
-                                    style: GoogleFonts.inter(
-                                      color: Colors.white,
+                                      ),
                                     ),
+                                  )
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 110),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.remove_shopping_cart_sharp,
+                                    color: Colors.black.withOpacity(0.15),
+                                    size: 250,
                                   ),
-                                )
-                              ],
+                                  const Text("Empty Cart"),
+                                ],
+                              ),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 110),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.remove_shopping_cart_sharp,
-                                  color: Colors.black.withOpacity(0.15),
-                                  size: 250,
-                                ),
-                                const Text("Empty Cart"),
-                              ],
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
                     );
                   } else {
