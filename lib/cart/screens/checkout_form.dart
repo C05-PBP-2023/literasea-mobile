@@ -51,10 +51,9 @@ class _CheckoutFormState extends State<CheckoutForm> {
                 child: Text(
                   "CHECKOUT DATA",
                   style: GoogleFonts.inter(
-                    color: const Color(0xff00134e),
-                    fontSize: 15,
-                    fontWeight: FontWeight.w800
-                  ),
+                      color: const Color(0xff00134e),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800),
                 ),
               ),
               const SizedBox(
@@ -68,14 +67,15 @@ class _CheckoutFormState extends State<CheckoutForm> {
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: [Text(
-                          "Nama Pembeli:",
-                          style: GoogleFonts.inter(
-                    color: const Color(0xff00134e),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500
-                  ),
-                          )],
+                        children: [
+                          Text(
+                            "Nama Pembeli:",
+                            style: GoogleFonts.inter(
+                                color: const Color(0xff00134e),
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
                       ),
                       const SizedBox(
                         height: 10,
@@ -107,14 +107,15 @@ class _CheckoutFormState extends State<CheckoutForm> {
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
-                        children: [Text(
-                          "Alamat Kirim:",
-                          style: GoogleFonts.inter(
-                    color: const Color(0xff00134e),
-                    fontSize: 13,
-                    fontWeight: FontWeight.w500),
-                  
-                          )],
+                        children: [
+                          Text(
+                            "Alamat Kirim:",
+                            style: GoogleFonts.inter(
+                                color: const Color(0xff00134e),
+                                fontSize: 13,
+                                fontWeight: FontWeight.w500),
+                          )
+                        ],
                       ),
                       const SizedBox(
                         height: 10,
@@ -148,17 +149,12 @@ class _CheckoutFormState extends State<CheckoutForm> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
-                            
                             "Grand Total:",
-        
                             style: GoogleFonts.inter(
-                    color: const Color(0xff00134e),
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500
-                  
-                            
-                            ),
-                            ),
+                                color: const Color(0xff00134e),
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500),
+                          ),
                         ],
                       ),
                       Row(
@@ -167,14 +163,10 @@ class _CheckoutFormState extends State<CheckoutForm> {
                           Text(
                             "Rp${widget.total},00",
                             style: GoogleFonts.inter(
-                    color: const Color(0xff00134e),
-                    fontSize: 24,
-                    fontWeight: FontWeight.w700
-                  
-                            
-                            ),
-                            
-                            ),
+                                color: const Color(0xff00134e),
+                                fontSize: 24,
+                                fontWeight: FontWeight.w700),
+                          ),
                         ],
                       ),
                       const SizedBox(
@@ -182,12 +174,12 @@ class _CheckoutFormState extends State<CheckoutForm> {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
-                                minimumSize: Size(double.infinity, 40),
-                                shape: const StadiumBorder(),
-                                backgroundColor: const Color(0xff3894c8),
-                                elevation: 0,
-                                padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
-                              ),
+                          minimumSize: const Size(double.infinity, 40),
+                          shape: const StadiumBorder(),
+                          backgroundColor: const Color(0xff3894c8),
+                          elevation: 0,
+                          padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
+                        ),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             final response = await request.postJson(

@@ -1,12 +1,12 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:literasea_mobile/Katalog/models/product.dart';
 import 'package:literasea_mobile/tracker/models/book_tracker.dart';
-import 'package:literasea_mobile/tracker/models/book.dart';
+import 'package:literasea_mobile/main.dart';
 
-Future<List<BookTracker>> fetchBookTracker(uid) async {
-  String userId = uid.toString();
-
-  var url = Uri.parse('https://literasea.live/tracker/mobile/$userId');
+Future<List<BookTracker>> fetchBookTracker() async {
+  var url =
+      Uri.parse('https://literasea.live/tracker/mobile/${UserInfo.data["id"]}');
   var response = await http.get(url, headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
@@ -23,7 +23,7 @@ Future<List<BookTracker>> fetchBookTracker(uid) async {
   return listBookTracker;
 }
 
-Future<List<Book>> fetchBook() async {
+Future<List<Product>> fetchBook() async {
   var url = Uri.parse('https://literasea.live/tracker/book/mobile');
   var response = await http.get(url, headers: {
     "Access-Control-Allow-Origin": "*",
@@ -32,10 +32,10 @@ Future<List<Book>> fetchBook() async {
 
   var data = jsonDecode(utf8.decode(response.bodyBytes));
 
-  List<Book> listBook = [];
+  List<Product> listBook = [];
   for (var d in data) {
     if (d != null) {
-      listBook.add(Book.fromJson(d));
+      listBook.add(Product.fromJson(d));
     }
   }
   return listBook;
