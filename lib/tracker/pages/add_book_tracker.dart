@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:literasea_mobile/tracker/models/book.dart';
+import 'package:literasea_mobile/Katalog/models/product.dart';
 import 'package:literasea_mobile/tracker/utils/fetch.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +15,7 @@ class AddBookTracker extends StatefulWidget {
 }
 
 class _AddBookTrackerState extends State<AddBookTracker> {
-  List<Book> _books = [];
+  List<Product> _books = [];
   final _formKey = GlobalKey<FormState>();
   String _book_id = "";
   String _last_page = "";
@@ -31,7 +31,7 @@ class _AddBookTrackerState extends State<AddBookTracker> {
   }
 
   Future<void> _loadBooks() async {
-    List<Book> books = await fetchBook();
+    List<Product> books = await fetchBook();
     setState(() {
       _books = books;
     });
@@ -110,10 +110,10 @@ class _AddBookTrackerState extends State<AddBookTracker> {
                           filled: true,
                           // prefixIcon: Icon(Icons.abc),
                         ),
-                        items: _books.map((Book book) {
+                        items: _books.map((Product book) {
                           return DropdownMenuItem<String>(
-                            value: book.id.toString(),
-                            child: Text(book.book_title),
+                            value: book.pk.toString(),
+                            child: Text(book.fields.bookTitle),
                           );
                         }).toList(),
                         value: _book_id,

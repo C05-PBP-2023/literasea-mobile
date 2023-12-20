@@ -4,7 +4,6 @@ import 'package:literasea_mobile/main.dart';
 import 'package:literasea_mobile/Katalog/models/product.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:literasea_mobile/tracker/models/book.dart';
 
 class SeeBookTracker extends StatefulWidget {
   const SeeBookTracker({Key? key}) : super(key: key);
@@ -17,7 +16,7 @@ class _SeeBookTrackerState extends State<SeeBookTracker> {
   bool value = false;
   Future<List<BookTracker>> fetchBookTracker() async {
     var url = Uri.parse(
-        'https://literasea.live/tracker/mobile/' + UserInfo.data["id"]);
+        'http://localhost:8000/tracker/mobile/${UserInfo.data["id"]}');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -89,13 +88,13 @@ class _SeeBookTrackerState extends State<SeeBookTracker> {
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(30.0),
                                       child: Image.network(
-                                        snapshot.data![index].book_image,
+                                        snapshot.data![index].bookImage,
                                         height: 200,
                                       ),
                                     ),
                                     const SizedBox(height: 15),
                                     Text(
-                                      "${snapshot.data![index].book_title}",
+                                      "${snapshot.data![index].bookTitle}",
                                       style: const TextStyle(
                                         fontSize: 20.0,
                                         fontWeight: FontWeight.bold,
@@ -103,7 +102,7 @@ class _SeeBookTrackerState extends State<SeeBookTracker> {
                                     ),
                                     const SizedBox(height: 5),
                                     Text(
-                                      "${snapshot.data![index].last_page}",
+                                      "${snapshot.data![index].lastPage}",
                                       style: const TextStyle(
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.bold,
@@ -119,7 +118,7 @@ class _SeeBookTrackerState extends State<SeeBookTracker> {
                                           color: Colors.red,
                                         ),
                                         Text(
-                                          " ${snapshot.data![index].last_read_timestamp}",
+                                          " ${snapshot.data![index].lastReadTimestamp}",
                                           style: const TextStyle(
                                             fontSize: 16.0,
                                             fontWeight: FontWeight.bold,
