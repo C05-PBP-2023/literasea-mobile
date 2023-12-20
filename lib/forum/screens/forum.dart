@@ -26,7 +26,7 @@ class _QNAPageState extends State<QNAPage> {
           SliverAppBar(
             backgroundColor: Colors.white,
             toolbarHeight: 60,
-            expandedHeight: 200,
+            expandedHeight: 300,
             pinned: true,
             flexibleSpace: FlexibleSpaceBar(
               background: Container(
@@ -47,6 +47,7 @@ class _QNAPageState extends State<QNAPage> {
                             color: Color(0xff00134E),
                           ),
                         ),
+                        textAlign: TextAlign.center,
                       ),
                       const SizedBox(height: 8),
                       Text(
