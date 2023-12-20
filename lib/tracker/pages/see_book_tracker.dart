@@ -5,6 +5,7 @@ import 'package:literasea_mobile/Katalog/models/product.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:google_fonts/google_fonts.dart';
+import 'package:literasea_mobile/tracker/pages/add_book_tracker.dart';
 
 class SeeBookTracker extends StatefulWidget {
   const SeeBookTracker({Key? key}) : super(key: key);
@@ -38,7 +39,7 @@ class _SeeBookTrackerState extends State<SeeBookTracker> {
         title: Text(
           "Here is your reading history",
           style: GoogleFonts.inter(
-            textStyle: const TextStyle(
+            textStyle: TextStyle(
               fontWeight: FontWeight.w800,
               fontSize: 20,
               color: Color(0xff00134E),
@@ -55,13 +56,34 @@ class _SeeBookTrackerState extends State<SeeBookTracker> {
           children: [
             Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Text(
-                "Don't miss out on tracking your reading journey with Literasea!",
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.black,
-                ),
+              child: Column(
+                children: [
+                  Text(
+                    "Don't miss out on tracking your reading journey with Literasea!",
+                    style: GoogleFonts.inter(
+                      textStyle: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const AddBookTracker(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "Add Reading History",
+                      style: GoogleFonts.inter(),
+                    ),
+                  ),
+                ],
               ),
             ),
             Expanded(
@@ -77,7 +99,9 @@ class _SeeBookTrackerState extends State<SeeBookTracker> {
                           Text(
                             "Tidak ada buku terdeteksi",
                             style: TextStyle(
-                                color: Color(0xff59A5D8), fontSize: 20),
+                              color: Color(0xff59A5D8),
+                              fontSize: 20,
+                            ),
                           ),
                           SizedBox(height: 8),
                         ],
@@ -90,7 +114,7 @@ class _SeeBookTrackerState extends State<SeeBookTracker> {
                               horizontal: 50, vertical: 12),
                           padding: const EdgeInsets.all(20.0),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: Colors.blueGrey.shade200,
                             borderRadius: BorderRadius.circular(30.0),
                             boxShadow: const [
                               BoxShadow(color: Colors.black, blurRadius: 2.0),
@@ -110,26 +134,32 @@ class _SeeBookTrackerState extends State<SeeBookTracker> {
                               const SizedBox(height: 15),
                               Text(
                                 "${snapshot.data![index].bookTitle}",
-                                style: const TextStyle(
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.bold,
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    fontSize: 20.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 5),
                               Text(
-                                "${snapshot.data![index].lastPage}",
-                                style: const TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey,
+                                "Last page: ${snapshot.data![index].lastPage}",
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                               const SizedBox(height: 5),
                               Text(
-                                "${snapshot.data![index].lastReadTimestamp}",
-                                style: const TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
+                                "Timestamp: ${snapshot.data![index].lastReadTimestamp}",
+                                style: GoogleFonts.inter(
+                                  textStyle: TextStyle(
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
                               ),
                             ],
