@@ -94,7 +94,12 @@ class _CartState extends State<CartPage> {
                 textStyle: const TextStyle(
                   color: Colors.white,
                 )),
-            child: const Text("Order History"),
+            child: Text(
+              "Order History",
+              style: GoogleFonts.inter(
+                color: Colors.white,
+              ),
+            ),
           )
         ],
       ),
@@ -189,7 +194,12 @@ class _CartState extends State<CartPage> {
                                       textStyle: const TextStyle(
                                         color: Colors.white,
                                       )),
-                                  child: const Text("Order History"),
+                                  child: Text(
+                                    "Order History",
+                                    style: GoogleFonts.inter(
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 )
                               ],
                             ),
