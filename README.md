@@ -7,6 +7,9 @@
 
 # Dive into knowledge, sail with Literasea! 📖⛵
 
+## Aplikasi
+Aplikasi dapat diunduh melalui bagian [releases](https://github.com/C05-PBP-2023/literasea-mobile/releases) atau melalui [link ini](https://appcenter.ms/orgs/C05-Literasea/apps/Literasea/distribute/distribution-groups/Public/releases/) pada Microsoft App Center.
+
 ## Anggota Kelompok C05
 
 - [Muhammad Nabil Mu'afa](https://github.com/nabilmuafa) (2206024972)
