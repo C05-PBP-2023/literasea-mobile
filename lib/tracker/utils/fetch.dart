@@ -1,18 +1,22 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:literasea_mobile/tracker/models/book_tracker.dart';
 import 'package:literasea_mobile/tracker/models/book.dart';
+import 'package:literasea_mobile/tracker/models/book_tracker.dart';
+import 'package:literasea_mobile/main.dart';
 
-Future<List<BookTracker>> fetchBookTracker(uid) async {
-  String userId = uid.toString();
-
-  var url = Uri.parse('https://literasea.live/tracker/mobile/$userId');
+Future<List<BookTracker>> fetchBookTracker() async {
+  var url =
+      Uri.parse('https://literasea.live/tracker/mobile/' + UserInfo.data["id"]);
   var response = await http.get(url, headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
   });
 
+  print(url);
+
   var data = jsonDecode(utf8.decode(response.bodyBytes));
+
+  print(data);
 
   List<BookTracker> listBookTracker = [];
   for (var d in data) {

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:literasea_mobile/tracker/models/book_tracker.dart';
-import 'package:literasea_mobile/tracker/utils/fetch.dart';
 import 'package:literasea_mobile/main.dart';
 import 'package:literasea_mobile/Katalog/models/product.dart';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:literasea_mobile/tracker/models/book.dart';
 
 class SeeBookTracker extends StatefulWidget {
   const SeeBookTracker({Key? key}) : super(key: key);
@@ -13,9 +15,29 @@ class SeeBookTracker extends StatefulWidget {
 
 class _SeeBookTrackerState extends State<SeeBookTracker> {
   bool value = false;
+  Future<List<BookTracker>> fetchBookTracker() async {
+    var url = Uri.parse(
+        'https://literasea.live/tracker/mobile/' + UserInfo.data["id"]);
+    var response = await http.get(
+      url,
+      headers: {"Content-Type": "application/json"},
+    );
+
+    print(url);
+    print(response);
+
+    if (response.statusCode == 200) {
+      List<dynamic> body = json.decode(response.body);
+      return body.map((dynamic item) => BookTracker.fromJson(item)).toList();
+    } else {
+      throw Exception('Failed to load products');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    print("yono");
+    print(fetchBookTracker());
     return Scaffold(
         // backgroundColor: Colors.green[100],
         appBar: AppBar(
@@ -29,7 +51,7 @@ class _SeeBookTrackerState extends State<SeeBookTracker> {
                   end: Alignment.centerRight,
                   colors: [Colors.greenAccent, Colors.blueGrey])),
           child: FutureBuilder(
-              future: fetchBookTracker(UserInfo.data["id"]),
+              future: fetchBookTracker(),
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.data == null) {
                   return const Center(child: CircularProgressIndicator());
