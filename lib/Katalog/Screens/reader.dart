@@ -73,6 +73,7 @@ class _ProductPageState extends State<ProductPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.white,
         leading: const BackButton(color: Colors.black),
         elevation: 0.0,
         title: Text('Katalog Buku',
@@ -81,7 +82,7 @@ class _ProductPageState extends State<ProductPage> {
                 fontSize: 20.0,
                 color: Colors.black)),
         actions: [
-          ElevatedButton(
+          TextButton(
             onPressed: () {
               showModalBottomSheet(
                 context: context,
@@ -101,10 +102,10 @@ class _ProductPageState extends State<ProductPage> {
               );
             },
             style: TextButton.styleFrom(
-              backgroundColor: Colors.blue[600],
-              foregroundColor: Colors.white,
+              foregroundColor: Colors.black,
+              backgroundColor: Colors.white,
             ),
-            child: Text('Filter', style: GoogleFonts.inter()),
+            child: Text('FILTER', style: GoogleFonts.inter(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -119,25 +120,34 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   Widget _buildProductGrid() {
-    return GridView.builder(
-      padding: const EdgeInsets.all(8),
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        childAspectRatio: 0.60,
-      ),
-      itemCount: _filteredProducts.length,
-      itemBuilder: (BuildContext context, int index) {
-        Product product = _filteredProducts[index];
-        return Card(
+  return GridView.builder(
+    padding: const EdgeInsets.all(8),
+    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: 2,
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+      childAspectRatio: 0.70,
+    ),
+    itemCount: _filteredProducts.length,
+    itemBuilder: (BuildContext context, int index) {
+      Product product = _filteredProducts[index];
+      return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BookDetailsPage(product: product),
+            ),
+          );
+        },
+        child: Card(
           color: Colors.white,
           clipBehavior: Clip.antiAlias,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AspectRatio(
-                aspectRatio: 1.75,
+                aspectRatio: 1.6,
                 child: SizedBox(
                   width: double.infinity,
                   child: Image.network(
@@ -178,38 +188,16 @@ class _ProductPageState extends State<ProductPage> {
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),
-                    ButtonBar(
-                      alignment: MainAxisAlignment.start,
-                      children: [
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            foregroundColor: Colors.blue[600],
-                            backgroundColor: Colors.blue[50],
-                          ),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    BookDetailsPage(product: product),
-                              ),
-                            );
-                          },
-                          child: Text('See Details',
-                              style: GoogleFonts.inter(
-                                  fontWeight: FontWeight.bold)),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),
             ],
           ),
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
+}
 
   void _applyFilters(
       String? authorName, String? publisher, int? publishedYear) {
