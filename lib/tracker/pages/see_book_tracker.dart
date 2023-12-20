@@ -16,7 +16,7 @@ class SeeBookTracker extends StatefulWidget {
 class _SeeBookTrackerState extends State<SeeBookTracker> {
   Future<List<BookTracker>> fetchBookTracker() async {
     var url = Uri.parse(
-        'http://localhost:8000/tracker/mobile/${UserInfo.data["id"]}');
+        'https://literasea.live/tracker/mobile/${UserInfo.data["id"]}');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
