@@ -123,7 +123,7 @@ class _RootPageState extends State<RootPage> {
       children: const [
         MyHomePage(title: "Literasea"),
         SeeBookTracker(),
-        HistoryPage(),
+        HistoryPage(homePage: true,),
         LogoutPage()
       ],
     );

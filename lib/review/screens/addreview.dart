@@ -17,16 +17,13 @@ class ReviewFormPage extends StatefulWidget {
 
 class _ShopFormPageState extends State<ReviewFormPage> {
   final _formKey = GlobalKey<FormState>();
-  int? _rating; // Use int? to allow null, indicating no selection
+  int? _rating;
   String _reviewMessage = "";
 
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         body: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -181,7 +178,6 @@ class _ShopFormPageState extends State<ReviewFormPage> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }

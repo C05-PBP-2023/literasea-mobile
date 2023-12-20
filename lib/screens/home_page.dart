@@ -160,33 +160,37 @@ class _MyHomePageState extends State<MyHomePage> {
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 32.0),
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          homePageButtons[index]["name"],
-                                          style: GoogleFonts.inter(
-                                            textStyle: const TextStyle(
-                                              fontWeight: FontWeight.w600,
-                                              fontSize: 22,
-                                              color: Colors.white
+                                  // ignore: avoid_unnecessary_containers, sized_box_for_whitespace
+                                  Container(
+                                    width: 190,
+                                    child: Padding(
+                                      padding: const EdgeInsets.only(left: 32.0),
+                                      child: Column(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            homePageButtons[index]["name"],
+                                            style: GoogleFonts.inter(
+                                              textStyle: const TextStyle(
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 22,
+                                                color: Colors.white
+                                              ),
                                             ),
                                           ),
-                                        ),
-                                        Text(
-                                          homePageButtons[index]["desc"],
-                                          style: GoogleFonts.inter(
-                                            textStyle: const TextStyle(
-                                              fontWeight: FontWeight.w300,
-                                              fontSize: 13,
-                                              color: Colors.white
-                                            )
-                                          ),
-                                        )
-                                      ],
+                                          Text(
+                                            homePageButtons[index]["desc"],
+                                            style: GoogleFonts.inter(
+                                              textStyle: const TextStyle(
+                                                fontWeight: FontWeight.w300,
+                                                fontSize: 13,
+                                                color: Colors.white
+                                              )
+                                            ),
+                                          )
+                                        ],
+                                      ),
                                     ),
                                   ),
                                   Padding(
@@ -257,11 +261,11 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        "New Book",
+                        "New Books",
                         style: GoogleFonts.inter(
                           textStyle: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 22,
+                            fontWeight: FontWeight.w700,
+                            fontSize: 20,
                             color: Colors.black
                           ),
                         ),

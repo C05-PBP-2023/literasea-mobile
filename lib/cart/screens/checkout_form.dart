@@ -182,10 +182,11 @@ class _CheckoutFormState extends State<CheckoutForm> {
                       ),
                       ElevatedButton(
                         style: ElevatedButton.styleFrom(
+                                minimumSize: Size(double.infinity, 40),
                                 shape: const StadiumBorder(),
                                 backgroundColor: const Color(0xff3894c8),
                                 elevation: 0,
-                                padding: const EdgeInsets.fromLTRB(140, 20, 140, 20),
+                                padding: const EdgeInsets.fromLTRB(40, 20, 40, 20),
                               ),
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
