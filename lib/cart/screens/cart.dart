@@ -81,8 +81,12 @@ class _CartState extends State<CartPage> {
         children: [
           ElevatedButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => const HistoryPage(homePage: false,)));
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const HistoryPage(
+                            homePage: false,
+                          )));
             },
             style: ElevatedButton.styleFrom(
                 shape: const RoundedRectangleBorder(
@@ -171,7 +175,7 @@ class _CartState extends State<CartPage> {
                             Container(
                               margin: const EdgeInsets.fromLTRB(0, 12, 14, 12),
                               height: 35,
-                              color: Color.fromARGB(255, 219, 239, 250),
+                              color: const Color.fromARGB(255, 219, 239, 250),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
@@ -181,14 +185,17 @@ class _CartState extends State<CartPage> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  const HistoryPage(homePage: false,)));
+                                                  const HistoryPage(
+                                                    homePage: false,
+                                                  )));
                                     },
                                     style: ElevatedButton.styleFrom(
                                         shape: const RoundedRectangleBorder(
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(15)),
                                         ),
-                                        backgroundColor: const Color(0xff42aee8),
+                                        backgroundColor:
+                                            const Color(0xff42aee8),
                                         elevation: 0,
                                         padding: const EdgeInsets.fromLTRB(
                                             35, 8, 35, 8),

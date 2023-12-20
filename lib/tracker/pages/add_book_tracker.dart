@@ -1,10 +1,9 @@
 import 'dart:convert';
-import 'package:literasea_mobile/tracker/models/book.dart';
+import 'package:literasea_mobile/Katalog/models/product.dart';
 import 'package:literasea_mobile/tracker/utils/fetch.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
-import 'package:literasea_mobile/tracker/models/book_tracker.dart';
 import 'package:literasea_mobile/main.dart';
 
 class AddBookTracker extends StatefulWidget {
@@ -15,11 +14,11 @@ class AddBookTracker extends StatefulWidget {
 }
 
 class _AddBookTrackerState extends State<AddBookTracker> {
-  List<Book> _books = [];
+  List<Product> _books = [];
   final _formKey = GlobalKey<FormState>();
-  String _book_id = "";
-  String _last_page = "";
-  String _user_id = UserInfo.data["id"];
+  String _bookId = "";
+  String _lastPage = "";
+  final String _userId = UserInfo.data["id"];
 
   final _coBookId = TextEditingController();
   final _coLastPage = TextEditingController();
@@ -31,7 +30,7 @@ class _AddBookTrackerState extends State<AddBookTracker> {
   }
 
   Future<void> _loadBooks() async {
-    List<Book> books = await fetchBook();
+    List<Product> books = await fetchBook();
     setState(() {
       _books = books;
     });
@@ -41,8 +40,8 @@ class _AddBookTrackerState extends State<AddBookTracker> {
     _coBookId.clear();
     _coLastPage.clear();
     setState(() {
-      _book_id = "";
-      _last_page = "";
+      _bookId = "";
+      _lastPage = "";
     });
   }
 
@@ -52,38 +51,21 @@ class _AddBookTrackerState extends State<AddBookTracker> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Reading History'),
+        backgroundColor:
+            const Color.fromRGBO(255, 255, 255, 1), // Set background color
       ),
-      // drawer: BookTrackerDrawer(context),
-      body: Form(
-        key: _formKey,
+      body: SingleChildScrollView(
         child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Colors.greenAccent, Colors.blueGrey],
-            ),
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.all(Radius.circular(0.0)),
+          decoration: const BoxDecoration(
+            color: Colors.black, // Set background color
           ),
-          padding: const EdgeInsets.only(
-            right: 20.0,
-            left: 20.0,
-            top: 35.0,
-            bottom: 40.0,
-          ),
+          padding: const EdgeInsets.all(20.0),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.all(Radius.circular(40.0)),
+              borderRadius: BorderRadius.circular(20.0),
             ),
-            padding: const EdgeInsets.only(
-              right: 30.0,
-              left: 30.0,
-              top: 40.0,
-              bottom: 30.0,
-            ),
+            padding: const EdgeInsets.all(30.0),
             child: Column(
               children: [
                 Padding(
@@ -91,10 +73,10 @@ class _AddBookTrackerState extends State<AddBookTracker> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
+                      const Text(
                         "Add Reading History",
                         style: TextStyle(
-                          color: Colors.green[900],
+                          color: Colors.blueAccent,
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),
@@ -104,22 +86,21 @@ class _AddBookTrackerState extends State<AddBookTracker> {
                       ),
                       // ====================================== BOOK TITLE ===================================
                       DropdownButtonFormField<String>(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: "Judul buku ...",
                           labelText: "Book Title",
                           filled: true,
-                          // prefixIcon: Icon(Icons.abc),
                         ),
-                        items: _books.map((Book book) {
+                        items: _books.map((Product book) {
                           return DropdownMenuItem<String>(
-                            value: book.id.toString(),
-                            child: Text(book.book_title),
+                            value: book.pk.toString(),
+                            child: Text(book.fields.bookTitle),
                           );
                         }).toList(),
-                        value: _book_id,
+                        value: _bookId,
                         onChanged: (String? value) {
                           setState(() {
-                            _book_id = value!;
+                            _bookId = value!;
                           });
                         },
                         validator: (String? value) {
@@ -132,21 +113,20 @@ class _AddBookTrackerState extends State<AddBookTracker> {
                       const SizedBox(height: 15),
                       // ====================================== LAST PAGE ===================================
                       TextFormField(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           hintText: "0",
                           labelText: "Last Page",
                           filled: true,
-                          // prefixIcon: Icon(Icons.description)),
                         ),
                         controller: _coLastPage,
                         onChanged: (String? value) {
                           setState(() {
-                            _last_page = value!;
+                            _lastPage = value!;
                           });
                         },
                         onSaved: (String? value) {
                           setState(() {
-                            _last_page = value!;
+                            _lastPage = value!;
                           });
                         },
                         validator: (String? value) {
@@ -172,20 +152,23 @@ class _AddBookTrackerState extends State<AddBookTracker> {
                           horizontal: 30,
                         ),
                       ),
-                      backgroundColor: MaterialStateProperty.all(Colors.green),
+                      backgroundColor: MaterialStateProperty.all(Colors.white),
                     ),
                     onPressed: () async {
                       if (_formKey.currentState!.validate() &&
-                          _book_id != "" &&
-                          _last_page != "") {
+                          _bookId != "" &&
+                          _lastPage != "") {
+                        // ignore: unused_local_variable
                         final response = await request.postJson(
-                          "https://literasea.live/tracker/add/mobile/$_user_id",
+                          "https://literasea.live/tracker/add/mobile/$_userId",
                           jsonEncode({
-                            "book_id": _book_id,
-                            "last_page": _last_page,
+                            "book_id": _bookId,
+                            "last_page": _lastPage,
                           }),
                         );
-                        _showToast(context, true);
+                        if (context.mounted) {
+                          _showToast(context, true);
+                        }
                         clearInput();
                       } else {
                         _showToast(context, false);
@@ -194,7 +177,7 @@ class _AddBookTrackerState extends State<AddBookTracker> {
                     child: const Text(
                       "Submit",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
