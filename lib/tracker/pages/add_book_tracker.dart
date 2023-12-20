@@ -1,11 +1,12 @@
 import 'dart:convert';
-import 'package:literasea_mobile/tracker/models/book.dart';
+import 'package:literasea_mobile/Katalog/models/product.dart';
 import 'package:literasea_mobile/tracker/utils/fetch.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:literasea_mobile/tracker/models/book_tracker.dart';
 import 'package:literasea_mobile/main.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AddBookTracker extends StatefulWidget {
   const AddBookTracker({Key? key}) : super(key: key);
@@ -15,7 +16,7 @@ class AddBookTracker extends StatefulWidget {
 }
 
 class _AddBookTrackerState extends State<AddBookTracker> {
-  List<Book> _books = [];
+  List<Product> _books = [];
   final _formKey = GlobalKey<FormState>();
   String _book_id = "";
   String _last_page = "";
@@ -31,7 +32,7 @@ class _AddBookTrackerState extends State<AddBookTracker> {
   }
 
   Future<void> _loadBooks() async {
-    List<Book> books = await fetchBook();
+    List<Product> books = await fetchBook();
     setState(() {
       _books = books;
     });
@@ -52,38 +53,21 @@ class _AddBookTrackerState extends State<AddBookTracker> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Add Reading History'),
+        backgroundColor:
+            const Color.fromRGBO(255, 255, 255, 1), // Set background color
       ),
-      // drawer: BookTrackerDrawer(context),
-      body: Form(
-        key: _formKey,
+      body: SingleChildScrollView(
         child: Container(
           decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
-              colors: [Colors.greenAccent, Colors.blueGrey],
-            ),
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.all(Radius.circular(0.0)),
+            color: Colors.black, // Set background color
           ),
-          padding: const EdgeInsets.only(
-            right: 20.0,
-            left: 20.0,
-            top: 35.0,
-            bottom: 40.0,
-          ),
+          padding: const EdgeInsets.all(20.0),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
-              shape: BoxShape.rectangle,
-              borderRadius: BorderRadius.all(Radius.circular(40.0)),
+              borderRadius: BorderRadius.circular(20.0),
             ),
-            padding: const EdgeInsets.only(
-              right: 30.0,
-              left: 30.0,
-              top: 40.0,
-              bottom: 30.0,
-            ),
+            padding: const EdgeInsets.all(30.0),
             child: Column(
               children: [
                 Padding(
@@ -94,7 +78,7 @@ class _AddBookTrackerState extends State<AddBookTracker> {
                       Text(
                         "Add Reading History",
                         style: TextStyle(
-                          color: Colors.green[900],
+                          color: Colors.blueAccent,
                           fontSize: 25,
                           fontWeight: FontWeight.bold,
                         ),
@@ -108,12 +92,11 @@ class _AddBookTrackerState extends State<AddBookTracker> {
                           hintText: "Judul buku ...",
                           labelText: "Book Title",
                           filled: true,
-                          // prefixIcon: Icon(Icons.abc),
                         ),
-                        items: _books.map((Book book) {
+                        items: _books.map((Product book) {
                           return DropdownMenuItem<String>(
-                            value: book.id.toString(),
-                            child: Text(book.book_title),
+                            value: book.pk.toString(),
+                            child: Text(book.fields.bookTitle),
                           );
                         }).toList(),
                         value: _book_id,
@@ -136,7 +119,6 @@ class _AddBookTrackerState extends State<AddBookTracker> {
                           hintText: "0",
                           labelText: "Last Page",
                           filled: true,
-                          // prefixIcon: Icon(Icons.description)),
                         ),
                         controller: _coLastPage,
                         onChanged: (String? value) {
@@ -172,7 +154,7 @@ class _AddBookTrackerState extends State<AddBookTracker> {
                           horizontal: 30,
                         ),
                       ),
-                      backgroundColor: MaterialStateProperty.all(Colors.green),
+                      backgroundColor: MaterialStateProperty.all(Colors.white),
                     ),
                     onPressed: () async {
                       if (_formKey.currentState!.validate() &&
@@ -194,7 +176,7 @@ class _AddBookTrackerState extends State<AddBookTracker> {
                     child: const Text(
                       "Submit",
                       style: TextStyle(
-                        color: Colors.white,
+                        color: Colors.black,
                         fontSize: 20,
                         fontWeight: FontWeight.bold,
                       ),
