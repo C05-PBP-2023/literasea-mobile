@@ -34,7 +34,22 @@ class MyApp extends StatelessWidget {
         return request;
       },
       child: MaterialApp(
-          theme: ThemeData(scaffoldBackgroundColor: Colors.white),
+          theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white,
+            inputDecorationTheme: InputDecorationTheme(
+              fillColor: Colors.grey.shade100,
+            ),
+            appBarTheme: const AppBarTheme(
+              backgroundColor: Colors.white,
+            ),
+            bottomSheetTheme: const BottomSheetThemeData(
+              backgroundColor: Colors.white,
+            ),
+            cardTheme: const CardTheme(
+              color: Colors.white,
+              surfaceTintColor: Colors.white,
+            ),
+          ),
           debugShowCheckedModeBanner: false,
           home: const WelcomePage()),
     );
