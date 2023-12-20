@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:literasea_mobile/review/screens/review.dart';
 import 'package:literasea_mobile/main.dart';
-import 'dart:convert'; // Import for jsonEncode
+import 'dart:convert';
 import 'package:provider/provider.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:literasea_mobile/Katalog/models/product.dart';
@@ -19,16 +19,13 @@ class ReviewFormPage extends StatefulWidget {
 
 class _ShopFormPageState extends State<ReviewFormPage> {
   final _formKey = GlobalKey<FormState>();
-  int? _rating; // Use int? to allow null, indicating no selection
+  int? _rating;
   String _reviewMessage = "";
 
   @override
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
-
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         body: Center(
           child: SingleChildScrollView(
             child: Column(
@@ -173,7 +170,6 @@ class _ShopFormPageState extends State<ReviewFormPage> {
             ),
           ),
         ),
-      ),
-    );
+      );
   }
 }
