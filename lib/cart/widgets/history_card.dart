@@ -26,7 +26,8 @@ class _HistoryCardState extends State<HistoryCard> {
   String b = "aa";
 
   Future<List<Product>> fetchBook() async {
-    var url = Uri.parse("https://literasea.live/products/get_book/");
+    var url = Uri.parse(
+        "http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/products/get_book/");
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -73,7 +74,7 @@ class _HistoryCardState extends State<HistoryCard> {
     double heightFactor = widget.listBuku.length.toDouble();
 
     return Container(
-      height: 250 + 30*heightFactor,
+      height: 250 + 30 * heightFactor,
       margin: const EdgeInsets.fromLTRB(40, 12, 40, 12),
       padding: const EdgeInsets.fromLTRB(30, 20, 30, 20),
       decoration: BoxDecoration(
@@ -95,10 +96,11 @@ class _HistoryCardState extends State<HistoryCard> {
                 ),
               ),
               const SizedBox(
-            height: 8,
-          ),
-              Text(widget.namaPembeli,
-              style: GoogleFonts.inter(
+                height: 8,
+              ),
+              Text(
+                widget.namaPembeli,
+                style: GoogleFonts.inter(
                   color: Colors.white,
                   fontSize: 15,
                   fontWeight: FontWeight.w300,
@@ -112,20 +114,22 @@ class _HistoryCardState extends State<HistoryCard> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("ADDRESS",
-              style: GoogleFonts.inter(
+              Text(
+                "ADDRESS",
+                style: GoogleFonts.inter(
                   color: Colors.white,
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              
-              Text(widget.alamatPembeli,
-              style: GoogleFonts.inter(
+              Text(
+                widget.alamatPembeli,
+                style: GoogleFonts.inter(
                   color: Colors.white,
                   fontSize: 13,
                   fontWeight: FontWeight.w300,
-                ),),
+                ),
+              ),
             ],
           ),
           const SizedBox(
@@ -142,16 +146,17 @@ class _HistoryCardState extends State<HistoryCard> {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("BOOKS ORDERED",
-              style: GoogleFonts.inter(
+              Text(
+                "BOOKS ORDERED",
+                style: GoogleFonts.inter(
                   color: Colors.white,
                   fontSize: 13,
                   fontWeight: FontWeight.w700,
                 ),
               ),
               const SizedBox(
-            height: 4,
-          ),
+                height: 4,
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: widget.listBuku.map((buku) {
@@ -182,9 +187,10 @@ class _HistoryCardState extends State<HistoryCard> {
                           child: Text(
                             title,
                             style: GoogleFonts.inter(
-                          color: Colors.white,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w300,),
+                              color: Colors.white,
+                              fontSize: 13,
+                              fontWeight: FontWeight.w300,
+                            ),
                             overflow: TextOverflow.ellipsis,
                             maxLines: 2,
                           ),

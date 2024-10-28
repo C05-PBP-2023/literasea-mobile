@@ -201,7 +201,7 @@ class _AnswerFormState extends State<AnswerForm> {
                                     _isLoading = true;
                                   });
                                   final response = await request.postJson(
-                                    "https://literasea.live/forum/add-answer-mobile/",
+                                    "http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/forum/add-answer-mobile/",
                                     jsonEncode(<String, dynamic>{
                                       'answer': answer,
                                       'question_id': widget.question.id,
@@ -213,29 +213,33 @@ class _AnswerFormState extends State<AnswerForm> {
                                       setState(() {
                                         _isLoading = false;
                                       });
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(const SnackBar(
-                                        content:
-                                            Text("Your answer has been added!"),
-                                      ));
+                                      if (context.mounted) {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(const SnackBar(
+                                          content: Text(
+                                              "Your answer has been added!"),
+                                        ));
+                                      }
                                       navigator.pop();
                                     } else {
-                                      showDialog(
-                                        context: context,
-                                        builder: (context) => AlertDialog(
-                                          title: const Text(
-                                              'Adding answer failed'),
-                                          content: Text(response['message']),
-                                          actions: [
-                                            TextButton(
-                                              child: const Text('OK'),
-                                              onPressed: () {
-                                                navigator.pop();
-                                              },
-                                            ),
-                                          ],
-                                        ),
-                                      );
+                                      if (context.mounted) {
+                                        showDialog(
+                                          context: context,
+                                          builder: (context) => AlertDialog(
+                                            title: const Text(
+                                                'Adding answer failed'),
+                                            content: Text(response['message']),
+                                            actions: [
+                                              TextButton(
+                                                child: const Text('OK'),
+                                                onPressed: () {
+                                                  navigator.pop();
+                                                },
+                                              ),
+                                            ],
+                                          ),
+                                        );
+                                      }
                                       setState(() {
                                         _isLoading = false;
                                       });

@@ -116,7 +116,7 @@ class _RegisterPageState extends State<RegisterPage> {
                                   _isLoading = true;
                                 });
                                 final response = await request.postJson(
-                                    "https://literasea.live/auth/register-mobile/",
+                                    "http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/auth/register-mobile/",
                                     jsonEncode(<String, String>{
                                       'user_type': usertype!,
                                       'username': username,
@@ -131,32 +131,36 @@ class _RegisterPageState extends State<RegisterPage> {
                                     setState(() {
                                       _isLoading = false;
                                     });
-                                    ScaffoldMessenger.of(context)
-                                        .showSnackBar(const SnackBar(
-                                      content: Text(
-                                          "Your account has been successfully created!"),
-                                    ));
+                                    if (context.mounted) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                        content: Text(
+                                            "Your account has been successfully created!"),
+                                      ));
+                                    }
                                     navigator.pushReplacement(
                                       MaterialPageRoute(
                                         builder: (context) => const LoginPage(),
                                       ),
                                     );
                                   } else {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => AlertDialog(
-                                        title: const Text('Register failed'),
-                                        content: Text(response['message']),
-                                        actions: [
-                                          TextButton(
-                                            child: const Text('OK'),
-                                            onPressed: () {
-                                              navigator.pop();
-                                            },
-                                          ),
-                                        ],
-                                      ),
-                                    );
+                                    if (context.mounted) {
+                                      showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                          title: const Text('Register failed'),
+                                          content: Text(response['message']),
+                                          actions: [
+                                            TextButton(
+                                              child: const Text('OK'),
+                                              onPressed: () {
+                                                navigator.pop();
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    }
                                     setState(() {
                                       _isLoading = false;
                                     });

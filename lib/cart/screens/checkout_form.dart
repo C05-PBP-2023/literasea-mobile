@@ -183,7 +183,7 @@ class _CheckoutFormState extends State<CheckoutForm> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             final response = await request.postJson(
-                                "https://literasea.live/cart/checkout-flutter/",
+                                "http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/cart/checkout-flutter/",
                                 jsonEncode(<String, String>{
                                   "nama": _nama,
                                   "alamat": _alamat,

@@ -146,13 +146,13 @@ class _AddBookTrackerState extends State<AddBookTracker> {
                   alignment: Alignment.bottomCenter,
                   child: TextButton(
                     style: ButtonStyle(
-                      padding: MaterialStateProperty.all(
+                      padding: WidgetStateProperty.all(
                         const EdgeInsets.symmetric(
                           vertical: 10,
                           horizontal: 30,
                         ),
                       ),
-                      backgroundColor: MaterialStateProperty.all(Colors.white),
+                      backgroundColor: WidgetStateProperty.all(Colors.white),
                     ),
                     onPressed: () async {
                       if (_formKey.currentState!.validate() &&
@@ -160,7 +160,7 @@ class _AddBookTrackerState extends State<AddBookTracker> {
                           _lastPage != "") {
                         // ignore: unused_local_variable
                         final response = await request.postJson(
-                          "https://literasea.live/tracker/add/mobile/$_userId",
+                          "http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/tracker/add/mobile/$_userId",
                           jsonEncode({
                             "book_id": _bookId,
                             "last_page": _lastPage,

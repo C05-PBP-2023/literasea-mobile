@@ -108,11 +108,12 @@ class _LoginPageState extends State<LoginPage> {
                       setState(() {
                         _isLoading = true;
                       });
-                      final response = await request
-                          .login("https://literasea.live/auth/login-mobile/", {
-                        'username': username,
-                        'password': password,
-                      });
+                      final response = await request.login(
+                          "http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/auth/login-mobile/",
+                          {
+                            'username': username,
+                            'password': password,
+                          });
                       await Future.delayed(const Duration(milliseconds: 1), () {
                         if (request.loggedIn) {
                           setState(() {
@@ -132,21 +133,23 @@ class _LoginPageState extends State<LoginPage> {
                             (route) => false,
                           );
                         } else {
-                          showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: const Text('Login Gagal'),
-                              content: Text(response['message']),
-                              actions: [
-                                TextButton(
-                                  child: const Text('OK'),
-                                  onPressed: () {
-                                    navigator.pop();
-                                  },
-                                ),
-                              ],
-                            ),
-                          );
+                          if (context.mounted) {
+                            showDialog(
+                              context: context,
+                              builder: (context) => AlertDialog(
+                                title: const Text('Login Gagal'),
+                                content: Text(response['message']),
+                                actions: [
+                                  TextButton(
+                                    child: const Text('OK'),
+                                    onPressed: () {
+                                      navigator.pop();
+                                    },
+                                  ),
+                                ],
+                              ),
+                            );
+                          }
                           setState(() {
                             _isLoading = false;
                           });

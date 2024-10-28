@@ -36,7 +36,7 @@ class _CartState extends State<CartPage> {
   Future<List<Product>> fetchProduct() async {
     //var url = Uri.parse("http://127.0.0.1:8000/products/get_book/");
     var url = Uri.parse(
-        "https://literasea.live/cart/get-cart-id/${UserInfo.data["id"]}");
+        "http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/cart/get-cart-id/${UserInfo.data["id"]}");
     //var url = Uri.parse("http://127.0.0.1:8000/cart/get-history/");
 
     final response = await http.get(url);

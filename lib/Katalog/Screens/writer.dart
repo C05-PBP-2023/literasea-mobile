@@ -15,7 +15,8 @@ class WriterPage extends StatefulWidget {
 
 class _WriterPageState extends State<WriterPage> {
   Future<List<Product>> fetchProduct() async {
-    var url = Uri.parse('https://literasea.live/products/get_book/');
+    var url = Uri.parse(
+        'http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/products/get_book/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -88,7 +89,8 @@ class _WriterPageState extends State<WriterPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => WriterBookDetailsPage(product: product),
+                      builder: (context) =>
+                          WriterBookDetailsPage(product: product),
                     ),
                   );
                 },
@@ -129,16 +131,16 @@ class _WriterPageState extends State<WriterPage> {
                             const SizedBox(height: 4),
                             Text(
                               'by ${product.fields.bookAuthor}',
-                              style:
-                                  GoogleFonts.inter(color: Colors.grey.shade600),
+                              style: GoogleFonts.inter(
+                                  color: Colors.grey.shade600),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),
                             const SizedBox(height: 4),
                             Text(
                               'Published: ${product.fields.yearOfPublication}',
-                              style:
-                                  GoogleFonts.inter(color: Colors.grey.shade600),
+                              style: GoogleFonts.inter(
+                                  color: Colors.grey.shade600),
                               maxLines: 1,
                               overflow: TextOverflow.ellipsis,
                             ),

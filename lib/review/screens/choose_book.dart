@@ -14,7 +14,8 @@ class ReviewProductPage extends StatefulWidget {
 
 class _ReviewProductPageState extends State<ReviewProductPage> {
   Future<List<Product>> fetchProduct() async {
-    var url = Uri.parse('https://literasea.live/review/get-book-review/');
+    var url = Uri.parse(
+        'http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/review/get-book-review/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -104,7 +105,7 @@ class _ReviewProductPageState extends State<ReviewProductPage> {
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          ButtonBar(
+                          OverflowBar(
                             alignment: MainAxisAlignment.start,
                             children: [
                               TextButton(

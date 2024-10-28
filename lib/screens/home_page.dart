@@ -33,7 +33,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> fetchProduct() async {
-    var url = Uri.parse('https://literasea.live/products/get_book/');
+    var url = Uri.parse(
+        'http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/products/get_book/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -54,40 +55,45 @@ class _MyHomePageState extends State<MyHomePage> {
     int len = (UserInfo.data["fullname"]).length;
 
     return SingleChildScrollView(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(20, 80, 0, 60),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        len <= 12 ? "Hello, ${UserInfo.data["fullname"]}" : "Hello,\n${UserInfo.data["fullname"]}",
-                        style: GoogleFonts.inter(
-                          fontSize: len <= 12 ? 25 : len <= 26 ? 20 : 16,
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(20, 80, 0, 60),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      len <= 12
+                          ? "Hello, ${UserInfo.data["fullname"]}"
+                          : "Hello,\n${UserInfo.data["fullname"]}",
+                      style: GoogleFonts.inter(
+                          fontSize: len <= 12
+                              ? 25
+                              : len <= 26
+                                  ? 20
+                                  : 16,
                           fontWeight: FontWeight.w800,
-                          color: Colors.white
-                        ),
-                      ),
-                      Text(
-                        "Which book you wanna \nread today?",
-                        style: GoogleFonts.inter(
+                          color: Colors.white),
+                    ),
+                    Text(
+                      "Which book you wanna \nread today?",
+                      style: GoogleFonts.inter(
                           fontSize: 13,
                           fontWeight: FontWeight.w300,
-                          color: Colors.white
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 30,
-                      ),
-                      ElevatedButton(
+                          color: Colors.white),
+                    ),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                    ElevatedButton(
                         onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(
-                            builder: (context) => const CartPage()
-                          ));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => const CartPage()));
                         },
                         style: ElevatedButton.styleFrom(
                           shape: const RoundedRectangleBorder(
@@ -116,225 +122,233 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             )
                           ],
-                        )
-                      )
-                    ],
-                  ),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(20,5,5,5),
-                      child: Image.asset('assets/images/buku_homepage.png', width: 120, height: 120,),
+                        ))
+                  ],
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20, 5, 5, 5),
+                    child: Image.asset(
+                      'assets/images/buku_homepage.png',
+                      width: 120,
+                      height: 120,
                     ),
-                  )
-                ],
-              ),
+                  ),
+                )
+              ],
             ),
-            Container(
-              padding: const EdgeInsets.only(top: 20, bottom: 30),
-              width: double.infinity,
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ...List.generate(
-                    3,
-                    (index) {
-                      return Container(
-                        padding: const EdgeInsets.only(
-                            right: 20.0, left: 20.0, bottom: 15.0),
-                        height: 130,
-                        width: double.infinity,
-                        child: Material(
-                          color: Colors.white,
-                          child: InkWell(
-                            child: Container(
-                              padding: const EdgeInsets.only(bottom: 20),
-                              width: 65,
-                              height: 25,
-                              decoration: BoxDecoration(
-                                  color: homePageButtons[index]["color"],
-                                  borderRadius: BorderRadius.circular(30)),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  // ignore: avoid_unnecessary_containers, sized_box_for_whitespace
-                                  Container(
-                                    width: 190,
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 32.0),
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        crossAxisAlignment: CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            homePageButtons[index]["name"],
-                                            style: GoogleFonts.inter(
-                                              textStyle: const TextStyle(
+          ),
+          Container(
+            padding: const EdgeInsets.only(top: 20, bottom: 30),
+            width: double.infinity,
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.vertical(top: Radius.circular(40)),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ...List.generate(
+                  3,
+                  (index) {
+                    return Container(
+                      padding: const EdgeInsets.only(
+                          right: 20.0, left: 20.0, bottom: 15.0),
+                      height: 130,
+                      width: double.infinity,
+                      child: Material(
+                        color: Colors.white,
+                        child: InkWell(
+                          child: Container(
+                            padding: const EdgeInsets.only(bottom: 20),
+                            width: 65,
+                            height: 25,
+                            decoration: BoxDecoration(
+                                color: homePageButtons[index]["color"],
+                                borderRadius: BorderRadius.circular(30)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                // ignore: avoid_unnecessary_containers, sized_box_for_whitespace
+                                Container(
+                                  width: 190,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 32.0),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          homePageButtons[index]["name"],
+                                          style: GoogleFonts.inter(
+                                            textStyle: const TextStyle(
                                                 fontWeight: FontWeight.w600,
                                                 fontSize: 22,
-                                                color: Colors.white
-                                              ),
-                                            ),
-                                          ),
-                                          Text(
-                                            homePageButtons[index]["desc"],
-                                            style: GoogleFonts.inter(
-                                              textStyle: const TextStyle(
-                                                fontWeight: FontWeight.w300,
-                                                fontSize: 13,
-                                                color: Colors.white
-                                              )
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 10.0, bottom: 10),
-                                    child: Stack(
-                                      children: [
-                                        RotationTransition(
-                                          turns:  const AlwaysStoppedAnimation(330 / 360),
-                                          child: Container(
-                                            height: 45,
-                                            width: 60,
-                                            margin: const EdgeInsets.only(top: 40, left: 40, right: 40),
-                                            decoration: BoxDecoration(
-                                              color: Colors.white.withOpacity(0.3),
-                                              borderRadius: const BorderRadius.all(Radius.elliptical(90, 70)),
-                                            ),
-                                            child: const Text(''),
+                                                color: Colors.white),
                                           ),
                                         ),
-                                        Positioned(
-                                          top: 24,
-                                          left: 55,
-                                          child: Icon(
-                                            homePageButtons[index]["icon"],
-                                            color: Colors.white,
-                                            size: 40,
-                                          ),
+                                        Text(
+                                          homePageButtons[index]["desc"],
+                                          style: GoogleFonts.inter(
+                                              textStyle: const TextStyle(
+                                                  fontWeight: FontWeight.w300,
+                                                  fontSize: 13,
+                                                  color: Colors.white)),
                                         )
                                       ],
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      right: 10.0, bottom: 10),
+                                  child: Stack(
+                                    children: [
+                                      RotationTransition(
+                                        turns: const AlwaysStoppedAnimation(
+                                            330 / 360),
+                                        child: Container(
+                                          height: 45,
+                                          width: 60,
+                                          margin: const EdgeInsets.only(
+                                              top: 40, left: 40, right: 40),
+                                          decoration: BoxDecoration(
+                                            color:
+                                                Colors.white.withOpacity(0.3),
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                                    Radius.elliptical(90, 70)),
+                                          ),
+                                          child: const Text(''),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        top: 24,
+                                        left: 55,
+                                        child: Icon(
+                                          homePageButtons[index]["icon"],
+                                          color: Colors.white,
+                                          size: 40,
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
-                            onTap: () {
-                              if (homePageButtons[index]["name"] == "Catalogue") {
-                                if (UserInfo.data["type"] == "writer") {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => const WriterPage()));
-                                } else {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => const ProductPage()));
-                                }
-                              } else if (homePageButtons[index]["name"] ==
-                                  "Reviews") {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const ReviewPage()));
-                              } else if (homePageButtons[index]["name"] == "Q & A") {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => const QNAPage()));
-                              }
-                            },
                           ),
+                          onTap: () {
+                            if (homePageButtons[index]["name"] == "Catalogue") {
+                              if (UserInfo.data["type"] == "writer") {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const WriterPage()));
+                              } else {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const ProductPage()));
+                              }
+                            } else if (homePageButtons[index]["name"] ==
+                                "Reviews") {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const ReviewPage()));
+                            } else if (homePageButtons[index]["name"] ==
+                                "Q & A") {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => const QNAPage()));
+                            }
+                          },
                         ),
-                      );
-                    },
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(20,10,0,20),
-                    child: Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        "New Books",
-                        style: GoogleFonts.inter(
-                          textStyle: const TextStyle(
+                      ),
+                    );
+                  },
+                ),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 10, 0, 20),
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      "New Books",
+                      style: GoogleFonts.inter(
+                        textStyle: const TextStyle(
                             fontWeight: FontWeight.w700,
                             fontSize: 20,
-                            color: Colors.black
-                          ),
-                        ),
+                            color: Colors.black),
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5, right: 5),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        ...List.generate(
-                          3,
-                          (index){
-                            String? imageLink = "";
-                            Product? book;
-                  
-                            if(_allProducts.isNotEmpty){
-                              book = _allProducts[Random().nextInt(_allProducts.length)];
-                              imageLink = book.fields.image;
-                            }
-                  
-                            return InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context, MaterialPageRoute(builder: (context) => BookDetailsPage(product: book!,))
-                                );
-                              },
-                              child: Container(
-                                padding: const EdgeInsets.all(5),
-                                margin: const EdgeInsets.only(left: 10, right: 10),
-                                height: 200,
-                                width: MediaQuery.of(context).size.width * 0.27,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xffd7e9f4),
-                                  borderRadius: const BorderRadius.vertical(
-                                    top: Radius.circular(13), bottom: Radius.circular(13)
-                                    ),
-                                  boxShadow: [
-                                    BoxShadow(
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 5, right: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ...List.generate(3, (index) {
+                        String? imageLink = "";
+                        Product? book;
+
+                        if (_allProducts.isNotEmpty) {
+                          book = _allProducts[
+                              Random().nextInt(_allProducts.length)];
+                          imageLink = book.fields.image;
+                        }
+
+                        return InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => BookDetailsPage(
+                                          product: book!,
+                                        )));
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(5),
+                            margin: const EdgeInsets.only(left: 10, right: 10),
+                            height: 200,
+                            width: MediaQuery.of(context).size.width * 0.27,
+                            decoration: BoxDecoration(
+                                color: const Color(0xffd7e9f4),
+                                borderRadius: const BorderRadius.vertical(
+                                    top: Radius.circular(13),
+                                    bottom: Radius.circular(13)),
+                                boxShadow: [
+                                  BoxShadow(
                                       color: Colors.grey.withOpacity(0.5),
                                       blurRadius: 5,
-                                      offset: const Offset(0, 2)
-                                    )
-                                  ]
-                                ),
-                                child: Image.network(
-                                  imageLink, 
-                                  errorBuilder:
-                                    ((context, error, stackTrace) {
-                                    return Image.network(
-                                    "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
-                                    width: 64,
-                                    );
-                                  }),
-                                ),
-                              ),
-                            );
-                          }
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
+                                      offset: const Offset(0, 2))
+                                ]),
+                            child: Image.network(
+                              imageLink,
+                              errorBuilder: ((context, error, stackTrace) {
+                                return Image.network(
+                                  "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
+                                  width: 64,
+                                );
+                              }),
+                            ),
+                          ),
+                        );
+                      }),
+                    ],
+                  ),
+                )
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
     );
   }
-
 }

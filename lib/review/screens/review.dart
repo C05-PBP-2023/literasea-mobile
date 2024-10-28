@@ -30,7 +30,8 @@ class _ReviewPageState extends State<ReviewPage> {
   }
 
   Future<List<Review>> fetchReview() async {
-    var url = Uri.parse('https://literasea.live/review/show-review-flutter/');
+    var url = Uri.parse(
+        'http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/review/show-review-flutter/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -49,8 +50,8 @@ class _ReviewPageState extends State<ReviewPage> {
   }
 
   Future<List<ProductR>> fetchRandomProduct() async {
-    var url =
-        Uri.parse('https://literasea.live/review/show-random-book-flutter/');
+    var url = Uri.parse(
+        'http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/review/show-random-book-flutter/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -69,7 +70,8 @@ class _ReviewPageState extends State<ReviewPage> {
   }
 
   Future<List<Review>> fetchLatestReview() async {
-    var url = Uri.parse('https://literasea.live/review/get-latest-reviews/');
+    var url = Uri.parse(
+        'http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/review/get-latest-reviews/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -88,7 +90,8 @@ class _ReviewPageState extends State<ReviewPage> {
   }
 
   Future<Map<String, Product>> fetchProduct() async {
-    var url = Uri.parse('https://literasea.live/products/get_book/');
+    var url = Uri.parse(
+        'http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/products/get_book/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -110,7 +113,8 @@ class _ReviewPageState extends State<ReviewPage> {
   Widget build(BuildContext context) {
     final request = context.watch<CookieRequest>();
     Future<List<ProductR>> data = request
-        .get("https://literasea.live/review/show-bookUser-flutter/")
+        .get(
+            "http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/review/show-bookUser-flutter/")
         .then((value) {
       if (value == null) {
         return [];

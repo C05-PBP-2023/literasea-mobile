@@ -17,7 +17,7 @@ class ProductPage extends StatefulWidget {
 Future<void> addToCart(BuildContext context, int bookId) async {
   var userId = UserInfo.data["id"];
   var url = Uri.parse(
-      'https://literasea.live/products/add_to_cart_flutter/$bookId/$userId/');
+      'http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/products/add_to_cart_flutter/$bookId/$userId/');
 
   var requestBody = {"user_id": userId};
 
@@ -52,7 +52,8 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   Future<void> fetchProduct() async {
-    var url = Uri.parse('https://literasea.live/products/get_book/');
+    var url = Uri.parse(
+        'http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/products/get_book/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -105,7 +106,8 @@ class _ProductPageState extends State<ProductPage> {
               foregroundColor: Colors.black,
               backgroundColor: Colors.white,
             ),
-            child: Text('FILTER', style: GoogleFonts.inter(fontWeight: FontWeight.bold)),
+            child: Text('FILTER',
+                style: GoogleFonts.inter(fontWeight: FontWeight.bold)),
           ),
         ],
       ),
@@ -120,84 +122,84 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   Widget _buildProductGrid() {
-  return GridView.builder(
-    padding: const EdgeInsets.all(8),
-    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 2,
-      crossAxisSpacing: 10,
-      mainAxisSpacing: 10,
-      childAspectRatio: 0.70,
-    ),
-    itemCount: _filteredProducts.length,
-    itemBuilder: (BuildContext context, int index) {
-      Product product = _filteredProducts[index];
-      return GestureDetector(
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => BookDetailsPage(product: product),
-            ),
-          );
-        },
-        child: Card(
-          color: Colors.white,
-          clipBehavior: Clip.antiAlias,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AspectRatio(
-                aspectRatio: 1.6,
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Image.network(
-                    product.fields.image,
-                    fit: BoxFit.cover,
-                    errorBuilder: ((context, error, stackTrace) {
-                      return Image.network(
-                        "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
-                        width: 64,
-                      );
-                    }),
+    return GridView.builder(
+      padding: const EdgeInsets.all(8),
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        childAspectRatio: 0.70,
+      ),
+      itemCount: _filteredProducts.length,
+      itemBuilder: (BuildContext context, int index) {
+        Product product = _filteredProducts[index];
+        return GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BookDetailsPage(product: product),
+              ),
+            );
+          },
+          child: Card(
+            color: Colors.white,
+            clipBehavior: Clip.antiAlias,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                AspectRatio(
+                  aspectRatio: 1.6,
+                  child: SizedBox(
+                    width: double.infinity,
+                    child: Image.network(
+                      product.fields.image,
+                      fit: BoxFit.cover,
+                      errorBuilder: ((context, error, stackTrace) {
+                        return Image.network(
+                          "https://upload.wikimedia.org/wikipedia/commons/thumb/6/65/No-Image-Placeholder.svg/1665px-No-Image-Placeholder.svg.png",
+                          width: 64,
+                        );
+                      }),
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      product.fields.bookTitle,
-                      style: GoogleFonts.inter(
-                          fontSize: 16.0, fontWeight: FontWeight.bold),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'by ${product.fields.bookAuthor}',
-                      style: GoogleFonts.inter(color: Colors.grey.shade600),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      'Published: ${product.fields.yearOfPublication}',
-                      style: GoogleFonts.inter(color: Colors.grey.shade600),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        product.fields.bookTitle,
+                        style: GoogleFonts.inter(
+                            fontSize: 16.0, fontWeight: FontWeight.bold),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'by ${product.fields.bookAuthor}',
+                        style: GoogleFonts.inter(color: Colors.grey.shade600),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 4),
+                      Text(
+                        'Published: ${product.fields.yearOfPublication}',
+                        style: GoogleFonts.inter(color: Colors.grey.shade600),
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
-      );
-    },
-  );
-}
+        );
+      },
+    );
+  }
 
   void _applyFilters(
       String? authorName, String? publisher, int? publishedYear) {

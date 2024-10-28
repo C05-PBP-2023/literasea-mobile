@@ -21,8 +21,8 @@ class _AddBookPageState extends State<AddBookPage> {
 
   Future<void> _submitBook() async {
     if (_formKey.currentState!.validate()) {
-      var url =
-          Uri.parse('https://literasea.live/products/create_book_flutter/');
+      var url = Uri.parse(
+          'http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/products/create_book_flutter/');
       var response = await http.post(
         url,
         headers: {"Content-Type": "application/json"},
@@ -35,6 +35,9 @@ class _AddBookPageState extends State<AddBookPage> {
           'Image': _imageController.text,
         }),
       );
+
+      if (!mounted) return;
+
       if (context.mounted) {
         if (response.statusCode == 200) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -54,7 +57,9 @@ class _AddBookPageState extends State<AddBookPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: const BackButton(color: Colors.black),
-        title: Text('Add New Book', style: GoogleFonts.inter(color: Colors.blue[800], fontWeight: FontWeight.bold)),
+        title: Text('Add New Book',
+            style: GoogleFonts.inter(
+                color: Colors.blue[800], fontWeight: FontWeight.bold)),
         elevation: 0.0,
       ),
       body: SingleChildScrollView(

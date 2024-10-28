@@ -5,8 +5,8 @@ import 'package:literasea_mobile/tracker/models/book_tracker.dart';
 import 'package:literasea_mobile/main.dart';
 
 Future<List<BookTracker>> fetchBookTracker() async {
-  var url =
-      Uri.parse('https://literasea.live/tracker/mobile/${UserInfo.data["id"]}');
+  var url = Uri.parse(
+      'http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/tracker/mobile/${UserInfo.data["id"]}');
   var response = await http.get(url, headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",
@@ -24,7 +24,8 @@ Future<List<BookTracker>> fetchBookTracker() async {
 }
 
 Future<List<Product>> fetchBook() async {
-  var url = Uri.parse('https://literasea.live/tracker/book/mobile');
+  var url = Uri.parse(
+      'http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/tracker/book/mobile');
   var response = await http.get(url, headers: {
     "Access-Control-Allow-Origin": "*",
     "Content-Type": "application/json",

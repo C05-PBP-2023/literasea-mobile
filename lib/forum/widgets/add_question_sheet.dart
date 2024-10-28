@@ -215,7 +215,7 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
                                 _isLoading = true;
                               });
                               final response = await request.postJson(
-                                "https://literasea.live/forum/add-question-mobile/",
+                                "http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/forum/add-question-mobile/",
                                 jsonEncode(<String, dynamic>{
                                   'title': title,
                                   'question': question,
@@ -228,29 +228,33 @@ class _AddQuestionFormState extends State<AddQuestionForm> {
                                   setState(() {
                                     _isLoading = false;
                                   });
-                                  ScaffoldMessenger.of(context)
-                                      .showSnackBar(SnackBar(
-                                    content: Text(response["message"]),
-                                  ));
+                                  if (context.mounted) {
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(SnackBar(
+                                      content: Text(response["message"]),
+                                    ));
+                                  }
                                   int count = 0;
                                   navigator.popUntil((_) => count++ >= 2);
                                 } else {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => AlertDialog(
-                                      title:
-                                          const Text('Adding question failed'),
-                                      content: Text(response['message']),
-                                      actions: [
-                                        TextButton(
-                                          child: const Text('OK'),
-                                          onPressed: () {
-                                            navigator.pop();
-                                          },
-                                        ),
-                                      ],
-                                    ),
-                                  );
+                                  if (context.mounted) {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => AlertDialog(
+                                        title: const Text(
+                                            'Adding question failed'),
+                                        content: Text(response['message']),
+                                        actions: [
+                                          TextButton(
+                                            child: const Text('OK'),
+                                            onPressed: () {
+                                              navigator.pop();
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }
                                   setState(() {
                                     _isLoading = false;
                                   });

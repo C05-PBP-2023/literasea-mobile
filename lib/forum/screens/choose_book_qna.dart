@@ -26,7 +26,8 @@ class _QNAChooseBookState extends State<QNAChooseBook> {
   }
 
   Future<void> fetchProduct() async {
-    var url = Uri.parse('https://literasea.live/products/get_book/');
+    var url = Uri.parse(
+        'http://muhammad-nabil22-literasea.pbp.cs.ui.ac.id/products/get_book/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
